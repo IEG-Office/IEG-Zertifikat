@@ -10,7 +10,7 @@ const CURRICULUM = [
     meta: 'Strategic Orientation · Foundational',
     title: 'The AI-Powered Investment Bank',
     desc: 'Warum agentische KI für M&A keine Option mehr ist, sondern eine Wettbewerbsnotwendigkeit. Die drei Interaktionsmodi: Chat, Cowork, Code.',
-    duration: '15 Min.',
+    duration: '10 Min.',
     // === ZUSATZ-INHALTE (optional) ===
     // Hier kannst du Videos, Bilder und zusätzlichen Text einfügen.
     // Diese Inhalte erscheinen AUTOMATISCH auf der Modul-Seite (modules/modul-XX.html).
