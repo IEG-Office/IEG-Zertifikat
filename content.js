@@ -156,7 +156,7 @@ const CURRICULUM = [
         q: 'Wozu dienen XML-Tags (z.B. <form>, <anweisungen>) in einem Prompt?',
         options: [
           'Sie haben keine genaue Funktion da sie wie eine HTML funktionieren',
-          'Sie verschlüsseln den Prompt. Das ist wichtig in Falle eines .',
+          'Sie verschlüsseln den Prompt. Das ist wichtig im Falle eines Turndowns',
           'Sie aktivieren den Programmiermodus',
           'Sie strukturieren den Prompt, damit Claude verschiedene Informationsarten unterscheiden und darauf zugreifen kann'
         ],
@@ -177,23 +177,23 @@ const CURRICULUM = [
       {
         q: 'Welche der folgenden Elemente gehören zur idealen Prompt-Struktur nach Anthropic?',
         options: [
-          'Nur eine kurze Frage ohne Kontext',
           'Aufgabenbeschreibung, Kontext, Hintergrunddaten, Anweisungen, Beispiele (Few-Shot) und wichtige Erinnerungen',
+          'Nur eine kurze Frage ohne Kontext',
           'Ausschließlich Code-Beispiele',
-          'Ein einzelnes Schlüsselwort'
+          'Ein Prompt, der erst ganz am Ende sagt, was gewünscht ist'
         ],
-        correct: 1,
+        correct: 0,
         explanation: 'Die ideale Struktur umfasst sechs Elemente: Aufgabenbeschreibung, Kontext & Tonfall, Hintergrunddaten, detaillierte Anweisungen, Beispiele (Few-Shot) und wichtige Erinnerungen am Ende.'
       },
       {
         q: 'Warum gehören statische Informationen (z.B. ein Standardformular) in den System Prompt?',
         options: [
           'Weil sie dort schöner aussehen',
-          'Weil Claude sie durch Caching nicht bei jeder Anfrage neu lernen muss — das spart Zeit und Ressourcen',
           'Weil sie im normalen Prompt nicht funktionieren',
+          'Weil Claude sie durch Caching nicht bei jeder Anfrage neu lernen muss — das spart Zeit und Ressourcen',
           'Weil der System Prompt kürzer ist'
         ],
-        correct: 1,
+        correct: 2,
         explanation: 'Prompt Caching: Statische Informationen im System Prompt werden gecacht, sodass Claude sie nicht bei jeder Anfrage neu verarbeiten muss.'
       }
     ]
@@ -313,8 +313,8 @@ const CURRICULUM = [
         options: [
           'Weil Claude nur einen Chat gleichzeitig speichern kann',
           'Weil das Vermischen von Themen die KI verwirren und die Ergebnisqualität verschlechtern kann',
-          'Weil jeder Chat nach 10 Nachrichten automatisch geschlossen wird',
-          'Weil separate Chats schneller laden'
+          'Damit Themen ohne Zusammenhang besser vermischt werden',
+          'Weil separate Chats schneller laden, wordurch Antworten grundsätzlich kürzer und genauer werden'
         ],
         correct: 1,
         explanation: 'Chat-Disziplin ist entscheidend: Wenn verschiedene Themen im selben Chat vermischt werden, verliert Claude den Kontext und die Antwortqualität sinkt.'
@@ -344,19 +344,19 @@ const CURRICULUM = [
       {
         q: 'Was ist der Unterschied zwischen "Präferenzen" und "Erinnerungen (Memory)"?',
         options: [
-          'Es gibt keinen Unterschied — beides ist dasselbe',
-          'Präferenzen sind globale Einstellungen für jeden Chat, Erinnerungen sind gezielte Anweisungen für die Zukunft',
+          'Präferenzen sind für jeden Chat, Erinnerungen sind gezielte Anweisungen für die Zukunft',
+          'Präferenzen gelten nur für ein einzelnes Wort, nicht für Gespräche',
           'Präferenzen gelten nur für einen Chat, Erinnerungen für alle',
           'Erinnerungen sind nur in der Gratisversion verfügbar'
         ],
-        correct: 1,
+        correct: 0,
         explanation: 'Präferenzen sind globale Einstellungen, die automatisch für jeden neuen Chat übernommen werden. Erinnerungen (Memory) sind gezielte Einzelanweisungen, die Claude langfristig im Gedächtnis speichert.'
       },
       {
         q: 'Welche Datenschutz-Einstellung sollte bei IEG unbedingt deaktiviert werden?',
         options: [
           'Die Websuche',
-          'Der Inkognitomodus',
+          'Der Inkognitomodus -um alle Daten zu speichern',
           'Die Option "hilft dabei Claude zu verbessern" unter Datenschutz',
           'Die Erinnerungen (Memory)'
         ],
@@ -604,12 +604,12 @@ const CURRICULUM = [
       {
         q: 'Was unterscheidet einen Claude Skill von einer Projektanweisung?',
         options: [
-          'Es gibt keinen Unterschied',
-          'Skills sind übertragbar und in jedem neuen Chat nutzbar, Projektanweisungen sind isoliert',
-          'Projektanweisungen sind besser als Skills',
-          'Skills funktionieren nur mit Claude Opus'
+          'Ein Skill ist nur für private Notizen gedacht, nicht für Aufgaben',
+          'Skills funktionieren nur mit Claude Opus',
+          'Projektanweisungen sind besser als Skills, da sie sich nach jeder Antwort ändern',
+          'Skills sind übertragbar und in jedem neuen Chat nutzbar, Projektanweisungen sind isoliert'
         ],
-        correct: 1,
+        correct: 3,
         explanation: 'Der Hauptunterschied: Skills sind übertragbar und können flexibel in jedem Chat eingesetzt werden, während Projektanweisungen an ein einzelnes Projekt gebunden sind.'
       },
       {
@@ -637,12 +637,12 @@ const CURRICULUM = [
       {
         q: 'Warum reicht bei einem fertigen Skill oft ein sehr allgemeiner Prompt aus?',
         options: [
-          'Weil Claude den Prompt ignoriert',
           'Weil das Expertenwissen bereits im Skill verankert ist und automatisch hochwertige Elemente integriert',
+          'Weil Skills nur mit langen, zufälligen Texten arbeiten.',
           'Weil Skills nur einfache Aufgaben erledigen',
           'Weil der Skill den Prompt automatisch verlängert'
         ],
-        correct: 1,
+        correct: 0,
         explanation: 'Da das Expertenwissen (Frameworks, Standards, Abläufe) bereits im Skill gespeichert ist, sorgt er automatisch für Qualität — auch bei einem kurzen Prompt.'
       },
       {
@@ -772,12 +772,12 @@ const CURRICULUM = [
       {
         q: 'Welche Rolle spielt NotebookLM im Experten-Workflow?',
         options: [
-          'Es ersetzt Claude komplett',
-          'Es dient der Wissens-Akquise durch Deep Research über 60+ Quellen',
+          'NotebookLM ist primär für kreative Texte gedacht, nicht für Wissensarbeit.',
+          'Es erstellt die Skills automatisch',
           'Es ist nur ein Notiz-Tool ohne KI',
-          'Es erstellt die Skills automatisch'
+          'Es dient der Wissens-Akquise durch Deep Research über 60+ Quellen'
         ],
-        correct: 1,
+        correct: 3,
         explanation: 'NotebookLM durchleuchtet Themen mit Deep Research (60+ Quellen) und liefert das strukturierte Expertenwissen, das als Datenbasis für den Skill dient.'
       },
       {
@@ -786,7 +786,7 @@ const CURRICULUM = [
           'Ein Skill ist kürzer als ein Prompt',
           'Ein Skill ist ein hinterlegter Prozess mit Standards, Frameworks und Schritt-für-Schritt-Abläufen',
           'Ein Skill funktioniert nur einmal',
-          'Ein Skill ist dasselbe wie ein Prompt, nur umbenannt'
+          'Ein Prompt ist ein Baustein, ein Skill ist nur eine Idee.'
         ],
         correct: 1,
         explanation: 'Ein Skill ist kein einfacher Prompt, sondern ein strukturierter Arbeitsprozess mit fest definierten Standards, psychologischen Frameworks und reproduzierbaren Abläufen.'
@@ -794,12 +794,12 @@ const CURRICULUM = [
       {
         q: 'Welche der folgenden Daten gehört NIEMALS in einen persönlichen KI-Account?',
         options: [
-          'Öffentlich verfügbare Branchenberichte',
-          'Nicht-öffentliche Budgets, Margen und Verträge mit echten Namen',
+          'Nicht-öffentliche Budgets, Margen und Verträge mit echten Name',
+          'nÖffentlich verfügbare Branchenberichte',
           'Allgemeine Fragen zur Grammatik',
           'Öffentliche Wikipedia-Artikel'
         ],
-        correct: 1,
+        correct: 0,
         explanation: 'Pasting-Verbot: Nicht-öffentliche Finanzdaten, Kundendaten, Quellcode und Interna gehören niemals in einen persönlichen KI-Account.'
       },
       {
@@ -933,11 +933,11 @@ const CURRICULUM = [
         q: 'Wie wird Claude Code im Curriculum metaphorisch beschrieben?',
         options: [
           '"Ein Stack Overflow im Pocket"',
-          '"Ein PhD in Computer Science in your pocket"',
+          '"Eine App im App Store"',
           '"Ein Junior Developer im Slack"',
-          '"Eine App im App Store"'
+          '"Ein PhD in Computer Science in your pocket"'
         ],
-        correct: 1,
+        correct: 3,
         explanation: 'Die exakte Metapher aus dem Curriculum ist "PhD in Computer Science in your pocket" — Claude Code agiert als Senior-Level-Engineer.'
       },
       {
@@ -954,12 +954,12 @@ const CURRICULUM = [
       {
         q: 'Was tut der /prime-Command?',
         options: [
-          'Er löscht Cache und Verlauf',
-          'Er zwingt das Modell, alle Context Files zu lesen, und initialisiert die Session mit Rolle und Business Objectives',
+          'Er löscht Cache und Verlauf für mehr Speicher',
           'Er installiert Updates',
-          'Er beendet die Session'
+          'Er zwingt das Modell, alle Context Files zu lesen, und initialisiert die Session mit Rolle und Business Objectives',
+          'Er lädt den Kontext für Issues im Claude-Plugin-Hub und aktiviert die markdown-TODO-Funktion.'
         ],
-        correct: 1,
+        correct: 2,
         explanation: '/prime erzwingt das Einlesen aller Kontextdateien — Claude startet damit informiert und auf Rolle plus Geschäftsziele kalibriert.'
       },
       {
