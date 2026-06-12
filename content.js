@@ -11,7 +11,7 @@ const CURRICULUM = [
     meta: 'Strategic Orientation · Foundational',
     title: 'Claude im Überblick — Projects, Cowork & Code',
     desc: 'Organisation durch Projects, Visualisierung im Chat, Claude Cowork als autonomer Assistent und Entwicklung mit Claude Code, Skills und Konnektoren.',
-    duration: '15 Min.',
+    duration: '20 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/EE9qr6Bfwj8', title: 'Claude im Überblick', caption: 'Video 0.1 · Claude Features im Überblick' },
     ],
@@ -132,7 +132,7 @@ const CURRICULUM = [
     meta: 'Beginner · Module 1',
     title: 'Foundations & The Analyst\u2019s Workbench',
     desc: 'Claude-Grundlagen, Chat-Organisation, die drei Modelle (Haiku, Sonnet, Opus), zentrale Funktionen, Personalisierung und Datenschutz.',
-    duration: '40 Min.',
+    duration: '30 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/51vysjHcJ5A', title: 'Claude kompletter Grundkurs (2026)', caption: 'Video 1.1 \u00b7 Claude Grundkurs \u2014 von Beginner zu Profi (30:42)' },
     ],
@@ -250,7 +250,7 @@ const CURRICULUM = [
     meta: 'Intermediate · Module 2',
     title: 'Prompt Engineering Masterclass',
     desc: 'Die 6 Bausteine des perfekten Prompts, XML-Tags, Few-Shot, Chain of Thought, Prompt Chaining, Self-Reflection, Pre-filling und System Prompts.',
-    duration: '60 Min.',
+    duration: '35 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/m4rFoTPpeAA', title: 'Prompt Engineering Praxis', caption: 'Video 2.1 · Prompt Engineering in der Praxis' },
       { url: 'https://www.youtube.com/embed/ysPbXH0LpIE', title: 'Anthropic Best Practices', caption: 'Video 2.2 · Prompt Engineering 101 nach Anthropic' },
@@ -379,7 +379,7 @@ const CURRICULUM = [
     meta: 'Advanced \u00b7 Module 3',
     title: 'Claude Skills \u2014 KI-Experten auf Knopfdruck',
     desc: 'Skills als wiederverwendbare Arbeitsanweisungen. Von der Wissensgewinnung mit NotebookLM \u00fcber die Skill-Konfiguration bis zur Anwendung.',
-    duration: '20 Min.',
+    duration: '30 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/XHVgq4zodpE', title: 'Claude Skills', caption: 'Video 3.1 \u00b7 Claude Skills erstellen und anwenden' },
     ],
@@ -623,84 +623,184 @@ const CURRICULUM = [
     id: 5,
     number: '05',
     meta: 'Expert \u00b7 Module 5',
-    title: 'Claude Code \u2014 The Terminal-Based Power User',
-    desc: '"PhD in Computer Science in your pocket". Bis zu 15 Stunden autonomer Operation, /prime, /create-plan und das Chunking-Prinzip.',
-    duration: '40 Min.',
-    videos: [],
+    title: 'Finance Automation \u2014 Skills in der Praxis',
+    desc: 'Modulare Skills f\u00fcr Finanzprozesse: Data Cleaning, Branding, Dynamic Dashboards, PowerPoint-Generierung und der "Super Skill" f\u00fcr Full Cycle Automation.',
+    duration: '30 Min.',
+    videos: [
+      { url: 'https://www.youtube.com/embed/h0XeJi6OAVI', title: 'Finance Automation mit Claude Skills', caption: 'Video 5.1 \u00b7 Kreditkartenabrechnung vollautomatisiert mit Claude Skills' },
+    ],
     images: [],
     longContent: '',
     content: `
-      <h3>Installation &amp; Command Workflow</h3>
-      <p>Claude Code operiert via Terminal mit IDEs wie <strong>VS Code</strong>. Drei kritische Commands:</p>
+      <p>Dieser Workflow zeigt, wie man komplexe, zeitintensive Finanzaufgaben durch die Kombination
+      spezialisierter Skills in einen <strong>vollautomatisierten Prozess</strong> verwandelt.</p>
+
+      <h3>1. Was sind Claude Skills im Finanzkontext?</h3>
+      <p>Ein Skill ist eine gespeicherte Arbeitsanweisung, die einen einmal definierten Workflow
+      f\u00fcr die zuk\u00fcnftige Nutzung konserviert. Im Finanzbereich erm\u00f6glichen sie es,
+      Rohdaten ohne manuellen Aufwand in <strong>\u201eCFO-fertige\u201c Berichte</strong> zu transformieren.</p>
+
+      <h3>2. Die Bausteine des Workflows (Modulare Skills)</h3>
+
+      <h4>Skill 1: Data Cleaning (Datenbereinigung)</h4>
       <ul>
-        <li><strong>/prime</strong> \u2014 Alle Context Files lesen, Session mit Rolle und Business Objectives initialisieren.</li>
-        <li><strong>/create-plan</strong> \u2014 Projekt architektieren (Gaps identifizieren, Steps outlinen) <em>bevor</em> Execution beginnt.</li>
-        <li><strong>dangerously skip permissions</strong> \u2014 Nur in vertrauten Workflows. Deaktiviert Human Approval.</li>
+        <li><strong>Ausgangslage:</strong> Rohdateien (z.B. Excel-Exporte) sind oft unstrukturiert,
+        enthalten \u00fcberfl\u00fcssige Zeilen/Spalten oder es fehlt der Kontext.</li>
+        <li><strong>Funktion:</strong> Claude konsolidiert verschiedene Tabs in einer Tabelle,
+        beh\u00e4lt nur relevante Felder (Datum, Beschreibung, Betrag) und f\u00fcgt fehlende
+        Informationen wie den Firmennamen oder den Karteninhaber hinzu.</li>
+        <li><strong>Erstellung:</strong> Sobald Claude die Daten im Chat korrekt bereinigt hat,
+        weist man ihn an, daraus den Skill \u201eData Cleaning\u201c zu erstellen.</li>
       </ul>
 
-      <h3>IDE-Integration &amp; Debugging</h3>
-      <p>Der Schl\u00fcssel bei Large-Scale-Automatisierungen: <strong>Chunking</strong> \u2014 massive Tasks in Sub-Tasks splitten, um Token Limits und Agent Fatigue zu vermeiden.</p>
+      <h4>Skill 2: Branding &amp; Design-Richtlinien</h4>
+      <p>Damit alle Ausgaben (Dashboards, Folien) professionell aussehen, wird ein Skill f\u00fcr
+      das <strong>Corporate Design</strong> erstellt. Hier werden Farben, Stile und funktionale
+      Anforderungen (z.B. KPIs oder Narrative) hinterlegt.</p>
 
-      <div class="callout callout-warn">
-        <div class="callout-title">Vorsicht</div>
-        <p><strong>dangerously skip permissions</strong> nur in vertrauten Workflows \u2014 nie bei Unsicherheit. Es deaktiviert die prim\u00e4re Verteidigungslinie.</p>
+      <h4>Skill 3: Dynamic Dashboard Builder</h4>
+      <ul>
+        <li><strong>Technik:</strong> Claude erstellt ein <strong>interaktives HTML-Dashboard</strong>.</li>
+        <li><strong>Features:</strong> Filter, Trendanalysen und Darstellungen gro\u00dfer Transaktionen.</li>
+        <li><strong>Drill-Down:</strong> Schl\u00fcsselfunktion \u2014 durch Klicken auf einen Namen
+        werden sofort alle detaillierten Berichte zu dieser Person angezeigt.</li>
+      </ul>
+
+      <h4>Skill 4: PowerPoint-Pr\u00e4sentationen</h4>
+      <p>Basierend auf den bereinigten Excel-Daten und den Dashboard-Erkenntnissen erstellt Claude
+      eine <strong>Pr\u00e4sentation f\u00fcr Vorstandssitzungen</strong>. Das Branding wird dabei
+      automatisch durch den Branding-Skill \u00fcbernommen.</p>
+
+      <h3>3. Der "Super Skill" (Full Cycle Automation)</h3>
+      <p>Der Super Skill verkn\u00fcpft alle Einzelfertigkeiten zu einer Kette:</p>
+      <div class="callout callout-success">
+        <div class="callout-title">Ablauf des Super Skills</div>
+        <p><strong>1.</strong> Data Cleaning \u2192 <strong>2.</strong> Saubere Excel-Datei \u2192
+        <strong>3.</strong> Dashboard-Erstellung \u2192 <strong>4.</strong> PowerPoint-Generierung</p>
+      </div>
+      <p>Mit einem kurzen Prompt wie <strong>\u201ecredit card report cycle\u201c</strong> f\u00fchrt
+      Claude den gesamten, oft tagef\u00fcllenden Prozess in <strong>Minuten autark</strong> durch.</p>
+
+      <h3>4. Verwaltung der Skills</h3>
+      <p>Alle erstellten und gespeicherten Skills k\u00f6nnen in den Einstellungen unter
+      <strong>Customize (Anpassen) \u2192 Skills</strong> eingesehen und bearbeitet werden.</p>
+
+      <div class="callout">
+        <div class="callout-title">Kernidee</div>
+        <p>Statt jeden Monat Stunden mit repetitiven Finanzaufgaben zu verbringen, baust du dir
+        einmalig spezialisierte Skills, die du dann mit einem einzigen Prompt ausl\u00f6st.</p>
       </div>
     `,
     quiz: [
       {
-        q: 'Wie wird Claude Code metaphorisch beschrieben?',
+        q: 'Was ist ein Claude Skill im Finanzkontext?',
         options: [
-          '"Ein Junior Developer im Slack"',
-          '"Eine App im App Store"',
-          '"Ein PhD in Computer Science in your pocket"',
-          '"Ein Stack Overflow im Pocket"'
+          'Ein einmaliger Prompt, der nach Benutzung gel\u00f6scht wird',
+          'Eine gespeicherte Arbeitsanweisung, die Rohdaten in CFO-fertige Berichte transformiert',
+          'Ein externes Excel-Plugin',
+          'Eine manuelle Checkliste f\u00fcr Buchhalter'
         ],
-        correct: 2,
-        explanation: 'Claude Code = "PhD in Computer Science in your pocket" \u2014 Senior-Level-Engineer-F\u00e4higkeiten.'
+        correct: 1,
+        explanation: 'Ein Skill konserviert einen definierten Workflow f\u00fcr wiederholte Nutzung \u2014 im Finanzbereich z.B. die Transformation von Rohdaten in fertige Berichte.'
       },
       {
-        q: 'Was tut der /prime-Command?',
+        q: 'Was macht der "Data Cleaning"-Skill mit unstrukturierten Excel-Exporten?',
         options: [
-          'Er installiert Updates f\u00fcr Claude Code',
-          'Er l\u00e4dt den Kontext f\u00fcr das Plugin-Hub',
-          'Er l\u00f6scht Cache und Verlauf f\u00fcr mehr Speicher',
-          'Er liest alle Context Files und initialisiert die Session mit Rolle und Zielen'
+          'Er l\u00f6scht die gesamte Datei und erstellt sie neu',
+          'Er konsolidiert Tabs, beh\u00e4lt relevante Felder und f\u00fcgt fehlende Infos hinzu',
+          'Er konvertiert Excel in PDF ohne \u00c4nderungen',
+          'Er sendet die Datei an einen menschlichen Buchhalter'
+        ],
+        correct: 1,
+        explanation: 'Data Cleaning: Tabs zusammenf\u00fchren, nur Datum/Beschreibung/Betrag behalten, fehlende Infos (Firmenname, Karteninhaber) erg\u00e4nzen.'
+      },
+      {
+        q: 'Warum wird ein separater Branding-Skill erstellt?',
+        options: [
+          'Weil Claude ohne Branding-Skill nicht funktioniert',
+          'Damit alle Ausgaben (Dashboards, Folien) automatisch das Corporate Design tragen',
+          'Um das Claude-Interface farblich anzupassen',
+          'Weil Branding gesetzlich vorgeschrieben ist'
+        ],
+        correct: 1,
+        explanation: 'Der Branding-Skill hinterlegt Farben, Stile und KPI-Anforderungen \u2014 alle nachfolgenden Outputs sehen automatisch professionell aus.'
+      },
+      {
+        q: 'Was ist die "Drill-Down"-Funktion im Dynamic Dashboard?',
+        options: [
+          'Eine Funktion zum L\u00f6schen von Daten',
+          'Ein Button zum Exportieren als PDF',
+          'Ein Bohrmaschinen-Simulator',
+          'Durch Klick auf einen Namen werden alle detaillierten Berichte zu dieser Person angezeigt'
         ],
         correct: 3,
-        explanation: '/prime erzwingt das Einlesen aller Kontextdateien und kalibriert Claude auf Rolle + Gesch\u00e4ftsziele.'
+        explanation: 'Drill-Down = auf einen Namen klicken \u2192 sofort alle detaillierten Transaktionen und Berichte dieser Person sehen.'
       },
       {
-        q: 'Was ist "Chunking" bei gro\u00dfen Automatisierungen?',
+        q: 'In welcher Reihenfolge arbeitet der "Super Skill"?',
         options: [
-          'Dateien zippen vor dem Upload',
-          'Tasks auf mehrere Personen verteilen',
-          'Massive Tasks in Sub-Tasks splitten, um Token Limits und Agent Fatigue zu vermeiden',
-          'Code in einzelne Dateien aufteilen'
+          'Dashboard \u2192 PowerPoint \u2192 Data Cleaning \u2192 Excel',
+          'PowerPoint \u2192 Dashboard \u2192 Excel \u2192 Data Cleaning',
+          'Data Cleaning \u2192 saubere Excel \u2192 Dashboard \u2192 PowerPoint',
+          'Excel \u2192 PowerPoint \u2192 Dashboard \u2192 Data Cleaning'
         ],
         correct: 2,
-        explanation: 'Chunking adressiert Token-Limits und Agent-Fatigue \u2014 Sub-Tasks erhalten die Output-Qualit\u00e4t.'
+        explanation: 'Die Kette: 1. Data Cleaning \u2192 2. Saubere Excel \u2192 3. Dashboard \u2192 4. PowerPoint-Pr\u00e4sentation.'
       },
       {
-        q: 'Wann sollte "dangerously skip permissions" eingesetzt werden?',
+        q: 'Was passiert, wenn man den Prompt "credit card report cycle" eingibt?',
         options: [
-          'Bei jedem neuen, unbekannten Task',
-          'Immer, um Zeit zu sparen',
-          'Niemals \u2014 es ist komplett verboten',
-          'Ausschlie\u00dflich in vertrauten, etablierten Workflows mit extremer Vorsicht'
+          'Claude fragt nach weiteren Details und wartet',
+          'Claude f\u00fchrt den gesamten Workflow (Cleaning \u2192 Excel \u2192 Dashboard \u2192 PPT) autark durch',
+          'Claude zeigt nur die letzte Kreditkartenabrechnung an',
+          'Claude \u00f6ffnet die Kreditkarten-Website'
+        ],
+        correct: 1,
+        explanation: 'Der Super Skill verkn\u00fcpft alle Einzelskills \u2014 ein kurzer Prompt l\u00f6st den kompletten, oft tagef\u00fcllenden Prozess in Minuten aus.'
+      },
+      {
+        q: 'Wo findet man alle gespeicherten Skills zur Bearbeitung?',
+        options: [
+          'Im Chat-Verlauf unter "Letzte Nachrichten"',
+          'In den Einstellungen unter Customize (Anpassen) \u2192 Skills',
+          'Auf der Anthropic-Website unter "Downloads"',
+          'Skills k\u00f6nnen nach der Erstellung nicht mehr bearbeitet werden'
+        ],
+        correct: 1,
+        explanation: 'Alle Skills sind unter Einstellungen \u2192 Customize \u2192 Skills einsehbar und editierbar.'
+      },
+      {
+        q: 'Wie wird ein neuer Skill am besten erstellt?',
+        options: [
+          'Man schreibt den Skill manuell in einem Texteditor',
+          'Man kauft Skills im Claude Store',
+          'Man l\u00e4sst Claude die Aufgabe erst im Chat korrekt l\u00f6sen, dann den Skill daraus erstellen',
+          'Skills werden automatisch nach 10 \u00e4hnlichen Chats erstellt'
+        ],
+        correct: 2,
+        explanation: 'Best Practice: Erst im Chat die Aufgabe l\u00f6sen lassen, dann Claude anweisen, daraus einen wiederverwendbaren Skill zu erstellen.'
+      },
+      {
+        q: 'Welches Format nutzt der Dashboard Builder f\u00fcr interaktive Dashboards?',
+        options: [
+          'PDF mit eingebetteten Links',
+          'PowerPoint mit Animationen',
+          'Excel mit Pivot-Tabellen',
+          'Interaktives HTML mit Filtern und Trendanalysen'
         ],
         correct: 3,
-        explanation: 'Nur in trusted Workflows. Der Command deaktiviert Human Approval \u2014 die prim\u00e4re Verteidigungslinie.'
+        explanation: 'Der Dashboard Builder erstellt interaktives HTML \u2014 mit Filtern, Trendanalysen und Drill-Down-Funktionalit\u00e4t.'
       },
       {
-        q: 'Wie lange kann Claude Code maximal autonom operieren?',
+        q: 'Was ist der Hauptvorteil des modularen Skill-Ansatzes gegen\u00fcber einem einzigen gro\u00dfen Prompt?',
         options: [
-          'Bis zu 15 Stunden',
-          'Unbegrenzt',
-          'Bis zu 1 Stunde',
-          'Bis zu 5 Stunden'
+          'Ein gro\u00dfer Prompt ist immer besser als mehrere Skills',
+          'Modulare Skills sind billiger',
+          'Einzelne Skills k\u00f6nnen unabh\u00e4ngig aktualisiert, kombiniert und in verschiedenen Workflows wiederverwendet werden',
+          'Es gibt keinen Unterschied'
         ],
-        correct: 0,
-        explanation: 'Claude Code ist f\u00fcr bis zu 15 Stunden autonomer Operation ausgelegt.'
+        correct: 2,
+        explanation: 'Modularit\u00e4t: Jeder Skill kann einzeln aktualisiert, frei kombiniert und in verschiedenen Workflows wiederverwendet werden.'
       }
     ]
   },
@@ -831,9 +931,9 @@ const FINAL_EXAM = [
     correct: 3, explanation: 'Monthly: check settings, cut anything not actively in use.'
   },
   {
-    q: 'Was tut /prime in Claude Code?',
-    options: ['Updates installieren', 'Cache l\u00f6schen', 'Context Files lesen und Session initialisieren', 'Session beenden'],
-    correct: 2, explanation: '/prime erzwingt das Einlesen aller Kontextdateien.'
+    q: 'Was macht der "Super Skill" bei der Finanzautomatisierung?',
+    options: ['Er erstellt nur eine Excel-Datei', 'Er verkettet Data Cleaning, Excel, Dashboard und PowerPoint in einem Durchlauf', 'Er sendet Rechnungen per E-Mail', 'Er bucht Transaktionen automatisch'],
+    correct: 1, explanation: 'Der Super Skill verkettet alle Einzelskills: Cleaning \u2192 Excel \u2192 Dashboard \u2192 PowerPoint \u2014 alles mit einem Prompt.'
   },
   {
     q: 'Was ist "Chunking"?',
