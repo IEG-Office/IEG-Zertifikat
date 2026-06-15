@@ -4,393 +4,194 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IEG Claude Academy — Login</title>
+<!-- Supabase ZUERST synchron laden -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase-config.js"></script>
+<script>
+  // Sofort initialisieren, kein Warten nötig
+  window.sb = supabase.createClient(window._supabaseURL, window._supabaseKEY);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ieg-blue: #075DE4;
-    --ieg-blue-bright: #2876F2;
-    --ieg-blue-soft: #E8F0FF;
-    --navy: #0A1A33;
-    --navy-soft: #14264A;
-    --bone: #F4F6FB;
-    --bone-soft: #E5EAF2;
-    --paper: #FBFCFE;
-    --white: #FFFFFF;
-    --text: #0A1A33;
-    --text-muted: #4A5878;
-    --rust: #C24A2C;
-    --sage: #2E7D5C;
+    --blue: #075DE4; --navy: #0A1A33; --navy-soft: #14264A;
+    --bone: #F4F6FB; --bone-soft: #E5EAF2; --paper: #FBFCFE;
+    --text: #0A1A33; --muted: #4A5878; --rust: #C24A2C; --sage: #2E7D5C;
     --serif: 'Fraunces', Georgia, serif;
     --sans: 'Inter Tight', -apple-system, sans-serif;
     --mono: 'JetBrains Mono', monospace;
-    --radius: 8px;
-    --radius-lg: 16px;
+    --r: 8px; --rl: 16px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: var(--sans);
-    background: var(--navy);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
+    font-family: var(--sans); background: var(--navy);
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; padding: 20px; overflow: hidden; position: relative;
   }
-  .bg-glow {
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(7,93,228,0.35) 0%, transparent 60%);
-    pointer-events: none;
+  .glow { position: absolute; border-radius: 50%; pointer-events: none; }
+  .glow-1 { top: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(7,93,228,.35) 0%, transparent 60%); }
+  .glow-2 { bottom: -300px; left: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(40,118,242,.20) 0%, transparent 60%); }
+  .card {
+    background: var(--paper); border-radius: var(--rl);
+    padding: 48px; width: 100%; max-width: 440px;
+    position: relative; z-index: 1;
+    box-shadow: 0 24px 80px rgba(10,26,51,.40);
   }
-  .bg-glow-2 {
-    position: absolute;
-    bottom: -300px; left: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(40,118,242,0.20) 0%, transparent 60%);
-    pointer-events: none;
+  .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+  .logo img { height: 36px; }
+  .logo-div { width: 1px; height: 24px; background: var(--bone-soft); }
+  .logo-primary { font-family: var(--serif); font-weight: 500; font-size: 15px; color: var(--navy); display: block; }
+  .logo-secondary { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); display: block; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: 32px; letter-spacing: -.02em; color: var(--navy); margin-bottom: 8px; }
+  .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.5; }
+  .tabs { display: flex; border-bottom: 1px solid var(--bone-soft); margin-bottom: 28px; }
+  .tab { padding: 10px 0; font-size: 14px; font-weight: 500; color: var(--muted); border: none; background: none; cursor: pointer; margin-right: 24px; border-bottom: 2px solid transparent; margin-bottom: -1px; font-family: var(--sans); transition: all .2s; }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .fg { margin-bottom: 18px; }
+  label { display: block; font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  input[type=text], input[type=email], input[type=password] {
+    width: 100%; padding: 12px 16px; font-family: var(--sans); font-size: 15px;
+    border: 1px solid var(--bone-soft); border-radius: var(--r);
+    background: #fff; color: var(--navy); outline: none; transition: all .2s;
   }
-  .login-card {
-    background: var(--paper);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    width: 100%;
-    max-width: 440px;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 24px 80px rgba(10,26,51,0.40);
+  input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(7,93,228,.12); }
+  .btn {
+    width: 100%; padding: 14px; background: var(--blue); color: #fff;
+    border: none; border-radius: var(--r); font-family: var(--sans);
+    font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px;
+    transition: all .25s; display: flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .login-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 40px;
-  }
-  .login-logo img { height: 36px; width: auto; }
-  .logo-divider { width: 1px; height: 24px; background: var(--bone-soft); }
-  .logo-text { display: flex; flex-direction: column; gap: 3px; }
-  .logo-primary { font-family: var(--serif); font-weight: 500; font-size: 15px; color: var(--navy); }
-  .logo-secondary { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ieg-blue); }
-
-  .login-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 32px;
-    letter-spacing: -0.02em;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .login-subtitle {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    line-height: 1.5;
-  }
-
-  /* Tabs */
-  .auth-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--bone-soft);
-    margin-bottom: 28px;
-  }
-  .auth-tab {
-    padding: 10px 0;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-muted);
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-right: 24px;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    transition: all 0.2s ease;
-    font-family: var(--sans);
-  }
-  .auth-tab.active {
-    color: var(--ieg-blue);
-    border-bottom-color: var(--ieg-blue);
-  }
-
-  /* Form */
-  .form-group { margin-bottom: 18px; }
-  .form-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 6px;
-    letter-spacing: 0.01em;
-  }
-  .form-input {
-    width: 100%;
-    padding: 12px 16px;
-    font-family: var(--sans);
-    font-size: 15px;
-    border: 1px solid var(--bone-soft);
-    border-radius: var(--radius);
-    background: var(--white);
-    color: var(--navy);
-    transition: all 0.2s ease;
-    outline: none;
-  }
-  .form-input:focus {
-    border-color: var(--ieg-blue);
-    box-shadow: 0 0 0 3px rgba(7,93,228,0.12);
-  }
-  .form-input.error { border-color: var(--rust); }
-
-  .btn-submit {
-    width: 100%;
-    padding: 14px;
-    background: var(--ieg-blue);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius);
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .btn-submit:hover { background: var(--ieg-blue-bright); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(7,93,228,0.30); }
-  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  /* Messages */
-  .alert {
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    font-size: 14px;
-    margin-bottom: 18px;
-    display: none;
-    line-height: 1.45;
-  }
+  .btn:hover:not(:disabled) { background: #2876F2; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(7,93,228,.30); }
+  .btn:disabled { opacity: .6; cursor: not-allowed; }
+  .alert { padding: 12px 16px; border-radius: var(--r); font-size: 14px; margin-bottom: 18px; line-height: 1.45; display: none; }
   .alert.show { display: block; }
-  .alert-error { background: #FEF1ED; color: var(--rust); border: 1px solid rgba(194,74,44,0.25); }
-  .alert-success { background: #ECF6F1; color: var(--sage); border: 1px solid rgba(46,125,92,0.25); }
-  .alert-info { background: var(--ieg-blue-soft); color: var(--ieg-blue); border: 1px solid rgba(7,93,228,0.20); }
-
-  /* Spinner */
-  .spinner {
-    width: 18px; height: 18px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    display: none;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .form-panel { display: none; }
-  .form-panel.active { display: block; }
-
-  .divider {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin: 20px 0 0;
-  }
-  .divider a { color: var(--ieg-blue); cursor: pointer; text-decoration: underline; }
-
-  .login-footer {
-    margin-top: 32px;
-    padding-top: 20px;
-    border-top: 1px solid var(--bone-soft);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--text-muted);
-    text-align: center;
-  }
-
-  /* Setup warning */
-  .setup-warning {
-    background: #FFF8E1;
-    border: 1px solid #F5C518;
-    border-radius: var(--radius);
-    padding: 12px 16px;
-    font-size: 13px;
-    color: #7A6000;
-    margin-bottom: 20px;
-    display: none;
-  }
+  .err { background: #FEF1ED; color: var(--rust); border: 1px solid rgba(194,74,44,.25); }
+  .ok  { background: #ECF6F1; color: var(--sage); border: 1px solid rgba(46,125,92,.25); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .hint { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .hint a { color: var(--blue); cursor: pointer; text-decoration: underline; }
+  .foot { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--bone-soft); font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: var(--muted); text-align: center; }
+  .spin { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: sp .8s linear infinite; display: none; }
+  @keyframes sp { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
-
-<div class="bg-glow"></div>
-<div class="bg-glow-2"></div>
-
-<div class="login-card">
-  <div class="login-logo">
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+<div class="card">
+  <div class="logo">
     <img src="assets/ieg-logo.png" alt="IEG">
-    <div class="logo-divider"></div>
-    <div class="logo-text">
+    <div class="logo-div"></div>
+    <div>
       <span class="logo-primary">Claude Academy</span>
       <span class="logo-secondary">Internal Training</span>
     </div>
   </div>
 
-  <div class="setup-warning" id="setupWarning">
-    ⚠️ <strong>Setup erforderlich:</strong> Bitte trage deine Supabase-Keys in <code>supabase-config.js</code> ein.
-    <a href="https://supabase.com" target="_blank">Supabase öffnen →</a>
+  <h1>Willkommen zurück</h1>
+  <p class="subtitle">Melde dich an, um deinen Lernfortschritt zu sehen und fortzusetzen.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('login')">Anmelden</button>
+    <button class="tab" onclick="switchTab('register')">Registrieren</button>
   </div>
 
-  <h1 class="login-title">Willkommen zurück</h1>
-  <p class="login-subtitle">Melde dich an, um deinen Lernfortschritt zu sehen und fortzusetzen.</p>
+  <div id="alert" class="alert"></div>
 
-  <div class="auth-tabs">
-    <button class="auth-tab active" onclick="switchTab('login')">Anmelden</button>
-    <button class="auth-tab" onclick="switchTab('register')">Registrieren</button>
-  </div>
-
-  <div id="alertBox" class="alert"></div>
-
-  <!-- LOGIN FORM -->
-  <div class="form-panel active" id="loginPanel">
-    <div class="form-group">
-      <label class="form-label">E-Mail-Adresse</label>
-      <input type="email" class="form-input" id="loginEmail" placeholder="name@ieg-banking.com" autocomplete="email">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Passwort</label>
-      <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
-    </div>
-    <button class="btn-submit" id="loginBtn" onclick="handleLogin()">
-      <span id="loginBtnText">Anmelden</span>
-      <div class="spinner" id="loginSpinner"></div>
+  <!-- LOGIN -->
+  <div class="panel active" id="loginPanel">
+    <div class="fg"><label>E-Mail-Adresse</label><input type="email" id="lEmail" placeholder="name@ieg-banking.com" autocomplete="email"></div>
+    <div class="fg"><label>Passwort</label><input type="password" id="lPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="btn" id="lBtn" onclick="doLogin()">
+      <span id="lTxt">Anmelden</span><div class="spin" id="lSpin"></div>
     </button>
-    <div class="divider">
-      Noch kein Konto? <a onclick="switchTab('register')">Jetzt registrieren</a>
-    </div>
+    <div class="hint">Noch kein Konto? <a onclick="switchTab('register')">Jetzt registrieren</a></div>
   </div>
 
-  <!-- REGISTER FORM -->
-  <div class="form-panel" id="registerPanel">
-    <div class="form-group">
-      <label class="form-label">Vollständiger Name</label>
-      <input type="text" class="form-input" id="registerName" placeholder="z. B. Max Mustermann" autocomplete="name">
-    </div>
-    <div class="form-group">
-      <label class="form-label">E-Mail-Adresse</label>
-      <input type="email" class="form-input" id="registerEmail" placeholder="name@ieg-banking.com" autocomplete="email">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Passwort</label>
-      <input type="password" class="form-input" id="registerPassword" placeholder="Mindestens 8 Zeichen" autocomplete="new-password">
-    </div>
-    <button class="btn-submit" id="registerBtn" onclick="handleRegister()">
-      <span id="registerBtnText">Account erstellen</span>
-      <div class="spinner" id="registerSpinner"></div>
+  <!-- REGISTER -->
+  <div class="panel" id="registerPanel">
+    <div class="fg"><label>Vollständiger Name</label><input type="text" id="rName" placeholder="z. B. Max Mustermann" autocomplete="name"></div>
+    <div class="fg"><label>E-Mail-Adresse</label><input type="email" id="rEmail" placeholder="name@ieg-banking.com" autocomplete="email"></div>
+    <div class="fg"><label>Passwort</label><input type="password" id="rPass" placeholder="Mindestens 8 Zeichen" autocomplete="new-password"></div>
+    <button class="btn" id="rBtn" onclick="doRegister()">
+      <span id="rTxt">Account erstellen</span><div class="spin" id="rSpin"></div>
     </button>
-    <div class="divider">
-      Bereits registriert? <a onclick="switchTab('login')">Anmelden</a>
-    </div>
+    <div class="hint">Bereits registriert? <a onclick="switchTab('login')">Anmelden</a></div>
   </div>
 
-  <div class="login-footer">
-    © 2026 IEG Investment Banking Group · Internal
-  </div>
+  <div class="foot">© 2026 IEG Investment Banking Group · Internal</div>
 </div>
 
-<script src="supabase-config.js"></script>
 <script>
-// Tab switching
-function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t, i) => t.classList.toggle('active', (i === 0) === (tab === 'login')));
-  document.getElementById('loginPanel').classList.toggle('active', tab === 'login');
-  document.getElementById('registerPanel').classList.toggle('active', tab === 'register');
-  hideAlert();
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach((el, i) => el.classList.toggle('active', (i===0)===(t==='login')));
+  document.getElementById('loginPanel').classList.toggle('active', t==='login');
+  document.getElementById('registerPanel').classList.toggle('active', t==='register');
+  msg('');
 }
 
-function showAlert(msg, type = 'error') {
-  const box = document.getElementById('alertBox');
-  box.textContent = msg;
-  box.className = 'alert show alert-' + type;
-}
-function hideAlert() {
-  document.getElementById('alertBox').className = 'alert';
+function msg(text, type='err') {
+  const a = document.getElementById('alert');
+  if (!text) { a.className = 'alert'; return; }
+  a.className = 'alert show ' + type;
+  a.textContent = text;
 }
 
-function setLoading(panel, loading) {
-  const btn = document.getElementById(panel + 'Btn');
-  const txt = document.getElementById(panel + 'BtnText');
-  const spin = document.getElementById(panel + 'Spinner');
-  btn.disabled = loading;
-  txt.textContent = loading ? (panel === 'login' ? 'Wird angemeldet...' : 'Wird erstellt...') : (panel === 'login' ? 'Anmelden' : 'Account erstellen');
-  spin.style.display = loading ? 'block' : 'none';
+function setLoading(id, on) {
+  document.getElementById(id+'Btn').disabled = on;
+  document.getElementById(id+'Txt').textContent = on ? (id==='l' ? 'Wird angemeldet...' : 'Wird erstellt...') : (id==='l' ? 'Anmelden' : 'Account erstellen');
+  document.getElementById(id+'Spin').style.display = on ? 'block' : 'none';
 }
 
-async function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  if (!email || !password) { showAlert('Bitte E-Mail und Passwort eingeben.'); return; }
-
-  setLoading('login', true);
-  hideAlert();
-
+async function doLogin() {
+  const email = document.getElementById('lEmail').value.trim();
+  const pass  = document.getElementById('lPass').value;
+  if (!email || !pass) { msg('Bitte E-Mail und Passwort eingeben.'); return; }
+  setLoading('l', true); msg('');
   try {
-    const { data, error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+    const { data, error } = await window.sb.auth.signInWithPassword({ email, password: pass });
     if (error) throw error;
     window.location.href = 'index.html';
-  } catch (err) {
-    showAlert(err.message === 'Invalid login credentials' ? 'E-Mail oder Passwort falsch.' : err.message);
-    setLoading('login', false);
+  } catch(e) {
+    msg(e.message.includes('Invalid') ? 'E-Mail oder Passwort falsch.' : e.message);
+    setLoading('l', false);
   }
 }
 
-async function handleRegister() {
-  const name = document.getElementById('registerName').value.trim();
-  const email = document.getElementById('registerEmail').value.trim();
-  const password = document.getElementById('registerPassword').value;
-  if (!name || !email || !password) { showAlert('Bitte alle Felder ausfüllen.'); return; }
-  if (password.length < 8) { showAlert('Passwort muss mindestens 8 Zeichen haben.'); return; }
-
-  setLoading('register', true);
-  hideAlert();
-
+async function doRegister() {
+  const name  = document.getElementById('rName').value.trim();
+  const email = document.getElementById('rEmail').value.trim();
+  const pass  = document.getElementById('rPass').value;
+  if (!name || !email || !pass) { msg('Bitte alle Felder ausfüllen.'); return; }
+  if (pass.length < 8) { msg('Passwort muss mindestens 8 Zeichen haben.'); return; }
+  setLoading('r', true); msg('');
   try {
-    const { data, error } = await window.supabaseClient.auth.signUp({
-      email, password,
+    const { data, error } = await window.sb.auth.signUp({
+      email, password: pass,
       options: { data: { full_name: name } }
     });
     if (error) throw error;
-    showAlert('Account erstellt! Bitte E-Mail bestätigen, dann anmelden.', 'success');
-    setLoading('register', false);
-  } catch (err) {
-    showAlert(err.message);
-    setLoading('register', false);
+    msg('✓ Account erstellt! Bitte E-Mail bestätigen, dann hier anmelden.', 'ok');
+    setLoading('r', false);
+  } catch(e) {
+    msg(e.message);
+    setLoading('r', false);
   }
 }
 
-// Enter key support
-document.addEventListener('keydown', (e) => {
+// Enter key
+document.addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
-  if (document.getElementById('loginPanel').classList.contains('active')) handleLogin();
-  else handleRegister();
+  if (document.getElementById('loginPanel').classList.contains('active')) doLogin();
+  else doRegister();
 });
 
-// Check if config is set
-window.addEventListener('load', () => {
-  if (typeof SUPABASE_URL === 'undefined' || SUPABASE_URL.includes('YOUR_') ||
-      typeof SUPABASE_ANON_KEY === 'undefined' || SUPABASE_ANON_KEY.includes('YOUR_')) {
-    document.getElementById('setupWarning').style.display = 'block';
-  }
-  // If already logged in → redirect
-  if (window.supabaseClient) {
-    window.supabaseClient.auth.getSession().then(({ data }) => {
-      if (data?.session) window.location.href = 'index.html';
-    });
-  }
+// Bereits eingeloggt? → weiterleiten
+window.sb.auth.getSession().then(({ data }) => {
+  if (data?.session) window.location.href = 'index.html';
 });
 </script>
 </body>
