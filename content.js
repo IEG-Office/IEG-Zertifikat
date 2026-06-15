@@ -250,7 +250,7 @@ const CURRICULUM = [
     meta: 'Intermediate · Module 2',
     title: 'Prompt Engineering Masterclass',
     desc: 'Die 6 Bausteine des perfekten Prompts, XML-Tags, Few-Shot, Chain of Thought, Prompt Chaining, Self-Reflection, Pre-filling und System Prompts.',
-    duration: '35 Min.',
+    duration: '60 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/m4rFoTPpeAA', title: 'Prompt Engineering Praxis', caption: 'Video 2.1 · Prompt Engineering in der Praxis' },
       { url: 'https://www.youtube.com/embed/ysPbXH0LpIE', title: 'Anthropic Best Practices', caption: 'Video 2.2 · Prompt Engineering 101 nach Anthropic' },
