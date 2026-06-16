@@ -6,7 +6,7 @@
 // Prüft ob User eingeloggt ist. Wenn nicht → login.html
 (function checkLogin() {
   if (localStorage.getItem('ieg_logged_in') !== 'yes') {
-    window.location.replace('login-2.html');
+    window.location.replace('login.html');
   }
 })();
 
@@ -31,7 +31,7 @@ function saveState() {
 function logout() {
   localStorage.removeItem('ieg_logged_in');
   localStorage.removeItem('ieg_user_name');
-  window.location.replace('login-2.html');
+  window.location.replace('login.html');
 }
 
 function resetProgress() {
