@@ -74,21 +74,10 @@
 
   <div class="panel on" id="loginPanel">
     <div class="fg"><label>E-MAIL</label><input type="email" id="lE" placeholder="name@ieg-banking.com"></div>
-    <div class="fg">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-        <label style="margin:0;">PASSWORT</label>
-        <a onclick="sw('reset')" style="font-size:12px;color:var(--blue);cursor:pointer;text-decoration:underline;">Passwort vergessen?</a>
-      </div>
-      <input type="password" id="lP" placeholder="••••••••">
-    </div>
+    <div class="fg"><label>PASSWORT</label><input type="password" id="lP" placeholder="••••••••"></div>
     <button class="btn" id="lB" onclick="doLogin()">Anmelden</button>
     <div class="hint">Noch kein Konto? <a onclick="sw('register')">Registrieren</a></div>
   </div>
-
-  <!-- RESET PANEL -->
-  <div class="panel" id="resetPanel">
-    <p style="font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.5;">Gib deine E-Mail-Adresse ein. Wir senden dir einen Link zum Zurücksetzen deines Passworts.</p>
-    <div class="fg"><label>E-MAIL</label><input type="email" id="rsetE" placeholder="name@ieg-banking.com"></div>
     <button class="btn" id="rsetB" onclick="doReset()">Reset-Link senden</button>
     <div class="hint"><a onclick="sw('login')">← Zurück zum Login</a></div>
   </div>
@@ -114,7 +103,6 @@ function sw(t) {
   document.querySelectorAll('.tab').forEach((el,i) => el.classList.toggle('on',(i===0)===(t==='login')));
   document.getElementById('loginPanel').classList.toggle('on', t==='login');
   document.getElementById('registerPanel').classList.toggle('on', t==='register');
-  document.getElementById('resetPanel').classList.toggle('on', t==='reset');
   showMsg('');
 }
 
@@ -189,10 +177,6 @@ document.addEventListener('keydown', e => {
   if (document.getElementById('loginPanel').classList.contains('on')) doLogin();
   else doRegister();
 });
-
-async function doReset() {
-  const email = document.getElementById('rsetE').value.trim();
-  if (!email) { showMsg('Bitte E-Mail eingeben.'); return; }
 
   const b = document.getElementById('rsetB');
   b.disabled = true;
