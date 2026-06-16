@@ -183,9 +183,15 @@ document.addEventListener('keydown', e => {
   else doRegister();
 });
 
+async function doReset() {
+  const email = prompt('Bitte geben Sie Ihre E-Mail-Adresse ein:');
+  if (!email) return;
+
   const b = document.getElementById('rsetB');
-  b.disabled = true;
-  b.textContent = 'Wird gesendet...';
+  if (b) {
+    b.disabled = true;
+    b.textContent = 'Wird gesendet...';
+  }
   showMsg('');
 
   try {
@@ -208,12 +214,14 @@ document.addEventListener('keydown', e => {
       const data = await res.json();
       throw new Error(data.error_description || data.msg || 'Fehler beim Senden');
     }
-  } catch(e) {
+  } catch (e) {
     showMsg('Fehler: ' + e.message);
   }
 
-  b.disabled = false;
-  b.textContent = 'Reset-Link senden';
+  if (b) {
+    b.disabled = false;
+    b.textContent = 'Reset-Link senden';
+  }
 }
 </script>
 </body>
