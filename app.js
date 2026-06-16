@@ -11,28 +11,18 @@ let supabaseReady = false;
 let previewMode = false;
 
 // Start wenn Seite geladen
-window.addEventListener('load', async () => {
-  // window.sb ist synchron in supabase-config.js erstellt
-  if (!window.sb) {
-    state = loadLocalState();
-    renderEverything();
-    setupNavObserver();
+window.addEventListener('DOMContentLoaded', () => {
+  // Login via localStorage Token (gesetzt von login.html)
+  const token = localStorage.getItem('ieg_token');
+  const userName = localStorage.getItem('ieg_user_name');
+
+  if (!token) {
+    window.location.href = 'login.html';
     return;
   }
 
-  try {
-    const { data: { session } } = await window.sb.auth.getSession();
-    if (!session) {
-      window.location.href = 'login.html';
-      return;
-    }
-    currentUser = session.user;
-    supabaseReady = true;
-    updateUserDisplay();
-  } catch(e) {
-    console.error('Auth error:', e);
-  }
-
+  currentUser = { name: userName || 'User' };
+  updateUserDisplay();
   state = loadLocalState();
   renderEverything();
   setupNavObserver();
@@ -151,8 +141,8 @@ function saveLocalState() {
 
 // Logout
 async function logout() {
-  localStorage.removeItem('sb_access_token');
-  localStorage.removeItem('sb_user_name');
+  localStorage.removeItem('ieg_token');
+  localStorage.removeItem('ieg_user_name');
   window.location.href = 'login.html';
 }
 

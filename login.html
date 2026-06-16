@@ -147,6 +147,8 @@ async function doRegister() {
       showMsg('✓ Account erstellt! Bitte jetzt anmelden.', 'ok');
       sw('login');
     } else {
+      localStorage.setItem('ieg_token', loginData.session.access_token);
+      localStorage.setItem('ieg_user_name', name);
       window.location.href = 'index.html';
     }
   } catch(e) {
@@ -165,6 +167,9 @@ async function doLogin() {
   try {
     const { data, error } = await window.sb.auth.signInWithPassword({ email, password: pass });
     if (error) throw error;
+    // Token speichern für app.js
+    localStorage.setItem('ieg_token', data.session.access_token);
+    localStorage.setItem('ieg_user_name', data.user?.user_metadata?.full_name || email.split('@')[0]);
     window.location.href = 'index.html';
   } catch(e) {
     showMsg(e.message.includes('Invalid') ? 'E-Mail oder Passwort falsch.' : 'Fehler: ' + e.message);
