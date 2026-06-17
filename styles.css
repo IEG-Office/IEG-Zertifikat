@@ -1331,9 +1331,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 .cert-signature {
-  font-family: 'Fraunces', cursive;
-  font-style: italic;
-  font-size: 24px;
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
   color: var(--navy);
   border-bottom: 1px solid var(--navy);
   padding-bottom: 4px;
