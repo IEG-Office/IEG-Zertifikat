@@ -58,4 +58,51 @@
       <div class="callout callout-warn">
         <div class="callout-title">Merke</div>
         <p>Strukturierte Daten liefern den Kontext, in dem unstrukturierte Daten korrekt interpretiert werden.</p>
-      </div><div class="quiz-section"><div class="quiz-eyebrow">Bereit für das Quiz?</div><h2>Testen Sie Ihr Verständnis</h2><p class="quiz-lede">10 Fragen · Pass-Threshold 70 %.</p><button class="btn btn-primary" onclick="startQuiz()">Quiz starten <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button></div></main><div class="module-navigation"><a href="modul-01.html" class="nav-card nav-card-prev"><div class="nav-card-label">← Vorheriges Modul</div><div class="nav-card-title">01 · Foundations & The Analyst’s Workbench</div></a><a href="modul-03.html" class="nav-card nav-card-next"><div class="nav-card-label">Nächstes Modul →</div><div class="nav-card-title">03 · Claude Skills — KI-Experten auf Knopfdruck</div></a></div><div class="modal-overlay" id="quizModal"><div class="modal-content"><button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div id="quizModalBody"></div></div></div><footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer><script src="../content.js"></script><script>const MODULE_ID=2;const MODULE_TITLE="Prompt Engineering Masterclass";const MODULE_QUIZ=CURRICULUM.find(m=>m.id===2).quiz;</script><script src="module.js"></script></body></html>
+      </div><section class="exercise-section">
+    <div class="section-intro">
+      <div class="section-eyebrow">Praxisübung</div>
+      <h2>Das Gelernte anwenden</h2>
+      <p>Verbessern Sie einen schwachen Prompt systematisch und zerlegen Sie eine komplexe Aufgabe in kontrollierbare Teilschritte.</p>
+    </div>
+    <div class="exercise-grid">
+      <article class="exercise-card">
+        <div class="exercise-kicker">Übung 1</div>
+        <h3 class="exercise-title">Schlechten Prompt professionell umbauen</h3>
+        <p class="exercise-text">Ein vager Prompt liefert vage Ergebnisse. Überarbeiten Sie den folgenden Prompt systematisch mit den 6 Bausteinen aus diesem Modul.</p>
+        <ul class="exercise-list">
+          <li>Ausgangsprompt: <em>„Schreib mir was über ein Unternehmen."</em></li>
+          <li>Ergänzen Sie: <strong>Rolle</strong> (wer soll Claude sein?), <strong>Aufgabe</strong> (konkretes Verb), <strong>Kontext</strong> (Branche, Zweck), <strong>Vorgehen</strong> (Schrittfolge), <strong>Stoppkriterien</strong> (keine Vermutungen) und <strong>Output-Format</strong> (Tabelle, Fließtext, Wortlimit).</li>
+          <li>Testen Sie beide Versionen in Claude und vergleichen Sie die Ergebnisqualität.</li>
+          <li>Dokumentieren Sie die drei wichtigsten Unterschiede.</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Beispiel-Prompt (nach Überarbeitung):</strong>
+          <p>Du bist ein M&amp;A-Analyst. Erstelle ein Kurzprofil eines mittelständischen Unternehmens im Bereich Industrieautomation. Struktur: (1) Geschäftsmodell in 2 Sätzen, (2) geschätzte Umsatzgröße, (3) 3 relevante Wettbewerber. Max. 150 Wörter. Wenn Daten nicht verfügbar sind, kennzeichne das explizit.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Ziel:</strong> Promptqualität durch systematische Struktur verbessern — vom vagen Input zum präzisen Output.
+        </div>
+      </article>
+      <article class="exercise-card">
+        <div class="exercise-kicker">Übung 2</div>
+        <h3 class="exercise-title">Prompt Chaining für Analyseaufgaben</h3>
+        <p class="exercise-text">Komplexe Aufgaben werden kontrollierbar, wenn man sie in mehrere aufeinander aufbauende Prompts zerlegt. Üben Sie das anhand einer typischen Analyse.</p>
+        <ul class="exercise-list">
+          <li><strong>Prompt 1:</strong> Erstellen Sie ein Kurzprofil für ein Unternehmen Ihrer Wahl (Geschäftsmodell, Marktposition, Kennzahlen).</li>
+          <li><strong>Prompt 2:</strong> Lassen Sie dasselbe für zwei weitere Unternehmen derselben Branche erstellen.</li>
+          <li><strong>Prompt 3:</strong> Fassen Sie alle drei Profile in einer Vergleichstabelle zusammen, sortiert nach strategischer Passung.</li>
+          <li><strong>Prompt 4:</strong> Erstellen Sie eine Management Summary (max. 100 Wörter), die das Ergebnis zusammenfasst.</li>
+          <li>Prüfen Sie nach jedem Schritt: Ist das Zwischenergebnis korrekt und vollständig?</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Beispiel-Prompt (Schritt 3):</strong>
+          <p>Fasse die Profile von Unternehmen A, B und C in einer Vergleichstabelle zusammen. Spalten: Unternehmen, Umsatz, Mitarbeiter, Marktposition, strategische Passung (1–5 mit Begründung). Sortiere nach Passung absteigend.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Ziel:</strong> Komplexe Aufgaben durch Prompt Chaining kontrollierbar machen — jedes Teilergebnis ist prüfbar.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="quiz-section"><div class="quiz-eyebrow">Bereit für das Quiz?</div><h2>Testen Sie Ihr Verständnis</h2><p class="quiz-lede">10 Fragen · Pass-Threshold 70 %.</p><button class="btn btn-primary" onclick="startQuiz()">Quiz starten <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button></div></main><div class="module-navigation"><a href="modul-01.html" class="nav-card nav-card-prev"><div class="nav-card-label">← Vorheriges Modul</div><div class="nav-card-title">01 · Foundations & The Analyst’s Workbench</div></a><a href="modul-03.html" class="nav-card nav-card-next"><div class="nav-card-label">Nächstes Modul →</div><div class="nav-card-title">03 · Claude Skills — KI-Experten auf Knopfdruck</div></a></div><div class="modal-overlay" id="quizModal"><div class="modal-content"><button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div id="quizModalBody"></div></div></div><footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer><script src="../content.js"></script><script>const MODULE_ID=2;const MODULE_TITLE="Prompt Engineering Masterclass";const MODULE_QUIZ=CURRICULUM.find(m=>m.id===2).quiz;</script><script src="module.js"></script></body></html>

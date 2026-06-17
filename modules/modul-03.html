@@ -41,4 +41,49 @@
         <div class="callout-title">Bottom line</div>
         <p>Save the connected setup for the <strong>IEG Claude account</strong>, where someone is paid to secure it.</p>
       </div>
+    <section class="exercise-section">
+      <div class="section-intro">
+        <div class="section-eyebrow">Praxisübung</div>
+        <h2>Das Gelernte anwenden</h2>
+        <p>Bewerten Sie Inputs nach Risiko und üben Sie, problematische Eingaben sicher umzuformulieren.</p>
+      </div>
+      <div class="exercise-grid">
+        <article class="exercise-card">
+          <div class="exercise-kicker">Übung 1</div>
+          <h3 class="exercise-title">Input-Risiko bewerten</h3>
+          <p class="exercise-text">Nicht alles, was man in einen KI-Chat eingeben könnte, sollte man auch eingeben. Sortieren Sie die folgenden Beispiele in drei Risikokategorien.</p>
+          <ul class="exercise-list">
+            <li>Erstellen Sie eine Tabelle mit drei Spalten: <strong>Unkritisch</strong>, <strong>Nur anonymisiert</strong>, <strong>Nicht in persönlichen Account</strong>.</li>
+            <li>Sortieren Sie diese Inputs ein: (a) Allgemeine Branchenrecherche, (b) Gesprächsnotizen mit Kundennamen, (c) interner Deal-Memo mit Bewertungszahlen, (d) öffentlich verfügbare Pressemitteilung, (e) Excel mit Kundenumsätzen, (f) allgemeine E-Mail-Vorlage ohne Namen.</li>
+            <li>Begründen Sie für jeden Input in einem Satz, warum er in die jeweilige Kategorie gehört.</li>
+          </ul>
+          <div class="exercise-prompt">
+            <strong>Beispiel-Prompt:</strong>
+            <p>Ich gebe dir 6 verschiedene Inputs, die ein M&amp;A-Analyst in einen KI-Chat eingeben könnte. Sortiere sie in drei Kategorien: unkritisch, nur anonymisiert verwenden, nicht in persönlichen Account. Begründe jede Einordnung in einem Satz. Format: Tabelle.</p>
+          </div>
+          <div class="exercise-note">
+            <strong>Ziel:</strong> Praxisnahe Datensensibilität entwickeln — erkennen, was wo eingegeben werden darf.
+          </div>
+        </article>
+        <article class="exercise-card">
+          <div class="exercise-kicker">Übung 2</div>
+          <h3 class="exercise-title">Unsicheren Input sicher umformulieren</h3>
+          <p class="exercise-text">Oft lässt sich ein problematischer Input so umschreiben, dass er sicher verwendet werden kann — ohne an Nützlichkeit zu verlieren.</p>
+          <ul class="exercise-list">
+            <li>Nehmen Sie folgenden Input: <em>„Erstelle eine Analyse für den CFO von [echter Firmenname], basierend auf dem internen Bewertungsmodell mit EBITDA-Multiple von 8,5x."</em></li>
+            <li>Formulieren Sie den Input so um, dass er keine vertraulichen Informationen enthält, aber trotzdem ein nützliches Ergebnis liefert.</li>
+            <li>Ersetzen Sie: echte Namen durch Platzhalter, konkrete Deal-Zahlen durch generische Beispielwerte, interne Modelle durch allgemeine Marktstandards.</li>
+            <li>Testen Sie beide Versionen und vergleichen Sie die Ergebnisqualität.</li>
+          </ul>
+          <div class="exercise-prompt">
+            <strong>Beispiel-Prompt (nach Anonymisierung):</strong>
+            <p>Erstelle eine exemplarische Bewertungsanalyse für den CFO eines mittelständischen Industrieunternehmens. Verwende marktübliche EBITDA-Multiples für die Branche. Format: Kurzanalyse mit 3 Szenarien (konservativ, base case, optimistisch). Keine echten Unternehmensdaten verwenden.</p>
+          </div>
+          <div class="exercise-note">
+            <strong>Ziel:</strong> Die Fähigkeit trainieren, vertrauliche Inputs in sichere, aber gleichwertige Prompts zu übersetzen.
+          </div>
+        </article>
+      </div>
+    </section>
+
     <div class="quiz-section"><div class="quiz-eyebrow">Bereit?</div><h2>Quiz starten</h2><p class="quiz-lede">7 Fragen · 70%</p><button class="btn btn-primary" onclick="startQuiz()">Quiz starten</button></div></main><div class="module-navigation"><a href="modul-02.html" class="nav-card nav-card-prev"><div class="nav-card-label">← Vorheriges Modul</div><div class="nav-card-title">02 · Prompting und strukturierte Anweisungen</div></a><a href="modul-04.html" class="nav-card nav-card-next"><div class="nav-card-label">Nächstes Modul →</div><div class="nav-card-title">04 · Skills und wiederverwendbare Arbeitsabläufe</div></a></div><div class="modal-overlay" id="quizModal"><div class="modal-content"><button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button><div id="quizModalBody"></div></div></div><footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer><script src="../content.js"></script><script>var MODULE_ID=3;var MODULE_TITLE="Sicherer Umgang mit Daten und Tools";var MODULE_QUIZ=CURRICULUM.find(function(m){return m.id===3;}).quiz;</script><script src="module.js"></script></body></html>
