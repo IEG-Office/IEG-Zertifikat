@@ -9,11 +9,184 @@ const CURRICULUM = [
     id: 0,
     number: '00',
     meta: 'Einführung · Grundlagen',
+    title: 'Claude — Der komplette Grundkurs (2026)',
+    desc: 'Chat-Disziplin, die drei Modelle, Websuche, Dateianalyse, Personalisierung und Datenschutz — alles was du für einen professionellen Einstieg in Claude brauchst.',
+    duration: '30 Min.',
+    videos: [
+      { url: 'https://www.youtube.com/embed/51vysjHcJ5A', title: 'Claude — Der komplette Grundkurs 2026', caption: 'Video 0.1 · Claude — Der komplette Grundkurs (2026)' },
+    ],
+    images: [],
+    longContent: '',
+    content: `
+      <h3>1. Grundlagen und Chat-Disziplin</h3>
+      <p>Claude ist ein KI-Tool von Anthropic, das über eine einfache Textbox bedient wird. Ein entscheidender Erfolgsfaktor ist die <strong>Chat-Disziplin</strong>: Erstelle für <strong>jedes neue Thema einen neuen Chat</strong>. Das Vermischen von Themen in einem einzigen Chat verwirrt die KI und verschlechtert die Qualität der Ergebnisse erheblich.</p>
+      <div class="callout">
+        <div class="callout-title">Goldene Regel</div>
+        <p>Ein Thema — ein Chat. Wer Urlaubsplanung und Quartalsberichte im selben Chat mischt, bekommt schlechtere Ergebnisse für beides.</p>
+      </div>
+
+      <h3>2. Die Modellfamilie</h3>
+      <p>Claude bietet drei spezialisierte Modelle für unterschiedliche Anforderungen:</p>
+      <table>
+        <thead><tr><th>Modell</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Opus</strong></td><td>Das leistungsstärkste Modell</td><td>Tiefgehende Recherche, komplexe Analysen — baut Studien und Quellen ein. Verfügbar in der Pro-Version.</td></tr>
+          <tr><td><strong>Sonnet</strong></td><td>Effizienter Allrounder</td><td>Tägliche Arbeit, Standard in der Gratisversion. Gute Balance aus Geschwindigkeit und Qualität.</td></tr>
+          <tr><td><strong>Haiku</strong></td><td>Das schnellste Modell</td><td>Schnelle Formulierungen und einfache Aufgaben. Weniger tiefgründig.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>3. Zentrale Arbeitsfunktionen</h3>
+      <h4>Websuche</h4>
+      <p>Über das <strong>Plus-Symbol</strong> aktivierbar. Claude kann hunderte Quellen in Sekunden durchsuchen, um aktuelle Daten (z.&thinsp;B. DAX-Umsätze) in Tabellen zusammenzufassen.</p>
+      <h4>Dateianalyse</h4>
+      <p>PDFs, Excel- oder Word-Dokumente lassen sich direkt hochladen. <strong>Pro-Tipp:</strong> Nutze das Stoppuhr-Symbol (<em>erweiterter Nachdenkenmodus</em>), damit Claude sich mehr Zeit nimmt, die Datei gründlich einzulesen und präzisere Antworten zu geben.</p>
+      <h4>Technischer Support</h4>
+      <p>Claude hilft bei PC-Problemen. Der effizienteste Workflow: Erst das Problem allgemein beschreiben, dann einen <strong>Screenshot der Benutzeroberfläche</strong> (z.&thinsp;B. Aktivitätsanzeige) hochladen — Claude diagnostiziert die Ursache direkt.</p>
+
+      <h3>4. Personalisierung und Produktivität</h3>
+      <ul>
+        <li><strong>Präferenzen:</strong> Globale Einstellungen (z.&thinsp;B. „Antworte immer in einem Satz"), die für jeden neuen Chat automatisch übernommen werden.</li>
+        <li><strong>Stile:</strong> Claude den eigenen <strong>Schreibstil beibringen</strong> — Beispieltexte (z.&thinsp;B. als PDF) hochladen, die Claude automatisch analysiert.</li>
+        <li><strong>Gedächtnis (Memory):</strong> Durch den Befehl „Bitte erstelle eine Erinnerung" merkt sich Claude Fakten über dich (z.&thinsp;B. „Ich habe Flugangst"), die er in künftigen Chats automatisch berücksichtigt.</li>
+        <li><strong>Projekte:</strong> Ein abgeschirmter Bereich für spezifische Aufgaben (z.&thinsp;B. „LinkedIn Post Generator"). Hier hochgeladene Dateien und Anweisungen gelten für <strong>alle Chats innerhalb dieses Projekts</strong>.</li>
+      </ul>
+
+      <h3>5. Profi-Funktionen: Programmierung und Excel</h3>
+      <h4>Dashboard- &amp; Website-Bau</h4>
+      <p>Claude kann interaktive Dashboards oder einfache HTML-Websites erstellen — inklusive Schritt-für-Schritt-Anleitungen zur Veröffentlichung. Kein Programmier-Vorwissen nötig.</p>
+      <h4>Claude in Excel</h4>
+      <p>Eine <strong>Pro-Funktion</strong>, die direkt in Excel Tabellen füllt, Webdaten abruft, dynamische Charts erstellt und Fehler wie <strong>Zirkelbezüge selbstständig korrigiert</strong> — per natürlichsprachlicher Anweisung.</p>
+
+      <h3>6. Sicherheit und Datenschutz</h3>
+      <div class="callout callout-warn">
+        <div class="callout-title">Pflicht bei IEG</div>
+        <p>Deaktiviere in den Einstellungen unter „Datenschutz" die Option <strong>„hilft dabei Claude zu verbessern"</strong>, damit deine Daten nicht zum Training neuer Modelle genutzt werden.</p>
+      </div>
+      <p>Der <strong>Inkognitomodus</strong> (Geist-Symbol) sorgt dafür, dass Chats nicht dauerhaft in der Seitenleiste gespeichert werden — ideal für private oder einmalige Anfragen.</p>
+    `,
+    quiz: [
+      {
+        q: 'Du analysierst eine 100-seitige Marktstudie als PDF und möchtest extrem präzise Details zu einer Nischenkennzahl extrahieren. Welches Vorgehen ist am effektivsten?',
+        options: [
+          'Nutze das Haiku-Modell für maximale Geschwindigkeit beim Scannen.',
+          'Aktiviere den „erweiterten Nachdenkenmodus" (Stoppuhr) im Opus-Modell.',
+          'Lade die Datei im Inkognitomodus hoch, damit die KI sich nicht an alte Chats erinnert.',
+          'Kopiere den gesamten Text der PDF manuell in die Chatzeile statt die Datei hochzuladen.'
+        ],
+        correct: 1,
+        explanation: 'Opus + erweiterter Nachdenkenmodus = Claude liest die Datei gründlicher ein und liefert präzisere Antworten bei komplexen Dokumenten.'
+      },
+      {
+        q: 'Du möchtest, dass Claude künftig bei jeder technischen Anleitung berücksichtigt, dass du ein Linux-Nutzer bist, ohne dies jedes Mal neu erwähnen zu müssen. Wo stellst du das ein?',
+        options: [
+          'In den „Erinnerungen" (Memory) durch den Befehl „Bitte erstelle eine Erinnerung".',
+          'In den globalen „Präferenzen" in den Einstellungen.',
+          'In einem speziellen „Projekt" für technische Anleitungen.',
+          'Sowohl A, B als auch C sind technisch korrekt — B ist für systemweite Betriebssystem-Infos am sinnvollsten.'
+        ],
+        correct: 3,
+        explanation: 'Alle drei Wege funktionieren technisch. Globale Präferenzen (B) sind am sinnvollsten für systemweite Infos wie das Betriebssystem.'
+      },
+      {
+        q: 'Warum ist es ein strategischer Fehler, Anfragen zu verschiedenen Projekten (z. B. Urlaubsplanung und Quartalsbericht) in einem einzigen Chat zu belassen?',
+        options: [
+          'Claude verbraucht in langen Chats mehr Token und wird dadurch teurer.',
+          'Die KI verliert bei Themenmischung den Fokus, was zu ungenaueren Ergebnissen führt.',
+          'Der Inkognitomodus funktioniert nur in kurzen Chats.',
+          'Die Websuche kann in Chats mit mehr als 10 Nachrichten nicht mehr aktiviert werden.'
+        ],
+        correct: 1,
+        explanation: 'Chat-Disziplin ist entscheidend: Jedes neue Thema in einen eigenen Chat — Themenmischung verschlechtert die Ergebnisqualität erheblich.'
+      },
+      {
+        q: 'Du nutzt Claude in Excel im Modus „Accept all edits". Du bittest die KI, eine Tabelle zu reparieren, in der die Summenbildung nicht stimmt. Was tut Claude?',
+        options: [
+          'Er schreibt dir eine Anleitung im Seitenfenster, wie du die Formel ändern musst.',
+          'Er erstellt eine neue Excel-Datei und sendet sie dir als Download-Link.',
+          'Er identifiziert den Fehler (z. B. einen Zirkelbezug) und korrigiert die Formel direkt in der Zelle, ohne nochmals nachzufragen.',
+          'Er markiert die fehlerhafte Zelle lediglich rot.'
+        ],
+        correct: 2,
+        explanation: 'Im Modus „Accept all edits" korrigiert Claude Fehler direkt in Excel — inklusive Zirkelbezüge, ohne Rückfragen.'
+      },
+      {
+        q: 'Du erstellst einen „benutzerdefinierten Stil" für deine E-Mails. Was ist der notwendige Schritt, damit Claude deinen Stil erkennt?',
+        options: [
+          'Du musst Claude mindestens 500 Wörter deines Stils im Chat diktieren.',
+          'Du lädst eine Textprobe (z. B. als PDF) hoch, die Claude automatisch analysiert.',
+          'Du wählst den vordefinierten Stil „formell" aus und änderst ihn manuell.',
+          'Du musst den Stil in den globalen Präferenzen unter „Allgemein" beschreiben.'
+        ],
+        correct: 1,
+        explanation: 'Textprobe hochladen → Claude analysiert automatisch Ton, Struktur und Wortwahl und adaptiert diesen Stil.'
+      },
+      {
+        q: 'Was passiert mit einem Chat, den du im Inkognitomodus (Geist-Symbol) führst, wenn du das Chat-Fenster schließt?',
+        options: [
+          'Er wird automatisch in das Projekt „Unsortiert" verschoben.',
+          'Er bleibt 24 Stunden in der Seitenleiste sichtbar und wird dann gelöscht.',
+          'Er taucht gar nicht erst in der Seitenleiste auf und wird nicht dauerhaft gespeichert.',
+          'Er wird anonymisiert für das Training der KI verwendet.'
+        ],
+        correct: 2,
+        explanation: 'Inkognitomodus = kein dauerhafter Speicher. Der Chat erscheint nicht in der Seitenleiste und wird nicht aufbewahrt.'
+      },
+      {
+        q: 'Dein Drucker druckt nur noch Streifen. Wie sieht der effizienteste 2-Schritte-Workflow mit Claude aus?',
+        options: [
+          '1. Websuche nach Testberichten des Druckers, 2. Kauf eines neuen Geräts über Claude.',
+          '1. Allgemeine Problembeschreibung, 2. Hochladen eines Fotos vom fehlerhaften Ausdruck oder der Fehlermeldung am PC.',
+          '1. Aktivierung von Opus, 2. Erstellung eines Python-Skripts zur Druckersteuerung.',
+          '1. Nutzung des Haiku-Modells für eine schnelle Antwort, 2. Erstellung einer Erinnerung „Mein Drucker ist kaputt".'
+        ],
+        correct: 1,
+        explanation: 'Erst allgemein beschreiben, dann Screenshot hochladen — Claude erkennt UI-Elemente und Fehlermeldungen direkt und gibt konkrete Handlungsanweisungen.'
+      },
+      {
+        q: 'Was ist ein wesentlicher Vorteil von „Projekten" gegenüber einfachen Chats?',
+        options: [
+          'Projekte speichern Anweisungen und Dateien dauerhaft, sodass alle Chats innerhalb des Projekts davon profitieren.',
+          'In Projekten ist das Opus-Modell doppelt so schnell.',
+          'Projekte können mit anderen Nutzern geteilt werden, um gleichzeitig daran zu arbeiten.',
+          'Nur in Projekten kann man HTML-Websites bauen.'
+        ],
+        correct: 0,
+        explanation: 'Projects = dauerhafter Kontext. Einmal anlegen, nie wieder neu briefen — gilt für alle Chats innerhalb des Projekts.'
+      },
+      {
+        q: 'Du lässt Claude eine Tabelle mit DAX-Unternehmen erstellen und eine Zahl erscheint falsch. Wie prüfst du die Verlässlichkeit der Antwort?',
+        options: [
+          'Du klickst auf die Websuche-Anzeige, um zu sehen, welche Quellen Claude für die Antwort gescannt hat.',
+          'Du bittest Claude, die Antwort im Haiku-Modell zu wiederholen.',
+          'Du aktivierst den Inkognitomodus und stellst die Frage erneut.',
+          'Claude gibt bei Tabellen grundsätzlich keine Quellen an — man muss immer manuell googeln.'
+        ],
+        correct: 0,
+        explanation: 'Bei aktivierter Websuche zeigt Claude die verwendeten Quellen an — so lässt sich jede Zahl nachverfolgen und prüfen.'
+      },
+      {
+        q: 'Wie startest du den Prozess, um eine „Erinnerung" (Memory) in Claudes Gedächtnis zu speichern?',
+        options: [
+          'Durch Klicken auf das Herz-Symbol in der Chatleiste.',
+          'Indem du den Prompt mit der Phrase „Bitte erstelle eine Erinnerung" beginnst.',
+          'Man kann Erinnerungen nur manuell in den Einstellungen unter „Fähigkeiten" eintippen.',
+          'Claude entscheidet selbstständig nach jedem Chat, was er als Erinnerung speichert.'
+        ],
+        correct: 1,
+        explanation: '„Bitte erstelle eine Erinnerung" ist der Trigger — Claude speichert den Fakt dann dauerhaft und berücksichtigt ihn in zukünftigen Chats.'
+      }
+    ]
+  },
+  {
+    id: 1,
+    number: '01',
+    meta: 'Einführung · Modul 1',
     title: 'Claude im Überblick: Vom Einsteiger zum Profi',
     desc: 'Alle zentralen Claude-Funktionen kompakt: Modellfamilie, Prompting-Techniken, Dokumentenanalyse, Deep Research, Personalisierung und Automatisierung — der perfekte Einstieg.',
     duration: '30 Min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/JEXCaG95iBs', title: 'Claude im Überblick 2026', caption: 'Video 0.1 · Claude — Vom Einsteiger zum Profi (2026)' },
+      { url: 'https://www.youtube.com/embed/JEXCaG95iBs', title: 'Claude im Überblick 2026', caption: 'Video 1.1 · Claude — Vom Einsteiger zum Profi (2026)' },
     ],
     images: [],
     longContent: '',
@@ -26,7 +199,7 @@ const CURRICULUM = [
       </div>
 
       <h3>2. Die Modellfamilie und Abonnements</h3>
-      <p>Je nach Aufgabe wählt man das passende Modell. Alle drei sind in Claude verfügbar, je nach Abonnement:</p>
+      <p>Je nach Aufgabe wählt man das passende Modell:</p>
       <table>
         <thead><tr><th>Modell</th><th>Stärke</th><th>Typischer Einsatz im M&amp;A</th></tr></thead>
         <tbody>
@@ -106,23 +279,23 @@ const CURRICULUM = [
         explanation: 'Deep Research = systematische Analyse hunderte Quellen über mehrere Minuten, Ergebnis als strukturierter PDF-Bericht.'
       },
       {
-        q: 'Du analysierst komplexe Finanzdaten für eine Mietentscheidung mit mehreren Risikofaktoren. Welches Setup bietet die höchste Präzision?',
+        q: 'Du analysierst komplexe Finanzdaten mit mehreren Risikofaktoren. Welches Setup bietet die höchste Präzision?',
         options: [
-          'Modell „Haiku" mit dem Prompt: „Mieten: Ja oder nein?"',
-          'Modell „Opus" mit aktiviertem Extended Thinking für tiefgreifende Kosten- und Risikoanalyse',
-          'Modell „Sonnet" mit Word-Skill, um direkt den Mietvertrag zu schreiben',
-          'Ein Artifact erstellen, das nur die Mietpreise visualisiert'
+          'Modell „Haiku" mit dem Prompt: „Analysiere: Ja oder nein?"',
+          'Modell „Opus" mit aktiviertem Extended Thinking für tiefgreifende Analyse',
+          'Modell „Sonnet" mit Word-Skill, um direkt ein Dokument zu schreiben',
+          'Ein Artifact erstellen, das nur Zahlen visualisiert'
         ],
         correct: 1,
         explanation: 'Opus + Extended Thinking = maximale Analysentiefe für komplexe Entscheidungen mit vielen Variablen.'
       },
       {
-        q: 'Du hast eine CSV mit 500 Mitarbeiter-Datensätzen und willst eine Excel-Tabelle mit Monatslöhnen. Wie gehst du vor?',
+        q: 'Du hast eine CSV mit 500 Datensätzen und willst eine Excel-Tabelle daraus. Wie gehst du vor?',
         options: [
-          'Artifacts-Generator nutzen, um ein interaktives Spiel zu erstellen',
+          'Artifacts-Generator nutzen, um ein interaktives Dashboard zu erstellen',
           'Datei hochladen und Claude mit einem Excel-Skill eine editierbare Excel-Datei generieren lassen',
           'Alle 500 Zeilen manuell in den Prompt kopieren',
-          'Claude Cowork nutzen, um Daten manuell in Google Sheets einzutragen'
+          'Claude Cowork nutzen, um Daten manuell einzutragen'
         ],
         correct: 1,
         explanation: 'Datei hochladen + Excel-Skill = Claude analysiert die CSV und generiert direkt eine herunterladbare Excel-Datei.'
@@ -144,7 +317,7 @@ const CURRICULUM = [
           'Claude nach einem Programmierkurs suchen lassen',
           'Ein Artifact erstellen lassen: Funktion beschreiben, Claude generiert Frontend und Code zum direkten Testen',
           'Claude bitten, eine PowerPoint über den Rechner zu erstellen',
-          'Custom Style „Prägnant" wählen und auf Java-Code hoffen'
+          'Custom Style „Prägnant" wählen und auf Code hoffen'
         ],
         correct: 1,
         explanation: 'Artifacts = Claude generiert direkt lauffähige Mini-Apps ohne Programmierkenntnisse.'
@@ -192,116 +365,6 @@ const CURRICULUM = [
         ],
         correct: 1,
         explanation: 'Skills entstehen durch iterative Verfeinerung im Chat — einmal perfektioniert, als wiederverwendbaren Skill speichern.'
-      }
-    ]
-  },
-  {
-    id: 1,
-    number: '01',
-    meta: 'Einführung · Modul 1',
-    title: 'Claude im Überblick — Projects, Cowork & Code',
-    desc: 'Organisation durch Projects, Visualisierung im Chat, Claude Cowork als autonomer Assistent und Entwicklung mit Claude Code, Skills und Konnektoren.',
-    duration: '20 Min.',
-    videos: [
-      { url: 'https://www.youtube.com/embed/EE9qr6Bfwj8', title: 'Claude im Überblick', caption: 'Video 1.1 · Claude Features im Überblick' },
-    ],
-    images: [],
-    longContent: '',
-    content: `
-      <h3>1. Organisation durch Projects</h3>
-      <p>Projects fungieren wie ein <strong>ausgelagertes Gehirn</strong> — ein Briefing-Ordner,
-      in dem du Dokumente, Anweisungen und Kontext für spezifische Themenbereiche abspeichern kannst.</p>
-      <p>Einmal angelegt (z.&thinsp;B. für Kunden-E-Mails inklusive Tonfall und Produktinfos),
-      muss man für neue Gespräche innerhalb dieses Projekts <strong>nicht wieder bei null anfangen</strong>.
-      Das spart enorm Zeit bei Routineaufgaben.</p>
-
-      <h3>2. Visualisierung und Interaktivität</h3>
-      <p>Claude kann <strong>ohne zusätzliche Plugins oder Installationen</strong> Diagramme,
-      Dashboards und interaktive Grafiken erstellen — direkt im Chat.</p>
-      <div class="callout">
-        <div class="callout-title">So einfach geht es</div>
-        <p>Ein Befehl wie &bdquo;zeig mir&ldquo; reicht aus, damit das visuelle Element
-        direkt im Chat-Fenster erscheint. Keine externe Software nötig.</p>
-      </div>
-
-      <h3>3. Claude Cowork: Der autonome Assistent</h3>
-      <p>Cowork lebt in der <strong>Desktop-App</strong> und arbeitet Aufgaben ab, solange der
-      Computer eingeschaltet und die App offen ist.</p>
-      <ul>
-        <li><strong>Hintergrund-Arbeit:</strong> Cowork erledigt Aufgaben autonom, während du andere Dinge tust.</li>
-        <li><strong>Fernsteuerung per App:</strong> Du kannst Cowork von unterwegs über dein Handy Anweisungen geben — z.&thinsp;B. das Organisieren von hunderten Dateien auf deinem Desktop.</li>
-      </ul>
-
-      <h3>4. Entwicklung und Erweiterungen</h3>
-      <h4>Claude Code</h4>
-      <p>Dieser Dienst fungiert als <strong>persönlicher Entwickler</strong>, der Webseiten-Prototypen, Tools und Apps baut, ohne dass du selbst Code schreiben musst.</p>
-      <h4>Skills und Plugins</h4>
-      <ul>
-        <li><strong>Skills:</strong> Einzelne Fähigkeiten, die du Claude beibringst (z.&thinsp;B. einen bestimmten Schreibstil oder Analyseprozess).</li>
-        <li><strong>Plugins:</strong> Ganze Bündel solcher Fähigkeiten (z.&thinsp;B. das &bdquo;Productivity&ldquo;-Plugin).</li>
-      </ul>
-      <h4>Konnektoren</h4>
-      <p>Konnektoren verbinden Claude direkt mit Anwendungen wie <strong>Gmail, Google Calendar oder Notion</strong>, sodass die KI innerhalb dieser Tools agieren kann.</p>
-      <div class="callout callout-warn">
-        <div class="callout-title">Wichtig bei Konnektoren</div>
-        <p>Konnektoren sind mächtig, aber bergen Sicherheitsrisiken — mehr dazu in Modul 03 (Sicherheit &amp; Datenschutz).</p>
-      </div>
-    `,
-    quiz: [
-      {
-        q: 'Wozu dienen "Projects" in Claude?',
-        options: [
-          'Sie sind nur für die Ablage alter Chats gedacht',
-          'Sie ersetzen die Websuche vollständig',
-          'Sie fungieren als Briefing-Ordner mit Dokumenten, Anweisungen und Kontext für spezifische Themen',
-          'Sie aktivieren den Programmiermodus'
-        ],
-        correct: 2,
-        explanation: 'Projects sind wie ein ausgelagertes Gehirn: einmal angelegt, muss man nicht bei null anfangen.'
-      },
-      {
-        q: 'Was braucht Claude, um Diagramme und interaktive Grafiken zu erstellen?',
-        options: [
-          'Ein spezielles Grafik-Plugin aus dem App Store',
-          'Nichts — Claude kann das ohne Plugins direkt im Chat',
-          'Eine externe Anbindung an PowerPoint',
-          'Mindestens die Pro-Version und ein Screenshot'
-        ],
-        correct: 1,
-        explanation: 'Claude erstellt Diagramme direkt im Chat — ohne Plugins. Ein Befehl wie "zeig mir" reicht.'
-      },
-      {
-        q: 'Welche Voraussetzung hat Claude Cowork?',
-        options: [
-          'Cowork funktioniert nur mit Internetverbindung im Browser',
-          'Cowork braucht eine spezielle Server-Installation',
-          'Computer muss eingeschaltet und die Desktop-App offen sein',
-          'Cowork läuft ausschließlich auf dem Handy'
-        ],
-        correct: 2,
-        explanation: 'Cowork lebt in der Desktop-App und arbeitet Aufgaben ab, solange Computer und App aktiv sind.'
-      },
-      {
-        q: 'Was ist der Unterschied zwischen Skills und Plugins?',
-        options: [
-          'Skills sind einzelne Fähigkeiten, Plugins sind ganze Bündel von Fähigkeiten',
-          'Es gibt keinen Unterschied — beides sind Synonyme',
-          'Plugins sind kostenlos, Skills kosten extra',
-          'Skills funktionieren nur mit Claude Code'
-        ],
-        correct: 0,
-        explanation: 'Skills = einzelne Fähigkeiten. Plugins = ganze Bündel solcher Fähigkeiten.'
-      },
-      {
-        q: 'Was machen Konnektoren in Claude?',
-        options: [
-          'Sie übersetzen Prompts in andere Sprachen',
-          'Sie verbessern die Antwortgeschwindigkeit',
-          'Sie speichern Chats als PDF',
-          'Sie verbinden Claude mit Apps wie Gmail, Calendar oder Notion'
-        ],
-        correct: 3,
-        explanation: 'Konnektoren verknüpfen Claude direkt mit externen Anwendungen.'
       }
     ]
   },
