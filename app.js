@@ -109,8 +109,8 @@ function renderModules() {
   var fcard = document.createElement('div');
   fcard.className = 'module-card final-exam ' + fc;
   fcard.innerHTML =
-    '<div class="module-header"><div class="module-number">08</div><div class="module-status-icon ' + fc + '">' + fi + '</div></div>' +
-    '<div class="module-meta">Abschlussprüfung · 15 Fragen</div>' +
+    '<div class="module-header"><div class="module-number">07</div><div class="module-status-icon ' + fc + '">' + fi + '</div></div>' +
+    '<div class="module-meta">Abschlussprüfung · 40 Fragen</div>' +
     '<div class="module-title">IEG Claude Academy — Abschlussprüfung</div>' +
     '<div class="module-desc">Das Abschluss-Examen über alle Module. Pass-Threshold: 70 %.</div>' +
     '<div class="module-footer"><span class="module-status">' + (fp ? 'Bestanden' : fu ? 'Verfügbar' : 'Alle Module abschließen') + '</span>' +
@@ -260,7 +260,7 @@ function renderCertificate() {
       '<div class="cert-verify">Verify at: <span>' + verifyUrl + '</span></div>' +
     '</div>' +
     '<div class="cert-actions">' +
-      '<button class="btn btn-primary" onclick="window.print()">' +
+      '<button class="btn btn-primary" onclick="printCertificate()">' +
         '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
         'Als PDF speichern' +
       '</button>' +
@@ -269,6 +269,22 @@ function renderCertificate() {
         'Für LinkedIn kopieren' +
       '</button>' +
     '</div>';
+}
+
+function printCertificate() {
+  var cert = document.getElementById('certDoc');
+  if (!cert) return;
+  var html = cert.outerHTML;
+  var win = window.open('', '_blank', 'width=1200,height=800');
+  win.document.write('<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8">');
+  win.document.write('<base href="' + window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/') + '">');
+  win.document.write('<link rel="preconnect" href="https://fonts.googleapis.com">');
+  win.document.write('<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">');
+  win.document.write('<link rel="stylesheet" href="styles.css">');
+  win.document.write('<style>@page{size:A4 landscape;margin:0}body{margin:0;padding:40px;background:white;display:flex;align-items:center;justify-content:center;min-height:100vh;box-sizing:border-box}.certificate{box-shadow:none!important;border:2px solid #0A1A33;max-width:900px;width:100%}</style>');
+  win.document.write('</head><body>' + html + '</body></html>');
+  win.document.close();
+  win.onload = function() { win.focus(); win.print(); };
 }
 
 function copyLinkedIn(cid, dateStr) {
