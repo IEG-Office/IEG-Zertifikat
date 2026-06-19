@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modul 00 · Claude — Der komplette Grundkurs (2026) — IEG Claude Academy</title>
+<title>Modul 00 · Das Claude-Ökosystem im Überblick — IEG Claude Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="module-styles.css">
@@ -11,12 +11,12 @@
   <a href="../index.html#curriculum" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück zum Curriculum</a>
 </div></nav>
 <section class="module-hero"><div class="module-hero-inner">
-  <div class="module-breadcrumb"><span>EINFÜHRUNG</span><span>·</span><span>MODULE 0</span></div>
+  <div class="module-breadcrumb"><span>EINFÜHRUNG</span><span>·</span><span>MODUL 0</span></div>
   <div class="module-hero-number">00</div>
-  <h1 class="module-hero-title">Claude — Der komplette Grundkurs (2026)</h1>
-  <p class="module-hero-lede">Chat-Disziplin, die drei Modelle, Websuche, Dateianalyse und Datenschutz — die solide Basis für jeden Claude-Einstieg, bevor es in Modul 01 in die Tiefe geht.</p>
+  <h1 class="module-hero-title">Das Claude-Ökosystem im Überblick</h1>
+  <p class="module-hero-lede">Modellfamilie, Projects, interaktive Visualisierungen, Claude Cowork, Claude Code und Erweiterungen — ein strukturierter Überblick über das gesamte Claude-Ökosystem als Einstieg in den Kurs.</p>
   <div class="module-hero-meta">
-    <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 30 Min. Lernzeit</span>
+    <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 25 Min. Lernzeit</span>
     <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 10 Quiz-Fragen</span>
     <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Mit Video</span>
   </div>
@@ -41,66 +41,91 @@
   <p>Empfehlung: Arbeiten Sie die Module der Reihe nach durch und probieren Sie jede Übung direkt
   in Claude aus. Der Lerneffekt entsteht durch das eigene Ausprobieren, nicht durch reines Lesen.</p>
 
-  <h3>1. Grundlagen und Chat-Disziplin</h3>
-  <p>Claude ist ein KI-Tool von Anthropic, das über eine einfache Textbox bedient wird. Ein entscheidender Erfolgsfaktor ist die <strong>Chat-Disziplin</strong>: Erstelle für <strong>jedes neue Thema einen neuen Chat</strong>. Das Vermischen von Themen in einem einzigen Chat verwirrt die KI und verschlechtert die Qualität der Ergebnisse erheblich.</p>
-  <div class="callout">
-    <div class="callout-title">Goldene Regel</div>
-    <p>Ein Thema — ein Chat. Wer Urlaubsplanung und Quartalsberichte im selben Chat mischt, bekommt schlechtere Ergebnisse für beides.</p>
-  </div>
-
-  <h3>2. Die Modellfamilie</h3>
-  <p>Claude bietet drei spezialisierte Modelle für unterschiedliche Anforderungen:</p>
+  <h3>1. Die Modellfamilie: Für jede Aufgabe das richtige Werkzeug</h3>
+  <p>Claude ist weit mehr als ein einfacher Chatbot — es ist ein vielseitiges Ökosystem mit spezialisierten Werkzeugen für Produktivität und Entwicklung. Den Einstieg bildet die Modellfamilie:</p>
   <table>
     <thead><tr><th>Modell</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
     <tbody>
-      <tr><td><strong>Opus</strong></td><td>Das leistungsstärkste Modell</td><td>Tiefgehende Recherche, komplexe Analysen — baut Studien und Quellen ein. Verfügbar in der Pro-Version.</td></tr>
-      <tr><td><strong>Sonnet</strong></td><td>Effizienter Allrounder</td><td>Tägliche Arbeit, Standard in der Gratisversion. Gute Balance aus Geschwindigkeit und Qualität.</td></tr>
-      <tr><td><strong>Haiku</strong></td><td>Das schnellste Modell</td><td>Schnelle Formulierungen und einfache Aufgaben. Weniger tiefgründig.</td></tr>
+      <tr><td><strong>Haiku</strong></td><td>Das schnellste und kostengünstigste Modell</td><td>Einfache Aufgaben, schnelle Formatierungen, kurze Zusammenfassungen</td></tr>
+      <tr><td><strong>Sonnet</strong></td><td>Der „Allrounder"</td><td>Ausgewogenes Verhältnis aus Geschwindigkeit und Intelligenz — tägliche Arbeit</td></tr>
+      <tr><td><strong>Opus</strong></td><td>Das Flaggschiff-Modell</td><td>Maximale Leistungsfähigkeit für extrem komplexe Analysen und Entscheidungen</td></tr>
     </tbody>
   </table>
+  <div class="callout">
+    <div class="callout-title">Ausblick: Was kommt als Nächstes?</div>
+    <p>Anthropic arbeitet kontinuierlich an neuen Modellen. Der aktuelle Entwicklungsstand zeigt, wohin die Reise geht — Geschwindigkeit, Tiefe und Integration werden weiter zunehmen.</p>
+  </div>
 
-  <h3>3. Zentrale Arbeitsfunktionen</h3>
-  <h4>Websuche</h4>
-  <p>Über das <strong>Plus-Symbol</strong> aktivierbar. Claude kann hunderte Quellen in Sekunden durchsuchen, um aktuelle Daten (z.&thinsp;B. DAX-Umsätze) in Tabellen zusammenzufassen.</p>
-  <h4>Dateianalyse</h4>
-  <p>PDFs, Excel- oder Word-Dokumente lassen sich direkt hochladen. <strong>Pro-Tipp:</strong> Nutze das Stoppuhr-Symbol (<em>erweiterter Nachdenkenmodus</em>), damit Claude sich mehr Zeit nimmt, die Datei gründlich einzulesen und präzisere Antworten zu geben.</p>
-  <h4>Technischer Support</h4>
-  <p>Claude hilft bei PC-Problemen. Der effizienteste Workflow: Erst das Problem allgemein beschreiben, dann einen <strong>Screenshot der Benutzeroberfläche</strong> (z.&thinsp;B. Aktivitätsanzeige) hochladen — Claude diagnostiziert die Ursache direkt.</p>
-
-  <h3>4. Einstellungen: Präferenzen &amp; Datenschutz</h3>
-  <p>Zwei schnelle Einstellungen, die du einmalig vornehmen solltest, bevor du loslegst:</p>
+  <h3>2. Organisation durch „Projects" — Der Briefing-Ordner</h3>
+  <p>Ein Project ist ein <strong>ausgelagertes Gehirn</strong> mit Dokumenten, Anweisungen und Kontext. Claude greift bei jedem Gespräch innerhalb des Projekts darauf zu — ideal für wiederkehrende Aufgaben:</p>
   <ul>
-    <li><strong>Globale Präferenzen:</strong> Unter Einstellungen kannst du Claude dauerhaft anweisen, wie er antworten soll — z.&thinsp;B. „Antworte immer auf Deutsch und fasse dich kurz." Das gilt automatisch für jeden neuen Chat.</li>
-    <li><strong>Training deaktivieren:</strong> Unter „Datenschutz" die Option „hilft dabei Claude zu verbessern" <strong>deaktivieren</strong>, damit deine Eingaben nicht zum Training neuer Modelle verwendet werden.</li>
-    <li><strong>Inkognitomodus</strong> (Geist-Symbol): Chats werden nicht dauerhaft gespeichert — ideal für private oder einmalige Anfragen.</li>
+    <li>Projekt anlegen → Hintergrunddokumente hochladen (z.&thinsp;B. Unternehmensprofile, Styleguides)</li>
+    <li>Systemprompt definieren: Welche Rolle soll Claude im Projekt einnehmen?</li>
+    <li>Ab sofort startet jeder neue Chat im Projekt mit diesem Kontext — kein erneutes Briefing nötig</li>
+  </ul>
+
+  <h3>3. Interaktive Visualisierung im Chat</h3>
+  <p>Claude kann direkt im Chat interaktive Inhalte erzeugen — ohne Plugins, ohne Programmierkenntnisse:</p>
+  <ul>
+    <li><strong>Diagramme und Dashboards:</strong> Interaktive Grafiken, Flowcharts und Kennzahlen-Dashboards</li>
+    <li><strong>Bewertungsrechner:</strong> Funktionale Mini-Apps mit Eingabefeldern und Berechnungen</li>
+    <li><strong>Einfacher Befehl:</strong> „Zeig mir das als interaktives Diagramm" — Claude generiert die Visualisierung sofort</li>
+  </ul>
+  <div class="callout">
+    <div class="callout-title">Praxis-Tipp</div>
+    <p>Für Kundenpräsentationen: Claude-Visualisierungen können direkt im Browser gezeigt oder als Screenshot für PowerPoint verwendet werden.</p>
+  </div>
+
+  <h3>4. Claude Cowork — Desktop-Assistent</h3>
+  <p>Claude Cowork lebt in der <strong>Desktop-App</strong> und arbeitet Aufgaben selbstständig auf dem Computer ab:</p>
+  <ul>
+    <li>Zugriff auf lokale Ordner und Dateien — ohne manuelles Hochladen</li>
+    <li>Arbeitet auch im Hintergrund, während andere Tätigkeiten erledigt werden</li>
+    <li><strong>Fernsteuerung über die Smartphone-App:</strong> Aufgaben delegieren, auch wenn man nicht am Rechner sitzt</li>
+  </ul>
+
+  <h3>5. Claude Code — Entwicklung ohne Programmierkenntnisse</h3>
+  <p>Claude Code macht technische Realisierung für jeden zugänglich:</p>
+  <ul>
+    <li>Einfache Beschreibung reicht — Claude erstellt vollständige Webseiten, Tools oder Apps</li>
+    <li>Kein Programmier-Vorwissen notwendig: Anforderungen auf Deutsch formulieren, Code wird automatisch generiert</li>
+    <li>Iterative Verbesserung: Feedback geben, Claude passt den Code an</li>
+  </ul>
+
+  <h3>6. Erweiterungen: Skills, Plugins und Konnektoren</h3>
+  <p>Das Claude-Ökosystem lässt sich durch drei Typen von Erweiterungen ausbauen:</p>
+  <ul>
+    <li><strong>Skills:</strong> Einzelne Fähigkeiten dauerhaft speichern — z.&thinsp;B. „Erstelle immer eine Excel-Datei als Ausgabe"</li>
+    <li><strong>Plugins:</strong> Sammlungen von Skills gebündelt als Paket (z.&thinsp;B. ein Productivity-Plugin mit Schreib- und Analysefunktionen)</li>
+    <li><strong>Konnektoren:</strong> Direkte Schnittstellen zu externen Diensten — Gmail, Google Calendar, Notion und weitere</li>
   </ul>
   <div class="callout callout-warn">
-    <div class="callout-title">Pflicht bei IEG</div>
-    <p>Das Deaktivieren der Training-Option ist bei IEG verbindlich. Erledige es vor deiner ersten Nutzung — einmal eingestellt, bleibt es dauerhaft aktiv.</p>
+    <div class="callout-title">Sicherheitshinweis</div>
+    <p>Konnektoren geben Claude Zugriff auf echte Daten externer Dienste. Niemals persönliche Firmen-Accounts ohne Freigabe verbinden — Datenschutzrichtlinien von IEG beachten.</p>
   </div>
 
   <section class="exercise-section">
     <div class="section-intro">
       <div class="section-eyebrow">Praxisübung</div>
       <h2>Das Gelernte anwenden</h2>
-      <p>Trainieren Sie die Grundlagen: Modellwahl, Chat-Disziplin und die erste Einrichtung Ihres Accounts.</p>
+      <p>Erkunden Sie das Claude-Ökosystem aktiv: Modellwahl, Projects und die ersten Erweiterungen.</p>
     </div>
     <div class="exercise-grid">
       <article class="exercise-card">
         <div class="exercise-kicker">Übung 1</div>
         <h3 class="exercise-title">Das richtige Modell für die richtige Aufgabe</h3>
-        <p class="exercise-text">Haiku, Sonnet oder Opus? Jedes Modell hat seine Stärken. Trainieren Sie, für verschiedene Szenarien das optimale Modell und die passende Funktion zu wählen.</p>
+        <p class="exercise-text">Haiku, Sonnet oder Opus? Jedes Modell hat klare Stärken. Trainieren Sie, für verschiedene Szenarien das optimale Modell zu wählen — und warum.</p>
         <ul class="exercise-list">
-          <li>Erstellen Sie eine Tabelle mit drei Spalten: <strong>Aufgabe</strong>, <strong>Modell</strong> und <strong>Funktion/Begründung</strong>.</li>
-          <li>Bewerten Sie diese Szenarien: (a) Schnelle Formatierung einer Kontaktliste, (b) Tiefgehende Analyse einer 80-seitigen Marktstudie als PDF, (c) Aktuelle Branchenmultiples mit Quellenangabe recherchieren, (d) Einen langsamen PC diagnostizieren, (e) Eine kurze Zusammenfassung für eine interne E-Mail erstellen.</li>
+          <li>Erstellen Sie eine Tabelle mit drei Spalten: <strong>Aufgabe</strong>, <strong>Modell</strong> und <strong>Begründung</strong>.</li>
+          <li>Bewerten Sie diese Szenarien: (a) Schnelle Formatierung einer Kontaktliste, (b) Tiefgehende Analyse einer 80-seitigen Marktstudie, (c) Tagesaktuelle Branchennews zusammenfassen, (d) Komplexe Unternehmensbewertung mit mehreren Szenarien, (e) Interaktiven Kennzahlen-Rechner erstellen.</li>
           <li>Begründen Sie jede Entscheidung in einem Satz.</li>
         </ul>
         <div class="exercise-prompt">
           <strong>Beispiel-Prompt:</strong>
-          <p>Ich gebe dir 5 Aufgaben aus dem Arbeitsalltag. Empfehle jeweils das passende Claude-Modell (Haiku, Sonnet, Opus) und die geeignete Funktion (Standard-Chat, Dateiupload + erweiterter Nachdenkenmodus, Websuche, Screenshot-Upload). Begründe in je einem Satz. Format: Tabelle.</p>
+          <p>Ich gebe dir 5 Aufgaben aus dem Arbeitsalltag. Empfehle jeweils das passende Claude-Modell (Haiku, Sonnet, Opus) und begründe die Wahl in einem Satz. Format: Tabelle mit drei Spalten.</p>
         </div>
         <div class="exercise-note">
-          <strong>Ziel:</strong> Das richtige Werkzeug für den richtigen Zweck — Modell, Funktion und Kontext zusammendenken.
+          <strong>Ziel:</strong> Das richtige Werkzeug für den richtigen Zweck — Modell und Anforderung zusammendenken.
         </div>
         <button class="exercise-solution-toggle" onclick="toggleSolution(this)">
           Musterlösung anzeigen
@@ -109,33 +134,33 @@
         <div class="exercise-solution">
           <div class="exercise-solution-eyebrow">Musterlösung</div>
           <table>
-            <thead><tr><th>Aufgabe</th><th>Modell</th><th>Funktion &amp; Begründung</th></tr></thead>
+            <thead><tr><th>Aufgabe</th><th>Modell</th><th>Begründung</th></tr></thead>
             <tbody>
-              <tr><td>(a) Schnelle Formatierung einer Kontaktliste</td><td><strong>Haiku</strong></td><td>Standard-Chat — einfache Aufgabe, Geschwindigkeit zählt</td></tr>
-              <tr><td>(b) Analyse einer 80-seitigen Marktstudie</td><td><strong>Opus</strong></td><td>Dateiupload + erweiterter Nachdenkenmodus für maximale Analysetiefe</td></tr>
-              <tr><td>(c) Branchenmultiples mit Quellenangabe</td><td><strong>Sonnet/Opus</strong></td><td>Websuche — Claude belegt Fakten automatisch mit Quellen</td></tr>
-              <tr><td>(d) Langsamen PC diagnostizieren</td><td><strong>Sonnet</strong></td><td>Screenshot der Aktivitätsanzeige hochladen — Claude erkennt UI-Elemente direkt</td></tr>
-              <tr><td>(e) Zusammenfassung für interne E-Mail</td><td><strong>Haiku</strong></td><td>Standard-Chat — einfache Textaufgabe, kein Deep-Thinking nötig</td></tr>
+              <tr><td>(a) Schnelle Formatierung einer Kontaktliste</td><td><strong>Haiku</strong></td><td>Einfache Aufgabe, Geschwindigkeit zählt — kein Deep Thinking nötig</td></tr>
+              <tr><td>(b) Analyse einer 80-seitigen Marktstudie</td><td><strong>Opus</strong></td><td>Tiefste Analyse und komplexes Denken für umfangreiche Dokumente</td></tr>
+              <tr><td>(c) Tagesaktuelle News zusammenfassen</td><td><strong>Sonnet</strong></td><td>Allrounder mit Websuche — gute Balance aus Aktualität und Qualität</td></tr>
+              <tr><td>(d) Komplexe Unternehmensbewertung</td><td><strong>Opus</strong></td><td>Maximale Leistungsfähigkeit für vielschichtige Analyse mit vielen Variablen</td></tr>
+              <tr><td>(e) Interaktiven Kennzahlen-Rechner erstellen</td><td><strong>Sonnet</strong></td><td>Artifact-Generierung — Sonnet ist für Code-Aufgaben schnell und zuverlässig</td></tr>
             </tbody>
           </table>
         </div>
       </article>
       <article class="exercise-card">
         <div class="exercise-kicker">Übung 2</div>
-        <h3 class="exercise-title">Account einrichten: Datenschutz und erste Präferenz</h3>
-        <p class="exercise-text">Bevor du produktiv mit Claude arbeitest, sollte der Account korrekt eingerichtet sein. Diese Übung führt durch die zwei wichtigsten Einstellungen und testet die Wirkung einer globalen Präferenz.</p>
+        <h3 class="exercise-title">Ein erstes Project einrichten</h3>
+        <p class="exercise-text">Projects sind das Herzstück der Produktivität in Claude. In dieser Übung richten Sie Ihr erstes Project für einen typischen IEG-Anwendungsfall ein.</p>
         <ul class="exercise-list">
-          <li><strong>Datenschutz:</strong> Öffne die Einstellungen → Datenschutz → deaktiviere „hilft dabei Claude zu verbessern". Mache einen Screenshot als Nachweis.</li>
-          <li><strong>Präferenz:</strong> Lege eine globale Präferenz fest, die für Ihren Arbeitsalltag sinnvoll ist (z.&thinsp;B. „Antworte immer auf Deutsch, strukturiere Antworten mit Aufzählungspunkten, maximal 5 Sätze").</li>
-          <li>Öffne danach einen <em>neuen</em> Chat und stelle eine beliebige Frage — prüfe, ob Claude die Präferenz ohne Aufforderung anwendet.</li>
-          <li>Teste zusätzlich den Inkognitomodus: Starte einen Chat mit dem Geist-Symbol und prüfe, ob er nach dem Schließen in der Seitenleiste erscheint.</li>
+          <li>Öffnen Sie Claude und erstellen Sie ein neues Project — z.&thinsp;B. „M&amp;A Research Assistant".</li>
+          <li>Definieren Sie einen Systemprompt: Welche Rolle soll Claude im Projekt einnehmen? (z.&thinsp;B. „Du bist ein erfahrener M&amp;A-Analyst. Antworte immer auf Deutsch, strukturiert und präzise.")</li>
+          <li>Testen Sie das Project: Stellen Sie eine Frage und prüfen Sie, ob Claude den definierten Kontext einhält.</li>
+          <li>Laden Sie optional ein kurzes Hintergrunddokument (z.&thinsp;B. eine Seite Unternehmensübersicht) in das Project — und fragen Sie danach im Chat.</li>
         </ul>
         <div class="exercise-prompt">
-          <strong>Beispiel-Prompt (zum Testen der Präferenz):</strong>
-          <p>Erkläre mir kurz, was ein DCF-Modell ist.</p>
+          <strong>Beispiel-Systemprompt für das Project:</strong>
+          <p>Du bist ein erfahrener M&amp;A-Analyst bei IEG. Antworte immer auf Deutsch. Strukturiere Antworten mit klaren Abschnitten. Bei Unsicherheiten weise explizit darauf hin und empfehle eine manuelle Überprüfung.</p>
         </div>
         <div class="exercise-note">
-          <strong>Ziel:</strong> Datenschutz sicherstellen und Claude so einrichten, dass er ab sofort ohne Briefing genau so antwortet, wie du es brauchst.
+          <strong>Ziel:</strong> Ein einmal eingerichtetes Project spart täglich Zeit — kein erneutes Briefing, sofortiger Einstieg in jede Aufgabe.
         </div>
         <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Lösungsansatz anzeigen" data-label-open="Lösungsansatz ausblenden">
           Lösungsansatz anzeigen
@@ -144,12 +169,12 @@
         <div class="exercise-solution">
           <div class="exercise-solution-eyebrow">Lösungsansatz</div>
           <ul>
-            <li><strong>Datenschutz:</strong> Einstellungen (Zahnrad) → Datenschutz → Häkchen bei „hilft dabei Claude zu verbessern" entfernen → Speichern.</li>
-            <li><strong>Präferenz-Beispiel:</strong> „Antworte immer auf Deutsch. Strukturiere Antworten als Aufzählungsliste. Fasse dich auf maximal 5 Punkte." → Ab dem nächsten Chat automatisch aktiv.</li>
-            <li><strong>Wirkungstest:</strong> Der DCF-Prompt sollte jetzt auf Deutsch als Aufzählung kommen — ohne dass du das in der Anfrage erwähnt hast.</li>
-            <li><strong>Inkognito:</strong> Geist-Symbol → Chat starten → Fenster schließen → Chat erscheint <em>nicht</em> in der Seitenleiste.</li>
+            <li><strong>Project anlegen:</strong> Linke Seitenleiste → „Neues Projekt" → Titel vergeben (z.&thinsp;B. „Deal Research").</li>
+            <li><strong>Systemprompt:</strong> Projekteinstellungen → Instruktionen → Rolle, Sprache und Ton definieren.</li>
+            <li><strong>Test:</strong> Neuen Chat im Project starten → Frage stellen → Claude sollte direkt im definierten Stil antworten, ohne erneutes Briefing.</li>
+            <li><strong>Dokument hochladen:</strong> Paperclip-Symbol → Datei hochladen → ab sofort in allen Chats des Projects verfügbar.</li>
           </ul>
-          <p style="margin-top:12px"><strong>Fazit:</strong> Diese zwei Einstellungen dauern 2 Minuten, sparen aber täglich Zeit und schützen Firmendaten — einmalig erledigt, dauerhaft wirksam.</p>
+          <p style="margin-top:12px"><strong>Fazit:</strong> Ein gut eingerichtetes Project ist wie ein permanent verfügbarer, vollständig gebriefter Assistent — einmal angelegt, täglich nützlich.</p>
         </div>
       </article>
     </div>
@@ -162,7 +187,7 @@
     <button class="btn btn-primary" onclick="startQuiz()">Quiz starten <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
   </div>
 </main>
-<div class="module-navigation"><div class="nav-card nav-card-empty"><div class="nav-card-label">Vorheriges Modul</div><div class="nav-card-title" style="color:var(--text-faint);">Erstes Modul</div></div><a href="modul-01.html" class="nav-card nav-card-next"><div class="nav-card-label">Nächstes Modul →</div><div class="nav-card-title">01 · Claude im Überblick: Vom Einsteiger zum Profi</div></a></div>
+<div class="module-navigation"><div class="nav-card nav-card-empty"><div class="nav-card-label">Vorheriges Modul</div><div class="nav-card-title" style="color:var(--text-faint);">Erstes Modul</div></div><a href="modul-01.html" class="nav-card nav-card-next"><div class="nav-card-label">Nächstes Modul →</div><div class="nav-card-title">01 · Claude — Der komplette Grundkurs (2026)</div></a></div>
 <div class="modal-overlay" id="quizModal"><div class="modal-content">
   <button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
   <div id="quizModalBody"></div>
@@ -171,7 +196,7 @@
 <script src="../content.js"></script>
 <script>
   const MODULE_ID = 0;
-  const MODULE_TITLE = "Claude — Der komplette Grundkurs (2026)";
+  const MODULE_TITLE = "Das Claude-Ökosystem im Überblick";
   const MODULE_QUIZ = CURRICULUM.find(m => m.id === 0).quiz;
 </script>
 <script src="module.js"></script>
