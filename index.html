@@ -37,7 +37,7 @@
     <div class="nav-right">
       <div class="nav-progress">
         <span class="progress-label">Fortschritt</span>
-        <span class="progress-value" id="navProgress">0/6</span>
+        <span class="progress-value" id="navProgress">0/7</span>
       </div>
       <div class="nav-user" id="navUser">
         <span class="nav-user-name" id="userDisplayName"></span>
@@ -51,23 +51,17 @@
 
 <!-- ============ HERO / HOME ============ -->
 <section id="home" class="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-glow-2"></div>
-  </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
-      <span class="eyebrow-dot"></span>
-      <span>Internal Training Programme · Analyst & Intern Onboarding · 2026</span>
+      <span>Internes Trainingsprogramm · Onboarding für Analysts &amp; Interns · 2026</span>
     </div>
     <h1 class="hero-title">
-      <span class="title-line">Mastering Claude</span>
-      <span class="title-line italic">for Investment Banking</span>
+      Claude im Investment Banking
     </h1>
     <p class="hero-lede">
-      Ein siebenteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag. 
-      Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und praktische Workflows für typische Aufgaben im Team.
+      Ein siebenteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag.
+      Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und
+      praktische Workflows für typische Aufgaben im Team — mit klarem Blick auf Sicherheit und Einsatzgrenzen.
     </p>
 
     <div class="hero-stats">
@@ -77,14 +71,14 @@
       </div>
       <div class="stat">
         <div class="stat-num">8</div>
-        <div class="stat-label">Quizzes</div>
+        <div class="stat-label">Quizze</div>
       </div>
       <div class="stat">
-        <div class="stat-num">Ca.5 Stunden</div>
+        <div class="stat-num">~5 Std.</div>
         <div class="stat-label">Lernzeit</div>
       </div>
       <div class="stat">
-            <div class="stat-num">1</div>
+        <div class="stat-num">1</div>
         <div class="stat-label">Teilnahmezertifikat</div>
       </div>
     </div>
@@ -97,13 +91,6 @@
       <button class="btn btn-ghost" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">
         Über das IEG Team
       </button>
-    </div>
-
-    <div class="hero-quote">
-      <div class="quote-mark">"</div>
-      <p>Der Kurs vermittelt eine strukturierte Einführung in Claude für den Einsatz im Finance- und M&A-Umfeld. 
-        Im Fokus stehen ein sicherer Umgang mit den wichtigsten Funktionen, ein realistisches Verständnis der Einsatzgrenzen und der praktische Nutzen im Arbeitsalltag.</p>
-      <div class="quote-attribution">— IEG Internal Training</div>
     </div>
   </div>
 </section>
@@ -129,7 +116,7 @@
   <div class="progress-track">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-meta">
-      <span id="progressText">0 von 6 Modulen abgeschlossen</span>
+      <span id="progressText">0 von 7 Modulen abgeschlossen</span>
       <span id="progressPercent">0%</span>
     </div>
   </div>
@@ -289,7 +276,7 @@
     <div class="section-eyebrow">/ Zertifikat</div>
     <h2 class="section-title">Ihr IEG Claude Teilnahmezertifikat</h2>
     <p class="section-lede">
-      Schließen Sie alle sechs Module und das Final Examination ab, um Ihr persönliches,
+      Schließen Sie alle sieben Module und die Abschlussprüfung ab, um Ihr persönliches,
       auf Ihren Namen ausgestelltes Zertifikat zu erhalten.
     </p>
     <div class="cert-status" id="certStatus">Status: noch nicht freigeschaltet</div>
@@ -323,10 +310,10 @@
 <!-- ============ MODAL: NAME INPUT ============ -->
 <div class="modal-overlay" id="nameModal" style="display:none;">
   <div class="modal-content modal-name">
-    <h3>Wer schreibt das Final Examination?</h3>
+    <h3>Wer schreibt die Abschlussprüfung?</h3>
     <p>Bitte geben Sie Ihren vollständigen Namen ein. Dieser erscheint auf Ihrem Zertifikat.</p>
     <input type="text" id="userNameInput" placeholder="z. B. Max Mustermann" />
-    <button class="btn btn-primary" onclick="submitName()">Zum Final Examination</button>
+    <button class="btn btn-primary" onclick="submitName()">Zur Abschlussprüfung</button>
   </div>
 </div>
 
