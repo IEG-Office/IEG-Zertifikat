@@ -383,6 +383,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 
 /* ==================== IMAGES ==================== */
+.module-figure {
+  margin: 0;
+}
+
 .module-image {
   width: 100%;
   height: auto;
