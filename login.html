@@ -206,7 +206,9 @@ async function doReset() {
   showMsg('');
 
   try {
-    const res = await fetch(`${URL}/auth/v1/recover`, {
+    // redirect_to: nach Klick im E-Mail-Link auf reset.html landen
+    const redirectTo = encodeURIComponent(window.location.origin + window.location.pathname.replace(/[^/]*$/, 'reset.html'));
+    const res = await fetch(`${URL}/auth/v1/recover?redirect_to=${redirectTo}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
