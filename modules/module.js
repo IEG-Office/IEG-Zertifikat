@@ -29,38 +29,48 @@ function saveState(state) {
   } catch (e) {}
 }
 
-// Save progress to Supabase via REST API (kein Library-Import nötig)
+// Supabase-Client lazy laden (Library ist auf den Modul-Seiten nicht eingebunden)
+let _sbClientPromise = null;
+function getSupabaseClient() {
+  if (window.sb) return Promise.resolve(window.sb);
+  if (_sbClientPromise) return _sbClientPromise;
+  _sbClientPromise = new Promise((resolve) => {
+    if (window.supabase) {
+      window.sb = window.supabase.createClient(_SB_URL, _SB_KEY);
+      return resolve(window.sb);
+    }
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+    s.onload = () => { window.sb = window.supabase.createClient(_SB_URL, _SB_KEY); resolve(window.sb); };
+    s.onerror = () => resolve(null);
+    document.head.appendChild(s);
+  });
+  return _sbClientPromise;
+}
+
+// Save progress to Supabase (upsert über user_id) — nutzt die offizielle Session
 async function saveProgressToSupabase(state) {
   try {
-    // Supabase speichert die Session unter diesem key im localStorage
-    const raw = localStorage.getItem('sb-hojkbskyhwocsknucvos-auth-token');
-    if (!raw) return;
-    const session = JSON.parse(raw);
-    const token = session.access_token;
-    const userId = session.user && session.user.id;
-    if (!token || !userId) return;
+    const sb = await getSupabaseClient();
+    if (!sb) return;
+    const sess = await sb.auth.getSession();
+    const session = sess && sess.data ? sess.data.session : null;
+    if (!session || !session.user) return; // nicht eingeloggt → nur localStorage
 
-    // Upsert: anlegen oder vorhandene Zeile per user_id aktualisieren
-    await fetch(_SB_URL + '/rest/v1/user_progress', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': _SB_KEY,
-        'Authorization': 'Bearer ' + token,
-        'Prefer': 'resolution=merge-duplicates,return=minimal'
-      },
-      body: JSON.stringify({
-        user_id:           userId,
-        completed_modules: state.completed || [],
-        final_passed:      state.finalPassed || false,
-        final_score:       state.finalScore  || 0,
-        completion_date:   state.completionDate || null
-      })
-    });
+    await sb.from('user_progress').upsert({
+      user_id:           session.user.id,
+      completed_modules: state.completed || [],
+      final_passed:      state.finalPassed || false,
+      final_score:       state.finalScore  || 0,
+      completion_date:   state.completionDate || null
+    }, { onConflict: 'user_id' });
   } catch (e) {
     console.warn('Supabase save error (module):', e.message);
   }
 }
+
+// Library vorab laden, damit das Speichern nach dem Quiz sofort bereit ist
+document.addEventListener('DOMContentLoaded', getSupabaseClient);
 
 // ---------- DYNAMIC CONTENT FROM content.js ----------
 // Lädt Videos, Bilder und Zusatztexte aus content.js (CURRICULUM[MODULE_ID])
