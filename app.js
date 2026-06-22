@@ -319,9 +319,17 @@ document.addEventListener('keydown', function(e) {
 function renderEverything() { updateUserDisplay(); renderModules(); renderProgress(); renderCertificate(); }
 
 // ===== SUPABASE PROGRESS SYNC =====
-// Lädt genau einen Datensatz pro Nutzer aus user_progress und mappt ihn auf den State.
+// Lädt den Datensatz aus user_progress und führt ihn mit dem lokalen Stand
+// zusammen (Union), damit Fortschritt aus den Modul-Seiten nicht verloren geht.
 async function loadProgressFromSupabase() {
   if (!window.sb || !currentUserId) return;
+
+  // Lokalen Stand merken (z. B. gerade in einer Modul-Seite abgeschlossen)
+  var localCompleted   = Array.isArray(state.completed) ? state.completed.slice() : [];
+  var localFinalPassed = !!state.finalPassed;
+  var localScore       = state.finalScore || 0;
+  var localDate        = state.completionDate || '';
+
   // Load progress from Supabase (ein Datensatz pro user_id)
   var res = await window.sb.from('user_progress')
     .select('completed_modules, final_passed, final_score, completion_date')
@@ -330,24 +338,32 @@ async function loadProgressFromSupabase() {
 
   if (res.error) { console.warn('Supabase load error:', res.error.message); return; }
 
-  if (!res.data) {
-    // Kein Datensatz vorhanden → neuen mit Default-Werten anlegen (insert)
-    await window.sb.from('user_progress').insert({
-      user_id: currentUserId,
-      completed_modules: [],
-      final_passed: false,
-      final_score: 0,
-      completion_date: null
-    });
-    return; // State bleibt auf Default
+  var remoteCompleted = [], remoteFinalPassed = false, remoteScore = 0, remoteDate = '';
+  if (res.data) {
+    remoteCompleted   = Array.isArray(res.data.completed_modules) ? res.data.completed_modules : [];
+    remoteFinalPassed = !!res.data.final_passed;
+    remoteScore       = res.data.final_score || 0;
+    remoteDate        = res.data.completion_date || '';
   }
 
-  // Supabase ist die Source of Truth → Row auf bestehende State-Struktur mappen
-  state.completed      = Array.isArray(res.data.completed_modules) ? res.data.completed_modules : [];
-  state.finalPassed    = !!res.data.final_passed;
-  state.finalScore     = res.data.final_score || 0;
-  state.completionDate = res.data.completion_date || '';
-  saveState(); // lokaler Cache, damit Offline/Reload schnell rendert
+  // Merge: Vereinigung der abgeschlossenen Module (lokal + Supabase)
+  var mergedSet = {};
+  localCompleted.concat(remoteCompleted).forEach(function(id) { mergedSet[id] = true; });
+  var merged = Object.keys(mergedSet).map(Number).sort(function(a, b) { return a - b; });
+
+  state.completed      = merged;
+  state.finalPassed    = localFinalPassed || remoteFinalPassed;
+  state.finalScore     = Math.max(localScore, remoteScore);
+  state.completionDate = remoteDate || localDate || '';
+  saveState(); // lokaler Cache
+
+  // Wenn lokal weiter war als Supabase (oder noch kein Datensatz existiert),
+  // den zusammengeführten Stand zurück nach Supabase schreiben.
+  var localAhead = !res.data
+    || merged.length > remoteCompleted.length
+    || (state.finalPassed && !remoteFinalPassed)
+    || (state.finalScore > remoteScore);
+  if (localAhead) await saveProgressToSupabase();
 }
 
 // Schreibt den aktuellen State nach Supabase (upsert über user_id).
