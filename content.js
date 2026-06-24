@@ -200,7 +200,7 @@ const CURRICULUM = [
     meta: 'Einführung · Grundlagen',
     title: 'Claude — Der komplette Grundkurs (2026)',
     desc: 'Chat-Disziplin, Websuche, Dateianalyse, technischer Support, Personalisierung und Datenschutz — alles was du für einen professionellen Einstieg in Claude brauchst. Die Modellfamilie hast du bereits in Modul 0 kennengelernt.',
-    duration: '30 Min.',
+    duration: '45 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/51vysjHcJ5A', title: 'Claude — Der komplette Grundkurs 2026', caption: 'Video 1.1 · Claude — Der komplette Grundkurs (2026)' },
     ],
@@ -693,7 +693,7 @@ const CURRICULUM = [
     meta: 'Praxis · Modul 5',
     title: 'Skills in Finance-Workflows',
     desc: 'Praxisnahe Anwendungsbeispiele für Skills in finanznahen Prozessen, darunter Datenaufbereitung, Strukturierung von Inhalten, Dashboards und wiederkehrende Arbeitsabläufe.',
-    duration: '20 Min.',
+    duration: '30 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/h0XeJi6OAVI', title: 'Finance Automation mit Claude Skills', caption: 'Video 5.1 · Kreditkartenabrechnung vollautomatisiert mit Claude Skills' },
     ],
@@ -857,7 +857,7 @@ const CURRICULUM = [
     meta: 'Praxis · Modul 6',
     title: 'Claude Cowork — Der autonome Desktop-Agent',
     desc: 'Während ein Chatbot nur antwortet, handelt Claude Cowork selbstständig auf deinem Rechner: Dateien sortieren, Dokumente erstellen, im Web recherchieren und Aufgaben planen — inklusive Setup, Sicherheit und Personal Instructions.',
-    duration: '30 Min.',
+    duration: '45 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/ZeWfksNXlbU', title: 'Claude Cowork — Einführung', caption: 'Video 6.1 · Claude Cowork — Der autonome Desktop-Agent im Überblick' },
       { url: 'https://www.youtube.com/embed/bEO0gDF5zqs', title: 'Claude Cowork — Praxis & Automatisierung', caption: 'Video 6.2 · Cowork in der Praxis — Workflows, Konnektoren und Automatisierung' },
@@ -1043,7 +1043,7 @@ const CURRICULUM = [
     meta: 'Praxis · Modul 7',
     title: 'Claude in Microsoft Office (Excel & PowerPoint)',
     desc: 'Das Claude Add-in direkt in Excel und PowerPoint: Formeln per Sprache generieren, VBA-Makros schreiben, Zirkelbezüge korrigieren und vollständige Präsentationen aus Datentabellen erzeugen — inklusive Setup, Sicherheit und Grenzen der Integration.',
-    duration: '25 Min.',
+    duration: '30 Min.',
     videos: [
       { url: 'https://www.youtube.com/embed/uLJp_4XCNIg', title: 'Claude im Excel Add-in', caption: 'Video 7.1 · Claude im Excel Add-in — Formeln, Makros und Datenanalyse direkt im Sheet' },
       { url: 'https://www.youtube.com/embed/oqN-_j6HdV4', title: 'Claude im PowerPoint Add-in', caption: 'Video 7.2 · Claude im PowerPoint Add-in — Folien und Sprechernotizen automatisieren' },
