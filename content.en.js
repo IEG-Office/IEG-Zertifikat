@@ -4,7 +4,7 @@
    v5.0 — English Translation
    ============================================ */
 
-const CURRICULUM_EN = [
+var CURRICULUM_EN = [
   {
     id: 0,
     number: '00',
@@ -728,7 +728,7 @@ const CURRICULUM_EN = [
   }
 ];
 
-const FINAL_EXAM_EN = [
+var FINAL_EXAM_EN = [
   { q: 'Why should a new chat be started for every new topic?', options: ['Mixing topics confuses the model and reduces result quality', 'The data limit per chat is capped at 10 messages', 'Claude loses access to web search in long chats', 'New chats are processed faster'], correct: 0, explanation: 'Chat discipline: one topic per chat. Mixing topics significantly reduces response quality.' },
   { q: 'What is the decisive advantage of the Claude Add-in over the standalone chat in Excel?', options: ['The Add-in switches to the most powerful model automatically', 'The Add-in stores all inputs locally', 'Claude sees the table structure and can read and edit cell content contextually', 'The Add-in replaces Excel\'s formula library'], correct: 2, explanation: 'In the Add-in, Claude knows the open file. In the standalone chat, only manually inserted content is available.' },
   { q: 'What is "Accept all edits" mode in the Claude Excel Add-in?', options: ['Claude asks before every cell change', 'Claude saves the workbook to OneDrive', 'Claude accepts all inputs without moderation', 'Claude applies formula corrections and data changes directly without asking'], correct: 3, explanation: 'In "Accept all edits" mode, corrections are applied immediately — no intermediate questions.' },
