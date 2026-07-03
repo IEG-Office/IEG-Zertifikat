@@ -13,7 +13,7 @@ var CURRICULUM_EN = [
     desc: 'Model family, Projects, interactive visualizations, Claude Cowork, Claude Code and extensions — a structured overview of the entire Claude ecosystem.',
     duration: '25 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/EE9qr6Bfwj8', title: 'The Claude Ecosystem at a Glance', caption: 'Video 0.1 · The Claude Ecosystem at a Glance (2026)' },
+      { url: 'https://www.youtube.com/embed/XTWb5oEfqdY', title: 'Claude AI Full Tutorial: From Basics to Agentic AI (2026)', caption: 'Video 0.1 · Claude AI Full Tutorial: From Basics to Agentic AI (2026)' },
     ],
     images: [],
     longContent: '',
@@ -202,7 +202,7 @@ var CURRICULUM_EN = [
     desc: 'Chat discipline, web search, file analysis, technical support, personalisation and data privacy — everything you need for a professional start with Claude. You have already been introduced to the model family in Module 0.',
     duration: '45 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/51vysjHcJ5A', title: 'Claude — The Complete Beginner\'s Guide 2026', caption: 'Video 1.1 · Claude — The Complete Beginner\'s Guide (2026)' },
+      { url: 'https://www.youtube.com/embed/Xg55nTrbYYY', title: 'FULL Claude Tutorial For Beginners in 2026! (FULL COURSE)', caption: 'Video 1.1 · FULL Claude Tutorial For Beginners in 2026!' },
     ],
     images: [],
     longContent: '',
@@ -367,8 +367,8 @@ var CURRICULUM_EN = [
     desc: 'Introduction to building effective prompts, using examples, XML structures and reusable instructions for more consistent results.',
     duration: '60 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/m4rFoTPpeAA', title: 'Prompt Engineering in Practice', caption: 'Video 2.1 · Prompt Engineering in Practice' },
-      { url: 'https://www.youtube.com/embed/ysPbXH0LpIE', title: 'Anthropic Best Practices', caption: 'Video 2.2 · Prompt Engineering 101 by Anthropic' },
+      { url: 'https://www.youtube.com/embed/dG2iFVKdyhs', title: 'Claude AI: The ULTIMATE Guide to Prompt Engineering & Artifacts', caption: 'Video 2.1 · Claude AI — The Ultimate Guide to Prompt Engineering' },
+      { url: 'https://www.youtube.com/embed/ysPbXH0LpIE', title: 'Prompting 101 by Anthropic', caption: 'Video 2.2 · Prompting 101 by Anthropic (Code w/ Claude)' },
     ],
     images: [],
     longContent: '',
@@ -494,7 +494,7 @@ var CURRICULUM_EN = [
     desc: 'Introduction to Skills as structured, reusable work instructions — from content preparation to practical application in daily work.',
     duration: '30 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/XHVgq4zodpE', title: 'Claude Skills', caption: 'Video 4.1 · Creating and applying Claude Skills' },
+      { url: 'https://www.youtube.com/embed/8tOfGkddPNM', title: 'Claude + NotebookLM: Ultimate AI Automation Workflow', caption: 'Video 4.1 · Claude + NotebookLM: Ultimate AI Automation Workflow' },
     ],
     images: [],
     longContent: '',
@@ -597,8 +597,8 @@ var CURRICULUM_EN = [
     desc: 'While a chatbot only responds, Claude Cowork acts independently on your computer: sorting files, creating documents, researching online and planning tasks — including setup, security and personal instructions.',
     duration: '45 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/ZeWfksNXlbU', title: 'Claude Cowork — Introduction', caption: 'Video 6.1 · Claude Cowork — The autonomous desktop agent overview' },
-      { url: 'https://www.youtube.com/embed/bEO0gDF5zqs', title: 'Claude Cowork — Practice', caption: 'Video 6.2 · Cowork in practice — workflows, connectors and automation' },
+      { url: 'https://www.youtube.com/embed/JdQ_FHgP5ms', title: 'FULL Claude Cowork Tutorial For Beginners in 2026! (Zero to PRO)', caption: 'Video 6.1 · FULL Claude Cowork Tutorial For Beginners in 2026!' },
+      { url: 'https://www.youtube.com/embed/UR0gac-ccjg', title: 'How to Use Claude Cowork: Full Beginners Tutorial 2026', caption: 'Video 6.2 · How to Use Claude Cowork: Full Beginners Tutorial 2026' },
     ],
     images: [],
     longContent: '',
@@ -655,8 +655,7 @@ var CURRICULUM_EN = [
     desc: 'The Claude Add-in in Excel and PowerPoint: generate formulas by voice, write VBA macros, fix circular references and create presentations from data tables.',
     duration: '30 min.',
     videos: [
-      { url: 'https://www.youtube.com/embed/uLJp_4XCNIg', title: 'Claude in the Excel Add-in', caption: 'Video 7.1 · Claude in the Excel Add-in — formulas, macros and data analysis' },
-      { url: 'https://www.youtube.com/embed/oqN-_j6HdV4', title: 'Claude in the PowerPoint Add-in', caption: 'Video 7.2 · Claude in the PowerPoint Add-in — automate slides and speaker notes' },
+      { url: 'https://www.youtube.com/embed/9OsKjq_rVXc', title: 'How to Use Claude for Excel (Step-by-Step Tutorial)', caption: 'Video 7.1 · How to Use Claude for Excel — Step-by-Step Tutorial' },
     ],
     images: [],
     longContent: '',
