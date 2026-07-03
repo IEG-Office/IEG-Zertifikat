@@ -157,7 +157,8 @@ var currentQuiz = null;
 function startQuiz(moduleId, isFinal) {
   var lang = typeof getLang === 'function' ? getLang() : 'de';
   var curriculum = (lang === 'en' && typeof CURRICULUM_EN !== 'undefined') ? CURRICULUM_EN : CURRICULUM;
-  var qs = isFinal ? FINAL_EXAM : curriculum.find(function(m) { return m.id === moduleId; }).quiz;
+  var activeFinalExam = (typeof getLang === 'function' && getLang() === 'en' && typeof FINAL_EXAM_EN !== 'undefined') ? FINAL_EXAM_EN : FINAL_EXAM;
+  var qs = isFinal ? activeFinalExam : curriculum.find(function(m) { return m.id === moduleId; }).quiz;
   currentQuiz = {
     moduleId: moduleId, isFinal: !!isFinal, questions: qs, currentIndex: 0,
     answers: new Array(qs.length).fill(null),
@@ -262,6 +263,7 @@ function closeQuiz() {
 // ============================================
 
 var EXAM_STORAGE_KEY = 'ieg-academy-final-exam-v1';
+function getFinalExam() { return (typeof getLang === 'function' && getLang() === 'en' && typeof FINAL_EXAM_EN !== 'undefined') ? FINAL_EXAM_EN : FINAL_EXAM; }
 var FINAL_EXAM_DURATION_SEC = 40 * 60;
 var examTimerId = null;
 
@@ -336,10 +338,10 @@ function submitName() {
 
 function beginExam() {
   clearExamTimer();
-  var n = FINAL_EXAM.length;
+  var n = getFinalExam().length;
   currentQuiz = {
     isFinal: true, started: true, submitted: false,
-    questions: FINAL_EXAM, currentIndex: 0,
+    questions: getFinalExam(), currentIndex: 0,
     answers: new Array(n).fill(null), flagged: new Array(n).fill(false),
     durationSec: FINAL_EXAM_DURATION_SEC, startedAt: Date.now(),
     endsAt: Date.now() + FINAL_EXAM_DURATION_SEC * 1000, restored: false
@@ -349,9 +351,9 @@ function beginExam() {
 
 function resumeExam(saved, showBanner) {
   clearExamTimer();
-  var n = FINAL_EXAM.length;
+  var n = getFinalExam().length;
   currentQuiz = {
-    isFinal: true, started: true, submitted: false, questions: FINAL_EXAM,
+    isFinal: true, started: true, submitted: false, questions: getFinalExam(),
     currentIndex: Math.min(Math.max(saved.currentIndex || 0, 0), n - 1),
     answers: normalizeExamArray(saved.answers, n, null),
     flagged: normalizeExamArray(saved.flagged, n, false),
@@ -366,7 +368,7 @@ function resumeExam(saved, showBanner) {
 }
 
 function restoreExamUI() {
-  if (typeof FINAL_EXAM === 'undefined' || !FINAL_EXAM.length) return;
+  if (typeof FINAL_EXAM === 'undefined' || !getFinalExam().length) return;
   var saved = loadExamState();
   if (!saved || !saved.started || saved.submitted) return;
   resumeExam(saved, true);
