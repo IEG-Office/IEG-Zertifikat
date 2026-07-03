@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 02 · Prompting and Structured Instructions — IEG Claude Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module-styles.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/ieg-logo.png" alt="IEG" class="nav-logo-img">
+      <span class="logo-divider"></span>
+      <div class="logo-text">
+        <span class="logo-primary">Claude Academy</span>
+        <span class="logo-secondary">Module 02</span>
+      </div>
+    </a>
+    <a href="../index.html#curriculum" class="nav-back">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Curriculum
+    </a>
+  </div>
+</nav>
+
+<section class="module-hero">
+  <div class="module-hero-inner">
+    <div class="module-breadcrumb"><span>ADVANCED</span><span>·</span><span>MODULE 2</span></div>
+    <div class="module-hero-number">02</div>
+    <h1 class="module-hero-title">Prompting and Structured Instructions</h1>
+    <p class="module-hero-lede">The six building blocks of a strong prompt, XML tags, Few-Shot, Chain of Thought, Prompt Chaining, Self-Reflection, Pre-filling and System Prompts — with concrete examples from the M&amp;A day-to-day.</p>
+    <div class="module-hero-meta">
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        35 min. learning time
+      </span>
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        10 quiz questions
+      </span>
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Includes video
+      </span>
+    </div>
+  </div>
+</section>
+
+<main class="module-content">
+  <div id="dynamicContent"></div>
+
+  <h3>1. Prompt Engineering as an Iterative Science</h3>
+  <p>Prompt engineering is not a one-time exercise — it is an <strong>empirical science</strong>. You start with a base instruction, analyse the AI's errors and expand the prompt <em>step by step</em> until the result is perfect. The goal: structure clear instructions and context so the AI delivers the desired result on the first attempt ("one-shot").</p>
+
+  <h3>2. The 6 Building Blocks of the Perfect Prompt</h3>
+  <table>
+    <thead><tr><th>Block</th><th>Description</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Role</strong></td><td>Assign Claude a professional identity</td><td>"You are an experienced social media consultant"</td></tr>
+      <tr><td><strong>Task</strong></td><td>The core — always start with a verb</td><td>"Analyse", "Create", "Compare"</td></tr>
+      <tr><td><strong>Context</strong></td><td>Relevant background information</td><td>Target audience, problem statement, tone</td></tr>
+      <tr><td><strong>Process</strong></td><td>Logical individual steps (roadmap)</td><td>"Step 1: Research, Step 2: Analysis"</td></tr>
+      <tr><td><strong>Stop criteria</strong></td><td>Boundaries against hallucinations</td><td>"If unsure, say so openly"</td></tr>
+      <tr><td><strong>Output</strong></td><td>Define the exact format</td><td>Table, list, JSON, word count</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <div class="callout-title">Why stop criteria?</div>
+    <p>Without clear boundaries, Claude will guess rather than admit uncertainty. Stop criteria such as "do not use technical jargon" prevent hallucinations.</p>
+  </div>
+
+  <h3>3. From Weak to Excellent — A Comparison</h3>
+  <p>The same information need, three quality levels. The example comes from the M&amp;A day-to-day: you need an initial profile of a potential target.</p>
+  <div class="callout callout-warn">
+    <div class="callout-title">❌ Weak prompt</div>
+    <p>"Tell me something about company XY."<br>Problem: no role, no structure, no format, no boundaries. Claude guesses what is meant, delivers arbitrary prose and may invent figures.</p>
+  </div>
+  <div class="callout">
+    <div class="callout-title">➖ Good prompt</div>
+    <p>"You are an M&amp;A analyst. Create a short company profile for [Company XY]: business model, market position and possible acquisition rationale. Respond as a structured list."<br>Better: role, task and output format defined. But stop criteria and a clear scope are missing.</p>
+  </div>
+  <div class="callout callout-success">
+    <div class="callout-title">✅ Excellent prompt</div>
+    <p>"You are an experienced M&amp;A analyst. Create a structured company profile for [Company XY] with exactly these sections: (1) Business model &amp; revenue streams, (2) Market position &amp; two to three competitors, (3) Possible acquisition rationale from a buyer perspective. Format: table plus one explanatory sentence each. Maximum 200 words. If information is not publicly available, mark it explicitly as 'not publicly available' — no estimates, no invented figures."</p>
+  </div>
+
+  <h3>4. Structuring with XML Tags</h3>
+  <p>Anthropic recommends XML tags (e.g. <code>&lt;instructions&gt;</code>, <code>&lt;context&gt;</code>, <code>&lt;example&gt;</code>) to cleanly separate information. Claude was trained on this structure and can reference individual sections specifically. Output control: place the final result in tags such as <code>&lt;verdict&gt;</code> for automated further processing.</p>
+
+  <h3>5. Advanced Prompting Techniques</h3>
+  <h4>Few-Shot Prompting</h4>
+  <p>Show Claude <strong>1 to 3 examples</strong> — often more powerful than any long description.</p>
+  <h4>Chain of Thought</h4>
+  <p>Instruct Claude to <strong>"think step by step"</strong> — massively improves logical reasoning.</p>
+  <h4>Prompt Chaining</h4>
+  <p>Break a large task into <strong>small, sequential prompts</strong>. Check each intermediate result.</p>
+  <h4>Self-Reflection</h4>
+  <p>Ask Claude to <strong>review its own answer for errors</strong> and revise it.</p>
+  <h4>Pre-filling</h4>
+  <p>Provide the start of the answer (e.g. <code>{</code> for JSON) — strictly enforces the format.</p>
+
+  <h3>6. Efficiency through System Prompts &amp; Caching</h3>
+  <ul>
+    <li><strong>System prompts:</strong> Offload static information (e.g. company forms).</li>
+    <li><strong>Prompt caching:</strong> Saves time as Claude does not need to re-read static documents with every request.</li>
+  </ul>
+
+  <h3>7. The Order of Analysis</h3>
+  <p>Always <strong>form before sketch</strong> — clear facts first, then interpretive data.</p>
+  <div class="callout callout-warn">
+    <div class="callout-title">Remember</div>
+    <p>Structured data provides the context in which unstructured data is correctly interpreted.</p>
+  </div>
+
+  <section class="exercise-section">
+    <div class="section-intro">
+      <div class="section-eyebrow">Practical exercise</div>
+      <h2>Apply what you've learned</h2>
+      <p>Systematically improve a weak prompt and break a complex task into controllable steps.</p>
+    </div>
+    <div class="exercise-grid">
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 1</div>
+        <h3 class="exercise-title">Professionally rebuild a weak prompt</h3>
+        <p class="exercise-text">A vague prompt delivers vague results. Systematically rework the following prompt using the 6 building blocks from this module.</p>
+        <ul class="exercise-list">
+          <li>Starting prompt: "Write me something about a company."</li>
+          <li>Add: Role (who should Claude be?), Task (concrete verb), Context (industry, purpose), Process (sequence of steps), Stop criteria (no guessing) and Output format (table, prose, word limit).</li>
+          <li>Test both versions in Claude and compare the quality of results.</li>
+          <li>Document the three most important differences.</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Example prompt (after reworking):</strong>
+          <p>You are an M&amp;A analyst. Create a short profile of a mid-sized company in industrial automation. Structure: (1) Business model in 2 sentences, (2) estimated revenue size, (3) 3 relevant competitors. Max. 150 words. If data is unavailable, mark it explicitly.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Goal:</strong> Improve prompt quality through systematic structure — from vague input to precise output.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show sample solution" data-label-open="Hide sample solution">
+          Show sample solution
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Sample solution</div>
+          <table>
+            <thead><tr><th>Element</th><th>Weak</th><th>Strong</th></tr></thead>
+            <tbody>
+              <tr><td>Role</td><td>—</td><td>M&amp;A analyst</td></tr>
+              <tr><td>Task</td><td>Vague ("write something")</td><td>Concrete ("create a profile with sections")</td></tr>
+              <tr><td>Output format</td><td>—</td><td>Structure + word limit defined</td></tr>
+              <tr><td>Stop criteria</td><td>—</td><td>"If unavailable, mark explicitly"</td></tr>
+              <tr><td>Verifiability</td><td>Low</td><td>High</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 2</div>
+        <h3 class="exercise-title">Prompt Chaining for analysis tasks</h3>
+        <p class="exercise-text">Complex tasks become manageable when broken into multiple sequential prompts. Practise this with a typical analysis.</p>
+        <ul class="exercise-list">
+          <li>Prompt 1: Create a short profile for a company of your choice (business model, market position, key figures).</li>
+          <li>Prompt 2: Do the same for two further companies in the same industry.</li>
+          <li>Prompt 3: Summarise all three profiles in a comparison table, sorted by strategic fit.</li>
+          <li>Prompt 4: Create a management summary (max. 100 words) of the result.</li>
+          <li>Check after each step: is the intermediate result correct and complete?</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Example prompt (Step 3):</strong>
+          <p>Summarise the profiles of Companies A, B and C in a comparison table. Columns: Company, Revenue, Employees, Market position, Strategic fit (1–5 with rationale). Sort by fit descending.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Goal:</strong> Make complex tasks manageable through Prompt Chaining — every intermediate result is verifiable.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show approach" data-label-open="Hide approach">
+          Show approach
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Approach</div>
+          <ul>
+            <li><strong>Step 1–2:</strong> Each company profile should contain: business model (2–3 sentences), estimated revenue range, 2–3 competitors, main strengths.</li>
+            <li><strong>Step 3:</strong> The table makes differences immediately visible — sort by strategic fit to identify the best candidate.</li>
+            <li><strong>Step 4:</strong> The management summary should name the top candidate with one clear reason.</li>
+            <li><strong>Key insight:</strong> Checking each step prevents errors from carrying over into subsequent prompts.</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="quiz-section">
+    <div class="quiz-eyebrow">Ready for the quiz?</div>
+    <h2>Test your understanding</h2>
+    <p class="quiz-lede">10 questions · Pass threshold 70%.</p>
+    <button class="btn btn-primary" onclick="startQuiz()">Start quiz <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+  </div>
+</main>
+
+<div class="module-navigation">
+  <a href="modul-01.en.html" class="nav-card nav-card-prev">
+    <div class="nav-card-label">← Previous module</div>
+    <div class="nav-card-title">01 · Claude — The Complete Beginner's Guide (2026)</div>
+  </a>
+  <a href="modul-03.en.html" class="nav-card nav-card-next">
+    <div class="nav-card-label">Next module →</div>
+    <div class="nav-card-title">03 · Safe Handling of Data and Tools</div>
+  </a>
+</div>
+
+<div class="modal-overlay" id="quizModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeQuiz()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="quizModalBody"></div>
+  </div>
+</div>
+
+<footer class="module-footer">
+  <img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo">
+  <div class="module-footer-text">© 2026 IEG Investment Banking Group</div>
+</footer>
+
+<script src="../i18n.js?v=1"></script>
+<script src="../content.en.js?v=1"></script>
+<script src="../content.js"></script>
+<script>
+  const MODULE_ID = 2;
+  const MODULE_TITLE = "Prompting and Structured Instructions";
+  const MODULE_QUIZ = CURRICULUM.find(m => m.id === 2).quiz;
+</script>
+<script src="module.js"></script>
+</body>
+</html>
