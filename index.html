@@ -12,7 +12,7 @@
 <title>IEG Claude Academy — Claude im Investment Banking Praxisnah einsetzen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600[...]
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=5">
 <!-- Supabase: Library + gemeinsamer Client (eine Initialisierung für die ganze App) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
@@ -23,8 +23,6 @@
     window.sb = window.supabase.createClient(window._SB_URL, window._SB_KEY);
   }
 </script>
-<!-- Language Translation System -->
-<script src="lang.js"></script>
 </head>
 <body>
 
@@ -40,19 +38,19 @@
       </div>
     </a>
     <div class="nav-links">
-      <a href="#home" class="nav-link active" data-nav="home" data-i18n="nav.overview">Übersicht</a>
-      <a href="#curriculum" class="nav-link" data-nav="curriculum" data-i18n="nav.curriculum">Curriculum</a>
-      <a href="#team" class="nav-link" data-nav="team" data-i18n="nav.team">Team</a>
-      <a href="#certificate" class="nav-link" data-nav="certificate" data-i18n="nav.certificate">Zertifikat</a>
+      <a href="#home" class="nav-link active" data-nav="home">Übersicht</a>
+      <a href="#curriculum" class="nav-link" data-nav="curriculum">Curriculum</a>
+      <a href="#team" class="nav-link" data-nav="team">Team</a>
+      <a href="#certificate" class="nav-link" data-nav="certificate">Zertifikat</a>
     </div>
     <div class="nav-right">
       <div class="nav-progress">
-        <span class="progress-label" data-i18n="nav.progress">Fortschritt</span>
+        <span class="progress-label">Fortschritt</span>
         <span class="progress-value" id="navProgress">0/7</span>
       </div>
       <div class="nav-user" id="navUser">
         <span class="nav-user-name" id="userDisplayName"></span>
-        <button class="nav-logout" onclick="logout()" title="Abmelden" data-i18n="nav.logout">
+        <button class="nav-logout" onclick="logout()" title="Abmelden">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
         </button>
       </div>
@@ -60,20 +58,16 @@
   </div>
 </nav>
 
-<!-- ============ LANGUAGE TOGGLE (Bottom-Right Corner) ============ -->
-<div class="language-toggle">
-  <button onclick="setLanguage('de')" class="lang-toggle-btn" id="langDE" title="Deutsch">DE</button>
-  <button onclick="setLanguage('en')" class="lang-toggle-btn" id="langEN" title="English">EN</button>
-</div>
-
 <!-- ============ HERO / HOME ============ -->
 <section id="home" class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">
-      <span data-i18n="hero.eyebrow">Internes Trainingsprogramm · Onboarding für Analysts &amp; Interns · 2026</span>
+      <span>Internes Trainingsprogramm · Onboarding für Analysts &amp; Interns · 2026</span>
     </div>
-    <h1 class="hero-title" data-i18n="hero.title">Claude im Investment Banking</h1>
-    <p class="hero-lede" data-i18n="hero.lede">
+    <h1 class="hero-title">
+      Claude im Investment Banking
+    </h1>
+    <p class="hero-lede">
       Ein achtteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag.
       Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und
       praktische Workflows für typische Aufgaben im Team — mit klarem Blick auf Sicherheit und Einsatzgrenzen.
@@ -82,28 +76,28 @@
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-num">8</div>
-        <div class="stat-label" data-i18n="hero.stat.modules">Module</div>
+        <div class="stat-label">Module</div>
       </div>
       <div class="stat">
         <div class="stat-num">9</div>
-        <div class="stat-label" data-i18n="hero.stat.quizzes">Quizze</div>
+        <div class="stat-label">Quizze</div>
       </div>
       <div class="stat">
         <div class="stat-num">~6<span class="stat-unit">Std.</span></div>
-        <div class="stat-label" data-i18n="hero.stat.hours">Lernzeit</div>
+        <div class="stat-label">Lernzeit</div>
       </div>
       <div class="stat">
         <div class="stat-num">1</div>
-        <div class="stat-label" data-i18n="hero.stat.certificate">Teilnahmezertifikat</div>
+        <div class="stat-label">Teilnahmezertifikat</div>
       </div>
     </div>
 
     <div class="hero-actions">
-      <button class="btn btn-primary" onclick="document.getElementById('curriculum').scrollIntoView({behavior:'smooth'})" data-i18n="hero.btn.start">
+      <button class="btn btn-primary" onclick="document.getElementById('curriculum').scrollIntoView({behavior:'smooth'})">
         Curriculum starten
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
-      <button class="btn btn-ghost" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})" data-i18n="hero.btn.team">
+      <button class="btn btn-ghost" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">
         Über das IEG Team
       </button>
     </div>
@@ -113,12 +107,19 @@
 <!-- ============ CURRICULUM ============ -->
 <section id="curriculum" class="curriculum">
   <div class="section-header">
-    <div class="section-eyebrow" data-i18n="curriculum.eyebrow">/ Curriculum</div>
-    <h2 class="section-title" data-i18n="curriculum.title">Acht Module für den strukturierten Einstieg.</h2>
-    <p class="section-lede" data-i18n="curriculum.lede">
+    <div class="section-eyebrow">/ Curriculum</div>
+    <h2 class="section-title">Acht Module für den strukturierten Einstieg.</h2>
+    <p class="section-lede">
       Jedes Modul schließt mit einem Quiz ab. Nach erfolgreichem Abschluss wird das nächste Modul freigeschaltet.
       Nach allen acht Modulen folgt eine Abschlussprüfung mit internem Teilnahmezertifikat.
     </p>
+    <div class="preview-hint">
+      <span class="preview-hint-icon">👁</span>
+      <span class="preview-hint-text">
+        <strong>Vorschau-Modus: Alle Module ohne Quiz-Freischaltung anzeigen.
+      </span>
+      <button id="previewToggle" class="preview-toggle" onclick="togglePreviewMode()">Vorschau aktivieren</button>
+    </div>
   </div>
 
   <div class="progress-track">
@@ -137,9 +138,9 @@
 <!-- ============ TEAM ============ -->
 <section id="team" class="team-section">
   <div class="section-header">
-    <div class="section-eyebrow" data-i18n="team.eyebrow">/ Team </div>
-    <h2 class="section-title" data-i18n="team.title">Die Menschen hinter IEG</h2>
-    <p class="section-lede" data-i18n="team.lede">
+    <div class="section-eyebrow">/ Team </div>
+    <h2 class="section-title">Die Menschen hinter IEG</h2>
+    <p class="section-lede">
       Eine kurze Einführung in das IEG Team und ausgewählte Ansprechpartner. 
       Besonders hilfreich für neue Praktikantinnen, Praktikanten und Analystinnen bzw. Analysten im Onboarding.
     </p>
@@ -259,7 +260,7 @@
   </div>
 
   <div class="team-locations">
-    <div class="location-eyebrow" data-i18n="team.locations">Standorte</div>
+    <div class="location-eyebrow">Standorte</div>
     <div class="location-list">
       <span>Berlin (HQ)</span><span>·</span>
       <span>Oslo</span><span>·</span>
@@ -273,7 +274,7 @@
 </section>
 
 <!-- ============ CERTIFICATE PREVIEW ============ -->
-<section id="certificate" class="cert-section">
+<section id="Zertifikat" class="cert-section">
   <div class="cert-locked-state" id="certLockedState">
     <div class="cert-icon-lock">
       <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -281,13 +282,13 @@
         <path d="M8 11V7a4 4 0 1 1 8 0v4"/>
       </svg>
     </div>
-    <div class="section-eyebrow" data-i18n="cert.eyebrow">/ Zertifikat</div>
-    <h2 class="section-title" data-i18n="cert.title">Ihr IEG Claude Teilnahmezertifikat</h2>
-    <p class="section-lede" data-i18n="cert.lede">
+    <div class="section-eyebrow">/ Zertifikat</div>
+    <h2 class="section-title">Ihr IEG Claude Teilnahmezertifikat</h2>
+    <p class="section-lede">
       Schließen Sie alle acht Module und die Abschlussprüfung ab, um Ihr persönliches,
       auf Ihren Namen ausgestelltes Zertifikat zu erhalten.
     </p>
-    <div class="cert-status" id="certStatus" data-i18n="cert.status.locked">Status: noch nicht freigeschaltet</div>
+    <div class="cert-status" id="certStatus">Status: noch nicht freigeschaltet</div>
   </div>
 
   <div class="cert-unlocked-state" id="certUnlockedState" style="display:none;">
@@ -330,30 +331,30 @@
   <div class="footer-inner">
     <div class="footer-col">
       <img src="assets/ieg-logo.png" alt="IEG" class="footer-logo-img">
-      <p class="footer-desc" data-i18n-html="footer.desc">
+      <p class="footer-desc">
         Investment Banking for Leading Innovators.<br>
         IEG Technology GmbH · Bundesallee 205 · 10717 Berlin
       </p>
     </div>
     <div class="footer-col">
-      <div class="footer-heading" data-i18n="footer.academy">Academy</div>
+      <div class="footer-heading">Academy</div>
       <a href="#curriculum">Curriculum</a>
       <a href="#team">Team</a>
       <a href="#certificate">Zertifikat</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading" data-i18n="footer.internal">Internal</div>
+      <div class="footer-heading">Internal</div>
       <a href="https://ieg-banking.com" target="_blank" rel="noopener">ieg-banking.com</a>
       <a href="https://ieg-banking.com/about-us" target="_blank" rel="noopener">Über uns</a>
-      <a href="#" onclick="resetProgress();return false;" data-i18n="footer.reset">Fortschritt zurücksetzen</a>
+      <a href="#" onclick="resetProgress();return false;">Fortschritt zurücksetzen</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading" data-i18n="footer.contact">Kontakt</div>
+      <div class="footer-heading">Kontakt</div>
       <p>IEG Investment Banking Group<br>
       <a href="mailto:info@ieg-banking.com">info@ieg-banking.com</a></p>
     </div>
   </div>
-  <div class="footer-bottom" data-i18n="footer.copyright">
+  <div class="footer-bottom">
     © 2026 IEG Investment Banking Group · Internal Training Material · v1.0
   </div>
 </footer>
