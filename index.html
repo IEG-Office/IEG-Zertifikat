@@ -2,7 +2,6 @@
 <html lang="de">
 <head>
 <script>
-  // Login-Check SOFORT — bevor die Seite gerendert wird
   if (localStorage.getItem('ieg_logged_in') !== 'yes') {
     window.location.replace('login.html');
   }
@@ -14,15 +13,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=5">
-<!-- Supabase: Library + gemeinsamer Client (eine Initialisierung für die ganze App) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="supabase-config.js"></script>
 <script>
-  // Reuse a single Supabase client across the app (kein zweiter Client)
   if (window.supabase && window._SB_URL) {
     window.sb = window.supabase.createClient(window._SB_URL, window._SB_KEY);
   }
 </script>
+<!-- i18n muss VOR app.js geladen werden -->
+<script src="i18n.js?v=1"></script>
 </head>
 <body>
 
@@ -38,16 +37,18 @@
       </div>
     </a>
     <div class="nav-links">
-      <a href="#home" class="nav-link active" data-nav="home">Übersicht</a>
-      <a href="#curriculum" class="nav-link" data-nav="curriculum">Curriculum</a>
-      <a href="#team" class="nav-link" data-nav="team">Team</a>
-      <a href="#certificate" class="nav-link" data-nav="certificate">Zertifikat</a>
+      <a href="#home"        class="nav-link active" data-nav="home"        data-i18n="nav.home">Übersicht</a>
+      <a href="#curriculum"  class="nav-link"        data-nav="curriculum"  data-i18n="nav.curriculum">Curriculum</a>
+      <a href="#team"        class="nav-link"        data-nav="team"        data-i18n="nav.team">Team</a>
+      <a href="#certificate" class="nav-link"        data-nav="certificate" data-i18n="nav.certificate">Zertifikat</a>
     </div>
     <div class="nav-right">
       <div class="nav-progress">
-        <span class="progress-label">Fortschritt</span>
+        <span class="progress-label" data-i18n="nav.progress">Fortschritt</span>
         <span class="progress-value" id="navProgress">0/7</span>
       </div>
+      <!-- Language toggle button -->
+      <button id="langToggleBtn" class="nav-lang-toggle" onclick="toggleLang()" title="Switch language">EN</button>
       <div class="nav-user" id="navUser">
         <span class="nav-user-name" id="userDisplayName"></span>
         <button class="nav-logout" onclick="logout()" title="Abmelden">
@@ -62,12 +63,12 @@
 <section id="home" class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">
-      <span>Internes Trainingsprogramm · Onboarding für Analysts &amp; Interns · 2026</span>
+      <span data-i18n="hero.eyebrow">Internes Trainingsprogramm · Onboarding für Analysts &amp; Interns · 2026</span>
     </div>
-    <h1 class="hero-title">
+    <h1 class="hero-title" data-i18n="hero.title">
       Claude im Investment Banking
     </h1>
-    <p class="hero-lede">
+    <p class="hero-lede" data-i18n="hero.lede">
       Ein achtteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag.
       Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und
       praktische Workflows für typische Aufgaben im Team — mit klarem Blick auf Sicherheit und Einsatzgrenzen.
@@ -76,29 +77,29 @@
     <div class="hero-stats">
       <div class="stat">
         <div class="stat-num">8</div>
-        <div class="stat-label">Module</div>
+        <div class="stat-label" data-i18n="hero.stat.modules">Module</div>
       </div>
       <div class="stat">
         <div class="stat-num">9</div>
-        <div class="stat-label">Quizze</div>
+        <div class="stat-label" data-i18n="hero.stat.quizzes">Quizze</div>
       </div>
       <div class="stat">
-        <div class="stat-num">~6<span class="stat-unit">Std.</span></div>
-        <div class="stat-label">Lernzeit</div>
+        <div class="stat-num">~6<span class="stat-unit" data-i18n="hero.stat.time.unit">Std.</span></div>
+        <div class="stat-label" data-i18n="hero.stat.time">Lernzeit</div>
       </div>
       <div class="stat">
         <div class="stat-num">1</div>
-        <div class="stat-label">Teilnahmezertifikat</div>
+        <div class="stat-label" data-i18n="hero.stat.certificate">Teilnahmezertifikat</div>
       </div>
     </div>
 
     <div class="hero-actions">
       <button class="btn btn-primary" onclick="document.getElementById('curriculum').scrollIntoView({behavior:'smooth'})">
-        Curriculum starten
+        <span data-i18n="hero.cta.start">Curriculum starten</span>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </button>
       <button class="btn btn-ghost" onclick="document.getElementById('team').scrollIntoView({behavior:'smooth'})">
-        Über das IEG Team
+        <span data-i18n="hero.cta.team">Über das IEG Team</span>
       </button>
     </div>
   </div>
@@ -107,25 +108,25 @@
 <!-- ============ CURRICULUM ============ -->
 <section id="curriculum" class="curriculum">
   <div class="section-header">
-    <div class="section-eyebrow">/ Curriculum</div>
-    <h2 class="section-title">Acht Module für den strukturierten Einstieg.</h2>
-    <p class="section-lede">
+    <div class="section-eyebrow" data-i18n="curriculum.eyebrow">/ Curriculum</div>
+    <h2 class="section-title" data-i18n="curriculum.title">Acht Module für den strukturierten Einstieg.</h2>
+    <p class="section-lede" data-i18n="curriculum.lede">
       Jedes Modul schließt mit einem Quiz ab. Nach erfolgreichem Abschluss wird das nächste Modul freigeschaltet.
       Nach allen acht Modulen folgt eine Abschlussprüfung mit internem Teilnahmezertifikat.
     </p>
     <div class="preview-hint">
       <span class="preview-hint-icon">👁</span>
       <span class="preview-hint-text">
-        <strong>Vorschau-Modus: Alle Module ohne Quiz-Freischaltung anzeigen.
+        <strong data-i18n="curriculum.preview">Vorschau-Modus: Alle Module ohne Quiz-Freischaltung anzeigen.</strong>
       </span>
-      <button id="previewToggle" class="preview-toggle" onclick="togglePreviewMode()">Vorschau aktivieren</button>
+      <button id="previewToggle" class="preview-toggle" onclick="togglePreviewMode()" data-i18n="curriculum.preview.btn">Vorschau aktivieren</button>
     </div>
   </div>
 
   <div class="progress-track">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-meta">
-      <span id="progressText">0 von 8 Modulen abgeschlossen</span>
+      <span id="progressText" data-i18n="curriculum.progress">0 von 8 Modulen abgeschlossen</span>
       <span id="progressPercent">0%</span>
     </div>
   </div>
@@ -138,10 +139,10 @@
 <!-- ============ TEAM ============ -->
 <section id="team" class="team-section">
   <div class="section-header">
-    <div class="section-eyebrow">/ Team </div>
-    <h2 class="section-title">Die Menschen hinter IEG</h2>
-    <p class="section-lede">
-      Eine kurze Einführung in das IEG Team und ausgewählte Ansprechpartner. 
+    <div class="section-eyebrow" data-i18n="team.eyebrow">/ Team</div>
+    <h2 class="section-title" data-i18n="team.title">Die Menschen hinter IEG</h2>
+    <p class="section-lede" data-i18n="team.lede">
+      Eine kurze Einführung in das IEG Team und ausgewählte Ansprechpartner.
       Besonders hilfreich für neue Praktikantinnen, Praktikanten und Analystinnen bzw. Analysten im Onboarding.
     </p>
   </div>
@@ -150,7 +151,7 @@
     <article class="team-card team-card-feature">
       <div class="team-role">Group CEO &amp; Managing Director · Berlin</div>
       <h3 class="team-name">Stefan Heilmann</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.heilmann.bio">
         Mitbegründer und Global CEO der IEG Investment Banking Group. Über 30 Jahre
         Erfahrung als Tech Investment Banker, Entrepreneur und Investor. Leidenschaft
         für digitale Gesundheit, Blockchain-Protokolle und Robotik (IoT).
@@ -161,7 +162,7 @@
     <article class="team-card">
       <div class="team-role">Managing Director · Berlin</div>
       <h3 class="team-name">Mirko Heide</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.heide.bio">
         Managing Partner mit über 15 Jahren Erfahrung. Global Head des SmartCity-Teams —
         treibt Innovationen in CleanTech, eMobility, Energy Transition und Software.
       </p>
@@ -171,7 +172,7 @@
     <article class="team-card">
       <div class="team-role">Executive Director · Berlin</div>
       <h3 class="team-name">Jan Wyrowinski</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.wyrowinski.bio">
         Investment Banking als unermüdliches Streben nach finanzieller Exzellenz —
         Schwerpunkt auf Deep Tech (insb. Robotik) und Cybersecurity.
       </p>
@@ -181,7 +182,7 @@
     <article class="team-card">
       <div class="team-role">Vice President · Berlin</div>
       <h3 class="team-name">Felix Specht</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.specht.bio">
         M&amp;A als perfekte Mischung aus Strategie, Menschen und Wandel.
         Fokussiert auf HealthTech und CleanTech.
       </p>
@@ -191,7 +192,7 @@
     <article class="team-card">
       <div class="team-role">Managing Director · India</div>
       <h3 class="team-name">Mihir Kapoor</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.kapoor.bio">
         20+ Jahre Investment Banking. Managing Partner für Südostasien.
         Spezialist für TMT und cross-border M&amp;A mit asiatischen Unicorns.
       </p>
@@ -201,7 +202,7 @@
     <article class="team-card">
       <div class="team-role">Managing Director · Abu Dhabi</div>
       <h3 class="team-name">Ala Qumsieh</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.qumsieh.bio">
         Managing Partner Middle East. Über 20 Jahre Erfahrung in der Begleitung
         wachstumsstarker Tech- und Startup-Unternehmen durch komplexe Transaktionen.
       </p>
@@ -211,7 +212,7 @@
     <article class="team-card">
       <div class="team-role">Managing Director · Oslo</div>
       <h3 class="team-name">Fredrik Gørrissen</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.gorrissen.bio">
         Tech Investment Banker mit Stationen in Oslo, London, Paris und New York.
         Ehemals BCG, Microsoft Executive — mit Leidenschaft für Software.
       </p>
@@ -221,7 +222,7 @@
     <article class="team-card">
       <div class="team-role">Managing Director · New York</div>
       <h3 class="team-name">Mack Rossoff</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.rossoff.bio">
         Harvard MBA. Ehemals JP Morgan, Banc of America, Dillon Read.
         Associated Partner bei IEG seit 2015.
       </p>
@@ -231,7 +232,7 @@
     <article class="team-card">
       <div class="team-role">Head of Office &amp; HR · Berlin</div>
       <h3 class="team-name">Vanessa Schwemme</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.schwemme.bio">
         Bringt Menschen und Prozesse zusammen. Erste Anlaufstelle für neue Teammitglieder
         in Sachen Onboarding und Office.
       </p>
@@ -241,7 +242,7 @@
     <article class="team-card">
       <div class="team-role">Executive Assistant · Berlin</div>
       <h3 class="team-name">Lena Krassowsky</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.krassowsky.bio">
         Strukturiert, kommunikativ, zuverlässig — Lena koordiniert das Tagesgeschäft
         und ist die richtige Adresse für organisatorische Fragen.
       </p>
@@ -251,7 +252,7 @@
     <article class="team-card">
       <div class="team-role">Senior Financial Analyst · Berlin</div>
       <h3 class="team-name">Moritz Dubber</h3>
-      <p class="team-bio">
+      <p class="team-bio" data-i18n="team.dubber.bio">
         Schwerpunkt auf HealthTech und FinTech. Schätzt das Navigieren komplexer
         finanzieller Transaktionen und kollaboratives Arbeiten.
       </p>
@@ -260,7 +261,7 @@
   </div>
 
   <div class="team-locations">
-    <div class="location-eyebrow">Standorte</div>
+    <div class="location-eyebrow" data-i18n="team.locations">Standorte</div>
     <div class="location-list">
       <span>Berlin (HQ)</span><span>·</span>
       <span>Oslo</span><span>·</span>
@@ -273,7 +274,7 @@
   </div>
 </section>
 
-<!-- ============ CERTIFICATE PREVIEW ============ -->
+<!-- ============ CERTIFICATE ============ -->
 <section id="Zertifikat" class="cert-section">
   <div class="cert-locked-state" id="certLockedState">
     <div class="cert-icon-lock">
@@ -282,18 +283,15 @@
         <path d="M8 11V7a4 4 0 1 1 8 0v4"/>
       </svg>
     </div>
-    <div class="section-eyebrow">/ Zertifikat</div>
-    <h2 class="section-title">Ihr IEG Claude Teilnahmezertifikat</h2>
-    <p class="section-lede">
+    <div class="section-eyebrow" data-i18n="cert.eyebrow">/ Zertifikat</div>
+    <h2 class="section-title" data-i18n="cert.title">Ihr IEG Claude Teilnahmezertifikat</h2>
+    <p class="section-lede" data-i18n="cert.lede">
       Schließen Sie alle acht Module und die Abschlussprüfung ab, um Ihr persönliches,
       auf Ihren Namen ausgestelltes Zertifikat zu erhalten.
     </p>
-    <div class="cert-status" id="certStatus">Status: noch nicht freigeschaltet</div>
+    <div class="cert-status" id="certStatus" data-i18n="cert.status">Status: noch nicht freigeschaltet</div>
   </div>
-
-  <div class="cert-unlocked-state" id="certUnlockedState" style="display:none;">
-    <!-- Certificate inserted by JS once unlocked -->
-  </div>
+  <div class="cert-unlocked-state" id="certUnlockedState" style="display:none;"></div>
 </section>
 
 <!-- ============ MODAL: MODULE CONTENT ============ -->
@@ -319,10 +317,10 @@
 <!-- ============ MODAL: NAME INPUT ============ -->
 <div class="modal-overlay" id="nameModal" style="display:none;">
   <div class="modal-content modal-name">
-    <h3>Wer schreibt die Abschlussprüfung?</h3>
-    <p>Bitte geben Sie Ihren vollständigen Namen ein. Dieser erscheint auf Ihrem Zertifikat.</p>
-    <input type="text" id="userNameInput" placeholder="z. B. Max Mustermann" />
-    <button class="btn btn-primary" onclick="submitName()">Zur Abschlussprüfung</button>
+    <h3 data-i18n="modal.name.title">Wer schreibt die Abschlussprüfung?</h3>
+    <p data-i18n="modal.name.lede">Bitte geben Sie Ihren vollständigen Namen ein. Dieser erscheint auf Ihrem Zertifikat.</p>
+    <input type="text" id="userNameInput" data-i18n="modal.name.placeholder" placeholder="z. B. Max Mustermann" />
+    <button class="btn btn-primary" onclick="submitName()" data-i18n="modal.name.cta">Zur Abschlussprüfung</button>
   </div>
 </div>
 
@@ -337,24 +335,24 @@
       </p>
     </div>
     <div class="footer-col">
-      <div class="footer-heading">Academy</div>
-      <a href="#curriculum">Curriculum</a>
-      <a href="#team">Team</a>
-      <a href="#certificate">Zertifikat</a>
+      <div class="footer-heading" data-i18n="footer.academy">Academy</div>
+      <a href="#curriculum" data-i18n="nav.curriculum">Curriculum</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#certificate" data-i18n="nav.certificate">Zertifikat</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading">Internal</div>
+      <div class="footer-heading" data-i18n="footer.internal">Internal</div>
       <a href="https://ieg-banking.com" target="_blank" rel="noopener">ieg-banking.com</a>
-      <a href="https://ieg-banking.com/about-us" target="_blank" rel="noopener">Über uns</a>
-      <a href="#" onclick="resetProgress();return false;">Fortschritt zurücksetzen</a>
+      <a href="https://ieg-banking.com/about-us" target="_blank" rel="noopener" data-i18n="footer.about">Über uns</a>
+      <a href="#" onclick="resetProgress();return false;" data-i18n="footer.reset">Fortschritt zurücksetzen</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading">Kontakt</div>
+      <div class="footer-heading" data-i18n="footer.contact">Kontakt</div>
       <p>IEG Investment Banking Group<br>
       <a href="mailto:info@ieg-banking.com">info@ieg-banking.com</a></p>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div class="footer-bottom" data-i18n="footer.copy">
     © 2026 IEG Investment Banking Group · Internal Training Material · v1.0
   </div>
 </footer>
