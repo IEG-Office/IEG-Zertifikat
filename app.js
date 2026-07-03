@@ -148,7 +148,11 @@ function renderProgress() {
 }
 
 // ===== MODULE =====
-function openModule(id) { window.location.href = 'modules/modul-' + String(id).padStart(2, '0') + '.html'; }
+function openModule(id) {
+  var lang = (typeof getLang === 'function') ? getLang() : 'de';
+  var suffix = (lang === 'en') ? '.en.html' : '.html';
+  window.location.href = 'modules/modul-' + String(id).padStart(2, '0') + suffix;
+}
 function closeModule() { var m = document.getElementById('moduleModal'); if (m) { m.style.display = 'none'; document.body.style.overflow = ''; } }
 
 // ===== QUIZ =====
