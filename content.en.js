@@ -770,5 +770,3 @@ const FINAL_EXAM_EN = [
   { q: 'What distinguishes Opus from Sonnet for complex analyses?', options: ['Opus is slower but delivers identical quality', 'Sonnet has a larger context window', 'Opus integrates sources more deeply; Sonnet is more efficient for routine tasks', 'No qualitative difference'], correct: 2, explanation: 'Opus for in-depth research; Sonnet for daily routine work with good quality-speed balance.' },
   { q: 'What distinguishes a Skill from a Project system prompt?', options: ['No difference', 'Projects are more flexible', 'Skills require Pro; system prompts are free in all versions', 'Skills are usable in any chat; system prompts only apply in the respective Project'], correct: 3, explanation: 'Skills: universally deployable in any chat. System prompts: only within the defined Project.' }
 ];
-
-const PASS_THRESHOLD = 70;
