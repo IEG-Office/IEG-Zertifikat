@@ -46,10 +46,6 @@
       <a href="#certificate" class="nav-link" data-nav="certificate" data-i18n="nav.certificate">Zertifikat</a>
     </div>
     <div class="nav-right">
-      <div class="nav-language">
-        <button onclick="setLanguage('de')" class="lang-btn" id="langDE" title="Deutsch">DE</button>
-        <button onclick="setLanguage('en')" class="lang-btn" id="langEN" title="English">EN</button>
-      </div>
       <div class="nav-progress">
         <span class="progress-label" data-i18n="nav.progress">Fortschritt</span>
         <span class="progress-value" id="navProgress">0/7</span>
@@ -63,6 +59,12 @@
     </div>
   </div>
 </nav>
+
+<!-- ============ LANGUAGE TOGGLE (Bottom-Right Corner) ============ -->
+<div class="language-toggle">
+  <button onclick="setLanguage('de')" class="lang-toggle-btn" id="langDE" title="Deutsch">DE</button>
+  <button onclick="setLanguage('en')" class="lang-toggle-btn" id="langEN" title="English">EN</button>
+</div>
 
 <!-- ============ HERO / HOME ============ -->
 <section id="home" class="hero">
