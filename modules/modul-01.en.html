@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 01 · Claude — The Complete Beginner's Guide (2026) — IEG Claude Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module-styles.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/ieg-logo.png" alt="IEG" class="nav-logo-img">
+      <span class="logo-divider"></span>
+      <div class="logo-text">
+        <span class="logo-primary">Claude Academy</span>
+        <span class="logo-secondary">Module 01</span>
+      </div>
+    </a>
+    <a href="../index.html#curriculum" class="nav-back">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Curriculum
+    </a>
+  </div>
+</nav>
+
+<section class="module-hero">
+  <div class="module-hero-inner">
+    <div class="module-breadcrumb"><span>INTRODUCTION</span><span>·</span><span>MODULE 1</span></div>
+    <div class="module-hero-number">01</div>
+    <h1 class="module-hero-title">Claude — The Complete Beginner's Guide (2026)</h1>
+    <p class="module-hero-lede">Chat discipline, web search, file analysis, technical support, personalisation and data privacy — a solid foundation for every professional start with Claude. (You have already been introduced to the model family in Module 0.)</p>
+    <div class="module-hero-meta">
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        30 min. learning time
+      </span>
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        10 quiz questions
+      </span>
+      <span class="module-hero-meta-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Includes video
+      </span>
+    </div>
+  </div>
+</section>
+
+<main class="module-content">
+  <div id="dynamicContent"></div>
+
+  <h3>1. Fundamentals and Chat Discipline</h3>
+  <p>Claude is an AI tool from Anthropic, operated through a simple text box. A key success factor is <strong>chat discipline</strong>: start a <strong>new chat for every new topic</strong>. Mixing topics in a single chat confuses the AI and significantly degrades the quality of results.</p>
+  <p>The reason lies in what is known as the <strong>context window</strong>: with every response, Claude re-reads the <em>entire</em> chat history from the beginning. The longer and more topically unfocused a chat becomes, the more irrelevant information the model has to process — answers become less accurate and slower. A fresh chat per topic keeps the context clean and focused.</p>
+  <div class="callout">
+    <div class="callout-title">Golden rule</div>
+    <p>One topic — one chat. Mixing holiday planning with quarterly reports in the same chat produces worse results for both.</p>
+  </div>
+  <p>Two further habits pay off from day one:</p>
+  <ul>
+    <li><strong>Provide context:</strong> Tell Claude <em>who</em> you are, <em>who</em> the output is for and <em>what format</em> you need — e.g. "Write as an analyst for an internal memo, maximum 200 words."</li>
+    <li><strong>Work iteratively:</strong> A first response is rarely perfect. Refine in the same (topic-consistent) chat with follow-up instructions such as "shorter", "more formal" or "with references".</li>
+  </ul>
+
+  <h3>2. Core Working Functions</h3>
+  <p>The most important tools can be activated via the <strong>plus icon</strong> below the text input. These three form the backbone of daily work:</p>
+  <h4>Web search</h4>
+  <p>Claude can search hundreds of sources in seconds to compile current data (e.g. DAX revenues or daily industry news) into tables. Unlike pure model knowledge, results are <strong>backed by source links</strong> — always verify these for critical figures. Formulate requests precisely with a time period and desired output format, e.g. "Summarise Q3 revenues of the three largest German car manufacturers as a table with source references."</p>
+  <h4>File analysis</h4>
+  <p>PDFs, Excel or Word documents can be uploaded directly. <strong>Pro tip:</strong> use the stopwatch icon (<em>extended thinking mode</em>) so Claude takes more time to read the file thoroughly and provide more precise answers. Ask specific questions <em>about</em> the document rather than a blanket summary — e.g. "What three risks does the report mention on pages 10–15?" With multiple files, Claude can also <strong>compare</strong> them (e.g. contrast two quarterly reports).</p>
+  <h4>Technical support</h4>
+  <p>Claude helps with PC and software problems. The most efficient workflow: first describe the problem in general terms, then upload a <strong>screenshot of the user interface</strong> (e.g. the activity monitor or an error message) — Claude reads the screen contents and diagnoses the cause directly. Then ask for a <strong>step-by-step guide</strong> and have technical terms explained in plain language if needed.</p>
+
+  <h3>3. Personalisation: Tailoring the AI to You</h3>
+  <p>To make Claude sound less generic and more suited to your working style, there are three tools:</p>
+  <ul>
+    <li><strong>Preferences:</strong> Global rules in the settings (e.g. "Always respond briefly and in English" or "I am a Mac user"), automatically applied to <strong>every new chat</strong>.</li>
+    <li><strong>Styles:</strong> You can choose predefined styles (formal, concise) or create a <strong>custom style</strong> by uploading your own writing samples (e.g. previous memos or scripts) — Claude analyses tone, structure and word choice and writes in your style from then on.</li>
+    <li><strong>Memories:</strong> Using the command "Please create a memory", Claude permanently stores facts about you (e.g. "I have a fear of flying" or "My team works in M&amp;A"), which it automatically takes into account in future chats.</li>
+  </ul>
+
+  <h3>4. Pro Features: Programming and Excel</h3>
+  <h4>Programming without code</h4>
+  <p>Claude can create interactive <strong>dashboards</strong> or complete <strong>HTML websites</strong> — including contact forms — without any programming knowledge. On request, Claude even provides a step-by-step guide for <strong>publishing</strong> the page.</p>
+  <h4>Claude in Excel</h4>
+  <p>The <strong>Excel Add-in</strong> (Pro feature) allows Claude to work directly in spreadsheets: retrieve data from the web, create <strong>dynamic charts linked to cells</strong> and independently correct complex errors such as <strong>circular references</strong> — all via natural language instructions.</p>
+
+  <h3>5. Security and Data Privacy</h3>
+  <ul>
+    <li><strong>Disable training:</strong> Go to settings under "Privacy" and switch off "helps improve Claude" so your inputs are not used to train new models.</li>
+    <li><strong>Incognito mode</strong> (ghost icon): Chats are not permanently stored in the sidebar — ideal for private or one-off requests.</li>
+  </ul>
+  <div class="callout callout-warn">
+    <div class="callout-title">Mandatory at IEG</div>
+    <p>Disabling the training option is mandatory at IEG. Do it before your first use — once set, it remains permanently active.</p>
+  </div>
+
+  <section class="exercise-section">
+    <div class="section-intro">
+      <div class="section-eyebrow">Practical exercise</div>
+      <h2>Apply what you've learned</h2>
+      <p>Practise the fundamentals: choosing the right function, chat discipline and the initial setup of your account.</p>
+    </div>
+    <div class="exercise-grid">
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 1</div>
+        <h3 class="exercise-title">The right function for the right task</h3>
+        <p class="exercise-text">Web search, file analysis or screenshot upload? Practise choosing the right Claude function for different work situations and combining it with a precise instruction.</p>
+        <ul class="exercise-list">
+          <li>Create a table with three columns: <strong>Task</strong>, <strong>Function</strong> and <strong>Rationale</strong>.</li>
+          <li>Evaluate these scenarios: (a) Research current industry multiples with source references, (b) Analyse an 80-page market study as a PDF, (c) Diagnose a slow PC, (d) Compare two quarterly reports, (e) Draft a short internal email.</li>
+          <li>For one scenario of your choice, formulate the complete instruction — including context, format and source requirements.</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Example prompt:</strong>
+          <p>I will give you 5 tasks from everyday work. Recommend the appropriate Claude function (web search, file upload + extended thinking mode, screenshot upload, standard chat) for each and justify the choice in one sentence. Format: table with three columns.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Goal:</strong> Think function and precise instruction together — the right tool alone is not enough, the instruction must be clear.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show sample solution" data-label-open="Hide sample solution">
+          Show sample solution
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Sample solution</div>
+          <table>
+            <thead><tr><th>Task</th><th>Function</th><th>Rationale</th></tr></thead>
+            <tbody>
+              <tr><td>(a) Industry multiples with source references</td><td><strong>Web search</strong></td><td>Delivers current data with cited source links for verification</td></tr>
+              <tr><td>(b) Analyse an 80-page market study</td><td><strong>File upload + extended thinking mode</strong></td><td>Thorough reading of large documents, targeted questions instead of blanket summaries</td></tr>
+              <tr><td>(c) Diagnose a slow PC</td><td><strong>Screenshot upload</strong></td><td>Claude reads the activity monitor and recognises UI elements directly</td></tr>
+              <tr><td>(d) Compare two quarterly reports</td><td><strong>File upload (multiple files)</strong></td><td>Claude compares both documents and highlights differences</td></tr>
+              <tr><td>(e) Short internal email</td><td><strong>Standard chat</strong></td><td>Simple text task — no external source or file needed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 2</div>
+        <h3 class="exercise-title">Account setup: privacy and first preference</h3>
+        <p class="exercise-text">Before working productively with Claude, your account should be correctly configured. This exercise walks through the two most important settings and tests the effect of a global preference.</p>
+        <ul class="exercise-list">
+          <li><strong>Privacy:</strong> Open settings → Privacy → disable "helps improve Claude". Take a screenshot as proof.</li>
+          <li><strong>Preference:</strong> Set a global preference useful for your daily work (e.g. "Always respond in English, structure answers with bullet points, maximum 5 sentences").</li>
+          <li>Then open a <em>new</em> chat and ask any question — check whether Claude applies the preference without being prompted.</li>
+          <li>Also test incognito mode: start a chat with the ghost icon and check whether it appears in the sidebar after closing.</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Example prompt (for testing the preference):</strong>
+          <p>Briefly explain what a DCF model is.</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Goal:</strong> Ensure privacy and configure Claude so it responds exactly as you need from now on — without any briefing.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show approach" data-label-open="Hide approach">
+          Show approach
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Approach</div>
+          <ul>
+            <li><strong>Privacy:</strong> Settings (gear icon) → Privacy → uncheck "helps improve Claude" → Save.</li>
+            <li><strong>Preference example:</strong> "Always respond in English. Structure answers as a bullet list. Keep it to a maximum of 5 points." → Active from the next chat onwards.</li>
+            <li><strong>Effect test:</strong> The DCF prompt should now come back in English as a bullet list — without you mentioning it in the request.</li>
+            <li><strong>Incognito:</strong> Ghost icon → start chat → close window → chat does <em>not</em> appear in the sidebar.</li>
+          </ul>
+          <p style="margin-top:12px"><strong>Conclusion:</strong> These two settings take 2 minutes but save time every day and protect company data — done once, effective permanently.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="quiz-section">
+    <div class="quiz-eyebrow">Ready for the quiz?</div>
+    <h2>Test your understanding</h2>
+    <p class="quiz-lede">10 questions · Pass threshold 70%.</p>
+    <button class="btn btn-primary" onclick="startQuiz()">Start quiz <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+  </div>
+</main>
+
+<div class="module-navigation">
+  <a href="modul-00.en.html" class="nav-card nav-card-prev">
+    <div class="nav-card-label">← Previous module</div>
+    <div class="nav-card-title">00 · The Claude Ecosystem at a Glance</div>
+  </a>
+  <a href="modul-02.en.html" class="nav-card nav-card-next">
+    <div class="nav-card-label">Next module →</div>
+    <div class="nav-card-title">02 · Prompting and Structured Instructions</div>
+  </a>
+</div>
+
+<div class="modal-overlay" id="quizModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeQuiz()">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div id="quizModalBody"></div>
+  </div>
+</div>
+
+<footer class="module-footer">
+  <img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo">
+  <div class="module-footer-text">© 2026 IEG Investment Banking Group</div>
+</footer>
+
+<script src="../i18n.js?v=1"></script>
+<script src="../content.en.js?v=1"></script>
+<script src="../content.js"></script>
+<script>
+  const MODULE_ID = 1;
+  const MODULE_TITLE = "Claude — The Complete Beginner's Guide (2026)";
+  const MODULE_QUIZ = CURRICULUM.find(m => m.id === 1).quiz;
+</script>
+<script src="module.js"></script>
+</body>
+</html>
