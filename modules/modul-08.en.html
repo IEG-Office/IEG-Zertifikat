@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 08 · @Claude in Slack (Claude Tag) — IEG Claude Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="module-styles.css">
+</head>
+<body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="../index.html" class="nav-logo"><img src="../assets/ieg-logo.png" alt="IEG" class="nav-logo-img"><span class="logo-divider"></span><div class="logo-text"><span class="logo-primary">Claude Academy</span><span class="logo-secondary">Module 08</span></div></a>
+  <a href="../index.html#curriculum" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Curriculum</a>
+</div></nav>
+
+<section class="module-hero"><div class="module-hero-inner">
+  <div class="module-breadcrumb"><span>PRACTICAL</span><span>·</span><span>MODULE 8</span></div>
+  <div class="module-hero-number">08</div>
+  <h1 class="module-hero-title">@Claude in Slack — Claude Tag</h1>
+  <p class="module-hero-lede">Claude Tag brings agentic AI directly into your team: tag @Claude, delegate tasks, build context across channels — while Claude works asynchronously in the background.</p>
+  <div class="module-hero-meta">
+    <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 20 min. learning time</span>
+    <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 5 quiz questions</span>
+    <span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg> Includes video</span>
+  </div>
+</div></section>
+
+<main class="module-content">
+  <div id="dynamicContent"></div>
+
+  <h3>What is Claude Tag?</h3>
+  <p>Claude Tag is a new way for teams to work with Claude. Instead of one person chatting privately with an AI, Claude joins a Slack channel as a full team member — with persistent context, access to approved tools, and the ability to handle tasks asynchronously over hours or even days.</p>
+  <div class="callout">
+    <div class="callout-title">Real-world numbers</div>
+    <p>At Anthropic itself, <strong>65% of the product team's code</strong> is already created by their internal version of Claude Tag. The pattern is spreading well beyond engineering — to data analysis, support tickets and bug investigation.</p>
+  </div>
+
+  <h3>1. From Chat to Team Member — The Conceptual Shift</h3>
+  <p>All previous Claude tools are designed for one person: one chat, one user, one task. Claude Tag breaks this pattern:</p>
+  <table>
+    <thead><tr><th>Feature</th><th>Claude Chat</th><th>Claude Tag</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Users</strong></td><td>Individual, private</td><td>Whole team, visible in channel</td></tr>
+      <tr><td><strong>Context</strong></td><td>Per session, no memory</td><td>Persistent, grows over time</td></tr>
+      <tr><td><strong>Working style</strong></td><td>Synchronous, waits for response</td><td>Asynchronous, works in background</td></tr>
+      <tr><td><strong>Initiative</strong></td><td>Only on request</td><td>Takes initiative (Ambient Mode)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2. How @Claude Works in Slack</h3>
+  <p>The basic principle is simple — like mentioning a colleague:</p>
+  <ol>
+    <li>Type <strong>@Claude</strong> followed by your task in any channel</li>
+    <li>Claude breaks the task into stages and works through them using available tools</li>
+    <li>Claude responds in the thread when the task is done — visible to everyone</li>
+  </ol>
+  <div class="callout">
+    <div class="callout-title">Example prompts for IEG</div>
+    <p><strong>@Claude</strong> Create a summary of all open action items from the last 5 meeting notes in the #deal-team channel, grouped by owner.</p>
+    <p style="margin-top:8px"><strong>@Claude</strong> Search all messages from the last week in #research and create a list of all mentioned companies with their key metrics.</p>
+  </div>
+
+  <h3>3. The Four Core Advantages</h3>
+  <h4>@Claude is multiplayer</h4>
+  <p>Within a given Slack channel, there is <strong>one Claude</strong> that interacts with everyone. Anyone can see what it is working on and pick up the conversation from where the last colleague left off — just like with a real team member.</p>
+
+  <h4>@Claude learns over time</h4>
+  <p>Claude builds context by following along with its channel — no re-briefing needed. Claude can even automatically learn from other Slack channels and data sources if granted permission. Note: private channels are never read.</p>
+
+  <h4>@Claude takes initiative (Ambient Mode)</h4>
+  <p>With ambient behaviour enabled, Claude proactively keeps you updated: it flags relevant information from across connected channels and tools, and follows up on threads or tasks that have gone quiet — without explicit tagging.</p>
+
+  <h4>@Claude works asynchronously</h4>
+  <p>Set a task and move on. Claude can schedule tasks for itself and pursue projects autonomously over hours or days. Multiple Claudes can be delegated in parallel — the pace of work multiplies.</p>
+
+  <h3>4. Getting Started in 4 Steps</h3>
+  <ol>
+    <li>Pair Claude Tag with your Slack workspace (Admin settings → Claude in Slack)</li>
+    <li>Give Claude access to relevant tools (e.g. Google Drive, Notion, codebase)</li>
+    <li>Set a monthly token spend limit for the organisation</li>
+    <li>Test Claude in a private channel to confirm everything works</li>
+  </ol>
+  <div class="callout">
+    <div class="callout-title">Migration</div>
+    <p>Claude Tag replaces the existing "Claude in Slack" app. The migration happens automatically on <strong>3 August 2026</strong> — admins can migrate earlier on their own timeline.</p>
+  </div>
+
+  <h3>5. Access Control and Security</h3>
+  <p>Claude Tag is designed from the ground up for teams and organisations:</p>
+  <ul>
+    <li><strong>Channel-specific identities:</strong> A Claude for sales has no access to engineering data and vice versa — context and memories stay strictly scoped to configured channels.</li>
+    <li><strong>Three permission levels:</strong> Organisation → Workspace → Individual channel. Each level inherits the permissions of the level above.</li>
+    <li><strong>Token limits:</strong> Admins set monthly budgets per organisation and per channel. Tasks that would exceed a limit are declined — never silently cut short.</li>
+    <li><strong>Full audit log:</strong> Every action Claude takes is logged — including who made the request. In Slack, posts appear from the Claude app with a link back to the originating thread.</li>
+  </ul>
+  <div class="callout callout-warn">
+    <div class="callout-title">Important for IEG</div>
+    <p>Claude Tag is in beta for <strong>Claude Enterprise and Team</strong> customers. For confidential deal data, always use the IEG Enterprise Account and carefully configure which channels and tools are accessible. Explicitly exclude confidential channels.</p>
+  </div>
+
+  <h3>6. Direct Messages and Conversation Separation</h3>
+  <p>Beyond channel tagging, Claude can also be sent direct messages — it responds privately using the personal tools and connectors you have set up. Important: Slack conversations and Claude web chats are strictly separate and not mutually visible.</p>
+
+  <section class="exercise-section">
+    <div class="section-intro">
+      <div class="section-eyebrow">Practical exercise</div>
+      <h2>Apply what you've learned</h2>
+      <p>Develop concrete use cases and a configuration plan for Claude Tag at IEG.</p>
+    </div>
+    <div class="exercise-grid">
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 1</div>
+        <h3 class="exercise-title">3 @Claude prompts for the IEG day-to-day</h3>
+        <p class="exercise-text">Claude Tag is most valuable for recurring, cross-team tasks. Develop three concrete prompts.</p>
+        <ul class="exercise-list">
+          <li>Which tasks in your daily work are recurring and rule-based?</li>
+          <li>Which information is regularly shared between channels?</li>
+          <li>Which tasks could run asynchronously in the background?</li>
+          <li>Write 3 complete @Claude prompts — with a specific channel, task and desired output format.</li>
+        </ul>
+        <div class="exercise-prompt">
+          <strong>Template:</strong>
+          <p>@Claude [Task] from [Source/Channel]. Format: [Table / List / Summary]. By [Time / immediately].</p>
+        </div>
+        <div class="exercise-note">
+          <strong>Goal:</strong> Concrete, immediately actionable prompts — not abstract ideas.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show examples" data-label-open="Hide examples">
+          Show examples
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Examples</div>
+          <ul>
+            <li><strong>Weekly pipeline update:</strong> @Claude Every Friday at 4:30pm, create a structured pipeline summary from #deal-updates: open deals by stage, new targets this week, next steps. Format: table.</li>
+            <li><strong>Research digest:</strong> @Claude Search #research and #market-news from the last 7 days and create a list of the 5 most important M&A trends with a 2-sentence summary each.</li>
+            <li><strong>Action item tracker:</strong> @Claude Read the meeting notes posted today in #meetings and create a table of all action items with owner and deadline.</li>
+          </ul>
+        </div>
+      </article>
+      <article class="exercise-card">
+        <div class="exercise-kicker">Exercise 2</div>
+        <h3 class="exercise-title">Configuration plan for IEG</h3>
+        <p class="exercise-text">A good Claude Tag setup starts with the right channel structure and access controls.</p>
+        <ul class="exercise-list">
+          <li>Which channels should get Claude Tag? Create a list with rationale.</li>
+          <li>Which tools should Claude be allowed to use in each channel?</li>
+          <li>Which channels should be explicitly excluded?</li>
+          <li>Who should have admin access to the audit log?</li>
+          <li>What monthly token budget makes sense?</li>
+        </ul>
+        <div class="exercise-note">
+          <strong>Goal:</strong> A concrete configuration plan that maximises value and minimises risk.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show approach" data-label-open="Hide approach">
+          Show approach
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Approach</div>
+          <table>
+            <thead><tr><th>Channel</th><th>Tools</th><th>Rationale</th></tr></thead>
+            <tbody>
+              <tr><td>#research</td><td>Web Search, Google Drive</td><td>Public research, no sensitive data</td></tr>
+              <tr><td>#deal-updates</td><td>Notion, Google Drive</td><td>Pipeline summaries, anonymised</td></tr>
+              <tr><td>#admin</td><td>Google Calendar, Notion</td><td>Scheduling, meeting notes</td></tr>
+              <tr><td>#confidential-*</td><td>— (excluded)</td><td>Confidential deal data never for Claude Tag</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <div class="quiz-section">
+    <div class="quiz-eyebrow">Ready for the quiz?</div>
+    <h2>Test your understanding</h2>
+    <p class="quiz-lede">5 questions · Pass threshold 70%.</p>
+    <button class="btn btn-primary" onclick="startQuiz()">Start quiz <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+  </div>
+</main>
+
+<div class="module-navigation">
+  <a href="modul-07.en.html" class="nav-card nav-card-prev">
+    <div class="nav-card-label">← Previous module</div>
+    <div class="nav-card-title">07 · Claude in Microsoft Office (Excel &amp; PowerPoint)</div>
+  </a>
+  <a href="../index.html#certificate" class="nav-card nav-card-next">
+    <div class="nav-card-label">Final exam →</div>
+    <div class="nav-card-title">Complete all modules and receive your certificate</div>
+  </a>
+</div>
+
+<div class="modal-overlay" id="quizModal"><div class="modal-content">
+  <button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div id="quizModalBody"></div>
+</div></div>
+
+<footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer>
+
+<script src="../i18n.js?v=1"></script>
+<script src="../content.en.js?v=1"></script>
+<script src="../content.js"></script>
+<script>
+  const MODULE_ID = 8;
+  const MODULE_TITLE = "Claude Tag — @Claude in Slack";
+  const MODULE_QUIZ = CURRICULUM.find(m => m.id === 8).quiz;
+</script>
+<script src="module.js"></script>
+</body>
+</html>
