@@ -122,7 +122,7 @@ function renderModules() {
   var fcard = document.createElement('div');
   fcard.className = 'module-card final-exam ' + fc;
   fcard.innerHTML =
-    '<div class="module-header"><div class="module-number">08</div><div class="module-status-icon ' + fc + '">' + fi + '</div></div>' +
+    '<div class="module-header"><div class="module-number">10</div><div class="module-status-icon ' + fc + '">' + fi + '</div></div>' +
     '<div class="module-meta">' + t('final.meta') + '</div>' +
     '<div class="module-title">' + t('final.title') + '</div>' +
     '<div class="module-desc">' + t('final.desc') + '</div>' +
