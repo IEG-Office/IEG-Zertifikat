@@ -296,7 +296,7 @@ function finishQuiz() {
     : mt('mod.quiz.result.msg.fail', {pass: PASS_THRESHOLD});
 
   const nextModuleId = MODULE_ID + 1;
-  const hasNext = nextModuleId <= 7; // updated for module 08
+  const hasNext = nextModuleId <= 9; // fixed off-by-one + extended for module 09
 
   const actions = passed
     ? (hasNext
