@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Modul 09 · Umgang mit Nutzungslimits — IEG Claude Academy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="module-styles.css"></head><body><nav class="navbar"><div class="nav-inner"><a href="../index.html" class="nav-logo"><img src="../assets/ieg-logo.png" alt="IEG" class="nav-logo-img"><span class="logo-divider"></span><div class="logo-text"><span class="logo-primary">Claude Academy</span><span class="logo-secondary">Modul 09</span></div></a><a href="../index.html#curriculum" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück</a></div></nav><section class="module-hero"><div class="module-hero-inner"><div class="module-breadcrumb"><span>PRODUKTIVITÄT</span><span>·</span><span>MODUL 9</span></div><div class="module-hero-number">09</div><h1 class="module-hero-title">Umgang mit Nutzungslimits: Effizient mit Claude arbeiten</h1><p class="module-hero-lede">Wie Token-Kosten entstehen und 23 praxiserprobte Gewohnheiten, um Nutzungslimits seltener zu erreichen — von Datei-Uploads über Modellwahl bis zur Sitzungsplanung.</p><div class="module-hero-meta"><span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 20 Min. Lernzeit</span><span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 6 Quiz-Fragen</span></div></div></section><main class="module-content"><div id="dynamicContent"></div>
+
+<h3>1. Warum Nutzungslimits entstehen: Wie Token-Kosten funktionieren</h3>
+<p>Claude misst Nutzung in <strong>Tokens</strong> — grob vergleichbar mit einem Wort. Bei jeder neuen
+Nachricht liest Claude die <strong>gesamte bisherige Konversation von vorne</strong> erneut ein: jede
+frühere Nachricht und jede frühere Antwort. Das bedeutet: Die erste Nachricht in einem Chat ist günstig,
+doch jede weitere Nachricht wird teurer, weil mehr Verlauf mitgelesen werden muss.</p>
+<div class="callout callout-warn">
+  <div class="callout-title">Die Zahlen dahinter</div>
+  <p>Ein Nutzer hat seinen Verbrauch ausgewertet und festgestellt, dass rund <strong>98,5&nbsp;% der
+  Tokens allein für das erneute Einlesen des Gesprächsverlaufs</strong> aufgewendet wurden — nur
+  1,5&nbsp;% flossen tatsächlich in die Ausgabe. Eine 20-Nachrichten-Sitzung wurde auf rund 105.000
+  Tokens geschätzt, eine 30-Nachrichten-Sitzung auf rund 232.000 Tokens.</p>
+</div>
+<p>Der rote Faden hinter allen folgenden Gewohnheiten: unnötig wiederholten Kontext vermeiden, damit
+Tokens für die eigentliche Aufgabe zur Verfügung stehen.</p>
+
+<h3>2. Gewohnheiten, die man wahrscheinlich noch nicht kennt</h3>
+<table>
+  <thead><tr><th>#</th><th>Gewohnheit</th><th>Warum sie Tokens spart</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Dateien vor dem Hochladen konvertieren</td><td>Eine PDF-Seite kostet ca. 1.500–3.000 Tokens, ein 1000×1000-Screenshot ca. 1.300 Tokens. Relevanten Text vorher in eine reine Text-/Markdown-Datei kopieren (Tipp: <code>doc.new</code> nutzen, Text einfügen, als .md herunterladen).</td></tr>
+    <tr><td>2</td><td>In Chat planen, in Cowork bauen</td><td>Dateierstellung (Tabellen, Docs, Präsentationen) verbraucht laut Anthropic mehr vom Nutzungslimit als reine Chat-Nachrichten. Struktur und Annahmen zuerst in Chat klären, erst danach in Cowork „genau diese Datei" bauen lassen.</td></tr>
+    <tr><td>3</td><td>„Stelle mir Fragen" statt langem Prompt</td><td>Ein langer Prompt wird bei jedem erneuten Einlesen der Konversation mit-gezählt. Kurzer Prompt + <strong>AskUserQuestion</strong>-Tool: Rückfragen werden einmal generiert, Antworten per Klick sind günstig.</td></tr>
+    <tr><td>4</td><td>Antworten sprechen statt tippen</td><td>Getippte Nachbesserungen sind oft vage ("mach es besser") und erzeugen weitere Nachrichten. Gesprochene Antworten liefern tendenziell mehr Kontext auf einmal — weniger Nachrichten, weniger erneutes Einlesen.</td></tr>
+    <tr><td>5</td><td>Nicht "alles neu machen" lassen</td><td>Statt "überarbeite den ganzen Bericht": gezielt den betroffenen Abschnitt benennen. Ein kompletter Neu-Durchlauf erzeugt die komplette Ausgabe erneut. Zusatz-Tipp: "Keine Kommentare, nur die Ausgabe" reduziert wortreiche Einleitungen.</td></tr>
+    <tr><td>6</td><td>Aufgaben in einer Nachricht bündeln</td><td>Drei einzelne Prompts = drei volle Kontext-Neuladungen. Ein Prompt mit drei Teilaufgaben = nur eine.</td></tr>
+    <tr><td>7</td><td>Immer dieselbe Prompt-Struktur nutzen</td><td>Anthropic hat bestätigt, dass häufig genutzte, ähnliche Prompts teilweise gecacht werden (Mechanismus nicht im Detail veröffentlicht). Eine feste Vorlage mit nur variablem Teil kann daher helfen.</td></tr>
+    <tr><td>8</td><td>Nachricht bearbeiten statt Folge-Nachricht senden (in Chat)</td><td>Chat erlaubt das Bearbeiten und Neugenerieren einer vorherigen Nachricht — der alte Austausch wird ersetzt statt zusätzlich gespeichert.</td></tr>
+    <tr><td>9</td><td>Das richtige Produkt/Modell wählen</td><td>Grobe Zuordnung: kurze Frage → Chat mit Haiku; Bericht aus Dateien → Cowork mit Opus; Diagramm aus Daten → Code mit Sonnet. Jedes Produkt hat unterschiedliche Token-Kosten pro Interaktion; die „Research"-Funktion in Chat ist gründlich, aber tokenintensiv.</td></tr>
+  </tbody>
+</table>
+
+<h3>3. Die Grundlagen, die weiterhin zählen</h3>
+<table>
+  <thead><tr><th>#</th><th>Gewohnheit</th><th>Warum sie Tokens spart</th></tr></thead>
+  <tbody>
+    <tr><td>10</td><td>„About Me"-/Kontextdateien unter ca. 2.000 Wörtern halten</td><td>Cowork liest den Arbeitsordner vor jeder einzelnen Aufgabe neu ein. Tipp: am Sitzungsende eine <code>session-notes.md</code> mit Entscheidungen/nächsten Schritten schreiben lassen und diese in der nächsten Sitzung zuerst einlesen lassen.</td></tr>
+    <tr><td>11</td><td>Konversation neu starten statt Folgekorrekturen (v. a. in Cowork)</td><td>Da Cowork keine Bearbeitung früherer Prompts erlaubt: "Restart the conversation from here" an einem früheren Punkt nutzen — je früher der Neustart, desto mehr Tokens gespart.</td></tr>
+    <tr><td>12</td><td>Alle 15–20 Nachrichten zusammenfassen und neu starten</td><td>Claude eine Zusammenfassung schreiben lassen, diese als erste Nachricht in eine neue Sitzung einfügen.</td></tr>
+    <tr><td>13</td><td>Sonnet/Haiku für einfache Aufgaben, Opus für Tiefenarbeit</td><td>Faustregel: Wenn eine Aufgabe unter ~30 Sekunden Antwortzeit bräuchte, ist Opus wahrscheinlich nicht nötig.</td></tr>
+    <tr><td>14</td><td>Nicht den ganzen Ordner "sicherheitshalber" in Cowork laden</td><td>Jede gelesene Datei kostet Tokens; bei zu vielen/großen Dateien wird eventuell nur grob statt sorgfältig zusammengefasst. Für Aufgaben ohne Dateibezug: null Ordner auswählen.</td></tr>
+    <tr><td>15</td><td>Neuer Chat bei neuem Thema</td><td>Alte, thematisch nicht mehr relevante Nachrichten werden weiterhin bei jeder neuen Frage mitgelesen — "totes Gewicht" im Kontext.</td></tr>
+    <tr><td>16</td><td>Ungenutzte Funktionen pro Aufgabe ausschalten</td><td>Websuche, Konnektoren, "Explore"-Modus und Extended Thinking fügen jeder Antwort Tokens hinzu, auch wenn nicht gebraucht. Bei Konnektoren: konkrete Anfragen (z. B. Zeitraum + Thema) sind günstiger als offene Suchen.</td></tr>
+    <tr><td>17</td><td>Projects für wiederkehrende Arbeit nutzen</td><td>Dieselbe Datei in mehreren Chats hochzuladen bedeutet mehrfaches erneutes Tokenisieren. In einem Project wird die Datei einmal hochgeladen und wiederverwendet; auf bezahlten Plänen nutzen Projects RAG, um nur relevante Abschnitte statt des gesamten Dokuments zu laden.</td></tr>
+    <tr><td>18</td><td>Memory ausschalten, stattdessen Personal Preferences/Styles nutzen</td><td>Ohne gespeicherten Kontext verbrauchen neue Chats mehrere Nachrichten für Grundeinstellungen (Ton, Rolle, Format). Personal Preferences und Styles (z. B. "Concise") gelten chatübergreifend, ohne bei jeder Nachricht mitgezählt zu werden.</td></tr>
+    <tr><td>19</td><td>Geplante/wiederkehrende Aufgaben nutzen (<code>/schedule</code>)</td><td>Für wiederkehrende Berichte/Digests statt manueller Wiederholung in einer wachsenden Sitzung.</td></tr>
+    <tr><td>20</td><td>Claude Code klar eingrenzen</td><td>Ohne klares Ziel erkundet Code breit (Verzeichnisse, Dateien, Prüfungen) — das kostet Tokens. Konkrete Vorgabe (genaues Ziel, Eingabedatei, Ausgabedateiname) lässt wenig Raum für offenes Explorieren.</td></tr>
+    <tr><td>21</td><td><code>CLAUDE.md</code> für dauerhaften Kontext in Code nutzen</td><td>Code liest <code>CLAUDE.md</code> vor jeder Aufgabe, ähnlich den "Global Instructions" in Cowork. Kurz halten — gelegentlich genutzte Workflows gehören eher in Skills, da diese nur bei Bedarf geladen werden, während <code>CLAUDE.md</code> jedes Mal geladen wird.</td></tr>
+    <tr><td>22</td><td>Arbeit über den Tag verteilen</td><td>Nutzungslimits laufen über ein rollierendes 5-Stunden-Fenster. Wer das gesamte Limit in einer Vormittagssitzung verbraucht, lässt Kapazität ungenutzt. 2–3 Sitzungen über den Tag verteilen, damit ältere Nutzung "abrollt".</td></tr>
+    <tr><td>23</td><td>Claude nicht für ungeeignete Aufgaben nutzen</td><td>Beispiel: Claude kann keine Bilder generieren — wiederholte Versuche, ein Bild zu beschreiben, verbrauchen Nachrichten für eine Aufgabe, die so nicht lösbar ist.</td></tr>
+  </tbody>
+</table>
+
+<h3>4. Womit anfangen?</h3>
+<p>Eine sinnvolle Priorisierung je nach Nutzungsmuster:</p>
+<ul>
+  <li><strong>Tägliche Cowork-Nutzung:</strong> Gewohnheiten 1, 2, 5 — Dateien vor dem Hochladen konvertieren, in Chat planen statt direkt bauen, keine kompletten Neu-Durchläufe anfordern.</li>
+  <li><strong>Überwiegend Chat-Nutzung:</strong> Gewohnheiten 8, 15, 17 — Nachrichten bearbeiten statt korrigieren, neuer Chat pro Thema, Projects für wiederkehrende Dateien.</li>
+  <li><strong>Häufig an Limits stoßend (kleinerer Plan):</strong> Gewohnheiten 6, 13, 22 — Prompts bündeln, günstigere Modelle für einfache Aufgaben, Sitzungen über den Tag verteilen.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-title">Einordnung</div>
+  <p>Die hier vorgestellten Gewohnheiten stammen aus der Praxis erfahrener Claude-Nutzer und sind kein
+  offizielles Anthropic-Dokument. Einzelne Angaben (z.&thinsp;B. zu Caching-Mechanismen oder zur
+  Gewichtung von Nutzungslimits) wurden von Anthropic laut Quelle bestätigt, aber nicht im Detail
+  veröffentlicht. Bei Unsicherheit: aktuelle Angaben zu Limits und Funktionen im eigenen Account bzw.
+  in der offiziellen Anthropic-Dokumentation prüfen.</p>
+</div>
+
+<div class="quiz-section">
+  <div class="quiz-eyebrow">Bereit für das Quiz?</div>
+  <h2>Testen Sie Ihr Verständnis</h2>
+  <p class="quiz-lede">6 Fragen · Pass-Threshold 70&nbsp;%.</p>
+  <button class="btn btn-primary" onclick="startQuiz()">Quiz starten <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+</div>
+</main>
+
+<div class="module-navigation">
+  <a href="modul-08.html" class="nav-card nav-card-prev">
+    <div class="nav-card-label">← Vorheriges Modul</div>
+    <div class="nav-card-title">08 · @Claude in Slack (Claude Tag)</div>
+  </a>
+  <a href="../index.html#certificate" class="nav-card nav-card-next">
+    <div class="nav-card-label">Weiter zur Abschlussprüfung →</div>
+    <div class="nav-card-title">Zertifikat</div>
+  </a>
+</div>
+
+<div class="modal-overlay" id="quizModal"><div class="modal-content">
+  <button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div id="quizModalBody"></div>
+</div></div>
+
+<footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer>
+
+<script src="../i18n.js?v=1"></script>
+<script src="../content.en.js?v=1"></script>
+<script src="../content.js"></script>
+<script>
+  const MODULE_ID = 9;
+  const MODULE_TITLE = "Umgang mit Nutzungslimits: Effizient mit Claude arbeiten";
+  const MODULE_QUIZ = CURRICULUM.find(m => m.id === 9).quiz;
+</script>
+<script src="module.js"></script>
+</body>
+</html>
