@@ -645,6 +645,86 @@ const CURRICULUM = [
       { q: 'Für wen ist Claude Tag aktuell in Beta verfügbar?', options: ['Alle Claude-Nutzer inklusive Free-Tier', 'Nur Claude Max Abonnenten', 'Claude Enterprise und Team Kunden', 'Ausschließlich Anthropic-Mitarbeiter'], correct: 2, explanation: 'Claude Tag ist aktuell in Beta für Claude Enterprise und Team Kunden verfügbar.' },
       { q: 'Was passiert bei der automatischen Migration der bisherigen Claude-in-Slack-App?', options: ['Alle bestehenden Chats werden gelöscht', 'Die Migration erfolgt am 3. August 2026 automatisch — Admins können vorher selbst migrieren', 'Nutzer müssen manuell alle Konnektoren neu einrichten', 'Die Migration erfordert eine neue Anthropic-Lizenz'], correct: 1, explanation: 'Claude Tag ersetzt Claude in Slack — automatisch am 3. August 2026. Admins können innerhalb von 30 Tagen selbst migrieren.' }
     ]
+  },
+  {
+    id: 9,
+    number: '09',
+    meta: 'Produktivität · Nutzung & Kosten',
+    title: 'Umgang mit Nutzungslimits: Effizient mit Claude arbeiten',
+    desc: 'Wie Token-Kosten entstehen und 23 praxiserprobte Gewohnheiten, um Nutzungslimits seltener zu erreichen — von Datei-Uploads über Modellwahl bis zur Sitzungsplanung.',
+    duration: '20 Min.',
+    videos: [],
+    images: [],
+    longContent: '',
+    content: '',
+    quiz: [
+      {
+        q: 'Warum werden spätere Nachrichten in einer langen Konversation teurer als frühe?',
+        options: [
+          'Claude wechselt automatisch zu einem teureren Modell',
+          'Claude liest bei jeder neuen Nachricht den gesamten bisherigen Gesprächsverlauf erneut ein',
+          'Lange Konversationen aktivieren immer Extended Thinking',
+          'Der Token-Preis steigt, je länger ein Chat schon geöffnet ist'
+        ],
+        correct: 1,
+        explanation: 'Jede neue Nachricht führt dazu, dass Claude den gesamten bisherigen Verlauf — jede frühere Nachricht und Antwort — erneut einliest. Dadurch werden spätere Nachrichten in einer langen Konversation teurer.'
+      },
+      {
+        q: 'Was wird empfohlen, bevor man Cowork bittet, eine Datei wie ein Finanzmodell oder einen Bericht zu erstellen?',
+        options: [
+          'Direkt in Cowork starten, damit Planung und Erstellung in einem Schritt passieren',
+          'Struktur und Annahmen zuerst in Chat klären, erst danach in Cowork die finale Datei bauen lassen',
+          'Für jede Dateierstellung grundsätzlich Claude Code statt Cowork verwenden',
+          'Cowork direkt drei verschiedene Entwürfe zum Vergleich erstellen lassen'
+        ],
+        correct: 1,
+        explanation: 'Dateierstellung in Cowork verbraucht mehr vom Nutzungslimit als reine Chat-Nachrichten. Empfohlen wird daher, die Planung in Chat zu erledigen und erst danach in Cowork die finale Datei bauen zu lassen.'
+      },
+      {
+        q: 'Wenn ein Teil einer Ausgabe falsch ist (z. B. ein Abschnitt eines Berichts) — was ist der token-effizientere Weg, dies zu korrigieren?',
+        options: [
+          'Claude bitten, den gesamten Bericht von Grund auf neu zu erstellen',
+          'Den konkret betroffenen Abschnitt benennen und nur diesen überarbeiten lassen',
+          'Ein komplett neues Projekt anlegen',
+          'Drei alternative Gesamtversionen des Berichts anfordern'
+        ],
+        correct: 1,
+        explanation: 'Ein kompletter Neu-Durchlauf erzeugt die gesamte Ausgabe (und deren Tokenkosten) erneut. Wird stattdessen gezielt der betroffene Abschnitt benannt, muss nicht alles andere neu erzeugt werden.'
+      },
+      {
+        q: 'Welchen Vorteil bietet die Nutzung von Projects für häufig genutzte Dateien (z. B. Verträge oder Styleguides)?',
+        options: [
+          'Projects übersetzen die Datei automatisch in jede Sprache',
+          'Die Datei muss nur einmal hochgeladen werden und kann über mehrere Konversationen hinweg genutzt werden, ohne jedes Mal vollständig neu tokenisiert zu werden',
+          'Projects machen Prompts vollständig überflüssig',
+          'Dateien in Projects zählen unter keinen Umständen zum Nutzungslimit'
+        ],
+        correct: 1,
+        explanation: 'Wird dieselbe Datei in mehrere separate Chats hochgeladen, wird sie jedes Mal neu tokenisiert. In einem Project wird die Datei einmal hochgeladen und wiederverwendet; auf bezahlten Plänen nutzen Projects zudem RAG, um nur relevante Abschnitte statt des gesamten Dokuments zu laden.'
+      },
+      {
+        q: 'Was bedeutet das „rollierende 5-Stunden-Fenster" für Nutzungslimits?',
+        options: [
+          'Nutzungslimits setzen sich nur alle 5 Tage zurück',
+          'Wird die Arbeit über den Tag auf mehrere Sitzungen verteilt (z. B. morgens/mittags/abends), kann ältere Nutzung „abrollen", bevor spätere Sitzungen starten',
+          'Das 5-Stunden-Fenster gilt ausschließlich für Claude Code',
+          'Nutzungslimits werden innerhalb eines 5-Stunden-Blocks im Team geteilt'
+        ],
+        correct: 1,
+        explanation: 'Da das Nutzungslimit über ein rollierendes 5-Stunden-Fenster läuft, kann durch Verteilen der Arbeit auf mehrere Sitzungen über den Tag ältere Nutzung abrollen, statt das gesamte Limit in einer langen Vormittagssitzung zu verbrauchen.'
+      },
+      {
+        q: 'Welches Beispiel wird für eine Aufgabe genannt, für die Claude laut Quelle nicht gut geeignet ist?',
+        options: [
+          'Ein langes Dokument zusammenfassen',
+          'Mehrere zusammenhängende Aufgaben in einem Prompt bündeln',
+          'Direkt Bilder generieren',
+          'Einen Abschnitt eines Berichts überprüfen'
+        ],
+        correct: 2,
+        explanation: 'Claude kann keine Bilder generieren. Wiederholte Versuche, ein Bild zu beschreiben und Text-Workarounds zu erzeugen, verbrauchen Nachrichten für eine Aufgabe, die Claude so nicht lösen kann.'
+      }
+    ]
   }
 ];
 
