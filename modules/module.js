@@ -126,7 +126,13 @@ function renderDynamicContent() {
   container.innerHTML = html;
 }
 
-document.addEventListener('DOMContentLoaded', renderDynamicContent);
+// Run on DOMContentLoaded — CURRICULUM_EN may not be ready yet, use small delay
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(renderDynamicContent, 50);
+});
+
+// Safety net: run again when all scripts are fully loaded
+window.addEventListener('load', renderDynamicContent);
 
 // Re-render when language changes
 document.addEventListener('ieg:langchange', renderDynamicContent);
@@ -290,7 +296,7 @@ function finishQuiz() {
     : mt('mod.quiz.result.msg.fail', {pass: PASS_THRESHOLD});
 
   const nextModuleId = MODULE_ID + 1;
-  const hasNext = nextModuleId <= 6;
+  const hasNext = nextModuleId <= 7; // updated for module 08
 
   const actions = passed
     ? (hasNext
