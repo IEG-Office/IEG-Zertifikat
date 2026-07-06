@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Module 09 · Managing Usage Limits — IEG Claude Academy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="module-styles.css"></head><body><nav class="navbar"><div class="nav-inner"><a href="../index.html" class="nav-logo"><img src="../assets/ieg-logo.png" alt="IEG" class="nav-logo-img"><span class="logo-divider"></span><div class="logo-text"><span class="logo-primary">Claude Academy</span><span class="logo-secondary">Module 09</span></div></a><a href="../index.html#curriculum" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</a></div></nav><section class="module-hero"><div class="module-hero-inner"><div class="module-breadcrumb"><span>PRODUCTIVITY</span><span>·</span><span>MODULE 9</span></div><div class="module-hero-number">09</div><h1 class="module-hero-title">Managing Usage Limits: Working Efficiently with Claude</h1><p class="module-hero-lede">How token costs work, and 23 practical habits to stop hitting usage limits — covering file uploads, model choice, and session planning.</p><div class="module-hero-meta"><span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> 20 min. learning time</span><span class="module-hero-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg> 6 quiz questions</span></div></div></section><main class="module-content"><div id="dynamicContent"></div>
+
+<h3>1. Why Usage Limits Happen: How Token Costs Work</h3>
+<p>Claude measures usage in <strong>tokens</strong> — roughly comparable to a word. On every new
+message, Claude re-reads the <strong>entire conversation history from the start</strong>: every prior
+message and every prior answer. That means the first message in a chat is cheap, but every following
+message gets more expensive because more history has to be re-read.</p>
+<div class="callout callout-warn">
+  <div class="callout-title">The numbers behind it</div>
+  <p>One user tracked their usage and found that roughly <strong>98.5% of tokens were spent purely
+  re-reading conversation history</strong> — only 1.5% went toward the actual output. A 20-message
+  session was estimated at roughly 105,000 tokens, and a 30-message session at roughly 232,000 tokens.</p>
+</div>
+<p>The common thread behind every habit below: avoid wasting tokens on repeated context, so they're
+available for the actual task.</p>
+
+<h3>2. Habits You Might Not Know About</h3>
+<table>
+  <thead><tr><th>#</th><th>Habit</th><th>Why it saves tokens</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Convert files before uploading</td><td>A PDF page costs roughly 1,500–3,000 tokens, a 1000×1000 screenshot roughly 1,300 tokens. Copy the relevant text into a plain text/Markdown file first (tip: use <code>doc.new</code>, paste the text, download as .md).</td></tr>
+    <tr><td>2</td><td>Plan in Chat, build in Cowork</td><td>Anthropic has confirmed that file creation (spreadsheets, docs, presentations) uses more of the usage limit than regular chat messages. Nail the structure and assumptions in Chat first, then ask Cowork to "build this exact file."</td></tr>
+    <tr><td>3</td><td>Say "ask me questions" instead of a long prompt</td><td>A long prompt gets re-counted every time the conversation is re-read. Short prompt + <strong>AskUserQuestion</strong> tool: clarifying questions are generated once, answers via clicks are cheap.</td></tr>
+    <tr><td>4</td><td>Speak answers instead of typing them</td><td>Typed follow-ups tend to be vague ("make it better") and trigger more messages. Spoken answers tend to carry more context in one shot — fewer messages, fewer context reloads.</td></tr>
+    <tr><td>5</td><td>Stop asking for full redos</td><td>Instead of "redo the report," name the specific section that's wrong. A full redo regenerates the entire output. Bonus: adding "No commentary, just the output" cuts down on verbose preambles.</td></tr>
+    <tr><td>6</td><td>Batch tasks into one message</td><td>Three separate prompts = three full context reloads. One prompt with three tasks = one reload.</td></tr>
+    <tr><td>7</td><td>Reuse the same prompt structure</td><td>Anthropic has confirmed that similar, frequently-used prompts get partially cached (exact mechanism not published). A stable prompt template with only the variable part swapped can help.</td></tr>
+    <tr><td>8</td><td>Edit your message instead of sending a follow-up (in Chat)</td><td>Chat lets you edit and regenerate a previous message — the old exchange gets replaced, not stacked on top.</td></tr>
+    <tr><td>9</td><td>Pick the right product/model for the task</td><td>Rough mapping: quick question → Chat with Haiku; report from files → Cowork with Opus; chart from data → Code with Sonnet. Each product carries different token costs per interaction; Chat's "Research" feature is thorough but token-intensive.</td></tr>
+  </tbody>
+</table>
+
+<h3>3. The Basics That Still Matter</h3>
+<table>
+  <thead><tr><th>#</th><th>Habit</th><th>Why it saves tokens</th></tr></thead>
+  <tbody>
+    <tr><td>10</td><td>Keep "About Me"/context files under ~2,000 words</td><td>Cowork re-reads the working folder before every single task. Tip: at session end, ask for a <code>session-notes.md</code> with key decisions/next steps, then read that file first next time.</td></tr>
+    <tr><td>11</td><td>Restart the conversation instead of stacking corrections (especially in Cowork)</td><td>Since Cowork doesn't support editing earlier prompts, use "Restart the conversation from here" — the earlier the restart point, the more tokens saved.</td></tr>
+    <tr><td>12</td><td>Summarize and start fresh every 15–20 messages</td><td>Ask Claude to summarize everything important, then paste that summary as the first message of a new session.</td></tr>
+    <tr><td>13</td><td>Use Sonnet/Haiku for simple tasks, Opus for deep work</td><td>Rule of thumb: if a task would take under ~30 seconds to answer, it probably doesn't need Opus.</td></tr>
+    <tr><td>14</td><td>Don't dump the entire folder into Cowork "just in case"</td><td>Every file read costs tokens; overly large file sets may cause looser summarization instead of careful reading. For tasks with no file needs, select zero folders.</td></tr>
+    <tr><td>15</td><td>Start a new chat when the topic changes</td><td>Old, unrelated messages are still re-read as "dead weight" context on every new question.</td></tr>
+    <tr><td>16</td><td>Turn off unused features per task</td><td>Web search, connectors, "Explore" mode and Extended Thinking all add tokens to every response even when not needed. With connectors, specific queries (e.g., a defined time range and topic) are cheaper than broad, open-ended ones.</td></tr>
+    <tr><td>17</td><td>Use Projects for recurring work</td><td>Uploading the same file to multiple chats re-tokenizes it every time. In a Project, it's uploaded once and reused; on paid plans, Projects use RAG to retrieve only relevant chunks instead of loading the entire document.</td></tr>
+    <tr><td>18</td><td>Turn off Memory, use Personal Preferences/Styles instead</td><td>Without saved context, new chats can waste several messages re-establishing tone/role/format. Personal Preferences and Styles (e.g., "Concise") persist across chats without adding to context every time.</td></tr>
+    <tr><td>19</td><td>Use scheduled/recurring tasks (<code>/schedule</code>)</td><td>For repeated reports/digests, instead of repeating them manually inside a growing session.</td></tr>
+    <tr><td>20</td><td>Give Claude Code a clear scope</td><td>Without a specific target, Code tends to explore broadly (directories, files, checks) — costing tokens. A precise instruction (exact target, input file, output filename) leaves little room for open-ended exploration.</td></tr>
+    <tr><td>21</td><td>Use a <code>CLAUDE.md</code> file for permanent context in Code</td><td>Code reads <code>CLAUDE.md</code> before every task, similar to Cowork's "Global Instructions." Keep it short — occasional workflows belong in Skills instead, since Skills load on demand while <code>CLAUDE.md</code> loads every time.</td></tr>
+    <tr><td>22</td><td>Spread work across the day</td><td>Usage limits run on a rolling 5-hour window. Burning the full limit in one morning session leaves capacity unused. Splitting into 2–3 sessions lets earlier usage roll off.</td></tr>
+    <tr><td>23</td><td>Don't use Claude for tasks it isn't suited for</td><td>Example: Claude cannot generate images — repeatedly trying to describe a visual wastes messages on a task it won't solve.</td></tr>
+  </tbody>
+</table>
+
+<h3>4. Where to Start</h3>
+<p>A sensible way to prioritize, depending on your usage pattern:</p>
+<ul>
+  <li><strong>Daily Cowork users:</strong> habits 1, 2, 5 — convert files before upload, plan in Chat before building, stop asking for full redos.</li>
+  <li><strong>Mostly Chat users:</strong> habits 8, 15, 17 — edit instead of correcting, new chat per topic, use Projects for recurring files.</li>
+  <li><strong>Frequently hitting limits (lower-tier plan):</strong> habits 6, 13, 22 — batch prompts, use cheaper models for simple tasks, spread sessions across the day.</li>
+</ul>
+
+<div class="callout">
+  <div class="callout-title">Context</div>
+  <p>These habits come from practitioner experience shared online, not an official Anthropic document.
+  Some specifics (e.g., caching mechanisms or exactly how usage limits are weighted) are described as
+  "confirmed by Anthropic" in the source but not published in full detail. When in doubt, check current
+  limits and features in your own account or in Anthropic's official documentation.</p>
+</div>
+
+<div class="quiz-section">
+  <div class="quiz-eyebrow">Ready for the quiz?</div>
+  <h2>Test your understanding</h2>
+  <p class="quiz-lede">6 questions · Pass threshold 70%.</p>
+  <button class="btn btn-primary" onclick="startQuiz()">Start quiz <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+</div>
+</main>
+
+<div class="module-navigation">
+  <a href="modul-08.en.html" class="nav-card nav-card-prev">
+    <div class="nav-card-label">← Previous Module</div>
+    <div class="nav-card-title">08 · @Claude in Slack (Claude Tag)</div>
+  </a>
+  <a href="../index.html#certificate" class="nav-card nav-card-next">
+    <div class="nav-card-label">Continue to Final Exam →</div>
+    <div class="nav-card-title">Certificate</div>
+  </a>
+</div>
+
+<div class="modal-overlay" id="quizModal"><div class="modal-content">
+  <button class="modal-close" onclick="closeQuiz()"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div id="quizModalBody"></div>
+</div></div>
+
+<footer class="module-footer"><img src="../assets/ieg-logo.png" alt="IEG" class="module-footer-logo"><div class="module-footer-text">© 2026 IEG Investment Banking Group</div></footer>
+
+<script src="../i18n.js?v=1"></script>
+<script src="../content.en.js?v=1"></script>
+<script src="../content.js"></script>
+<script>
+  const MODULE_ID = 9;
+  const MODULE_TITLE = "Managing Usage Limits: Working Efficiently with Claude";
+  const MODULE_QUIZ = CURRICULUM_EN.find(m => m.id === 9).quiz;
+</script>
+<script src="module.js"></script>
+</body>
+</html>
