@@ -852,6 +852,86 @@ var CURRICULUM_EN = [
         explanation: 'Claude Tag is currently in beta for Claude Enterprise and Team customers — with the goal of expanding availability more widely over time.'
       }
     ]
+  },
+  {
+    id: 9,
+    number: '09',
+    meta: 'Productivity · Usage & Cost',
+    title: 'Managing Usage Limits: Working Efficiently with Claude',
+    desc: 'How token costs work, and 23 practical habits to stop hitting usage limits — covering file uploads, model choice, and session planning.',
+    duration: '20 min.',
+    videos: [],
+    images: [],
+    longContent: '',
+    content: '',
+    quiz: [
+      {
+        q: 'Why do later messages in a long conversation cost more tokens than early ones?',
+        options: [
+          'Claude switches to a more expensive model automatically',
+          'Claude re-reads the entire conversation history from the start on every new message',
+          'Longer conversations always trigger Extended Thinking',
+          'The token price increases the longer a chat has been open'
+        ],
+        correct: 1,
+        explanation: 'Every new message causes Claude to re-read the full conversation history — every prior message and answer — so later messages in a long conversation are more expensive to process.'
+      },
+      {
+        q: 'According to the source, what should you do before asking Cowork to build a file like a financial model or report?',
+        options: [
+          'Go straight to Cowork so it can plan and build in one step',
+          'Plan and agree on the structure in Chat first, then move to Cowork once the plan is final',
+          'Always use Claude Code instead of Cowork for any file creation',
+          'Ask Cowork to build three different draft versions to compare'
+        ],
+        correct: 1,
+        explanation: 'File creation in Cowork uses more of the usage limit than regular chat messages, so the recommended approach is to do the planning/thinking in Chat and only build the final file in Cowork.'
+      },
+      {
+        q: 'When part of an output is wrong (e.g., one section of a report), what is the more token-efficient way to fix it?',
+        options: [
+          'Ask Claude to redo the entire report from scratch',
+          'Point to the specific section that is wrong and ask Claude to redo only that part',
+          'Start a completely new project',
+          'Ask for three alternative full versions of the report'
+        ],
+        correct: 1,
+        explanation: 'A full redo regenerates the entire output and its token cost, while pointing to the specific section that needs fixing avoids regenerating everything else.'
+      },
+      {
+        q: 'What is the suggested benefit of using Projects for files you reference often (e.g., contracts or brand guides)?',
+        options: [
+          'Projects automatically translate the file into every language',
+          'The file only needs to be uploaded once and can be reused across conversations without being fully re-tokenized each time',
+          'Projects remove the need for any prompts entirely',
+          'Files in Projects do not count toward usage limits under any circumstance'
+        ],
+        correct: 1,
+        explanation: 'Uploading the same file to multiple separate chats causes it to be re-tokenized every time. In a Project, the file is uploaded once and reused, and on paid plans Projects use RAG to retrieve only relevant chunks instead of loading the full document each time.'
+      },
+      {
+        q: 'What does the "rolling 5-hour window" for usage limits imply, according to the source?',
+        options: [
+          'Usage limits reset only once every 5 days',
+          'Splitting work into separate sessions across the day (e.g., morning/afternoon/evening) lets earlier usage roll off before later sessions',
+          'The 5-hour window only applies to Claude Code',
+          'Usage limits are shared across all team members in a 5-hour block'
+        ],
+        correct: 1,
+        explanation: 'Because the usage limit operates on a rolling 5-hour window, spreading tasks into multiple sessions throughout the day allows earlier usage to roll off, rather than exhausting the whole limit in one long morning session.'
+      },
+      {
+        q: 'Which of the following is given as an example of a task Claude is described as not well suited for, based on the source?',
+        options: [
+          'Summarizing a long document',
+          'Batching multiple related tasks into a single prompt',
+          'Generating images directly',
+          'Reviewing a section of a report'
+        ],
+        correct: 2,
+        explanation: 'The source notes that Claude cannot generate images, and repeatedly trying to describe a visual in Claude wastes messages/tokens on a task it is not built to solve.'
+      }
+    ]
   }
 ];
 
