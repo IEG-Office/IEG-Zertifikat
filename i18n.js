@@ -84,7 +84,7 @@ const I18N = {
     'mod.action.locked':      '🔒 Gesperrt',
 
     /* Final exam card */
-    'final.meta':             'Abschlussprüfung · 40 Fragen',
+    'final.meta':             'Abschlussprüfung · 46 Fragen',
     'final.title':            'IEG Claude Academy — Abschlussprüfung',
     'final.desc':             'Das Abschluss-Examen über alle Module. Pass-Threshold: 70 %.',
     'final.status.passed':    'Bestanden',
@@ -276,7 +276,7 @@ const I18N = {
     'mod.action.locked':      '🔒 Locked',
 
     /* Final exam card */
-    'final.meta':             'Final exam · 40 questions',
+    'final.meta':             'Final exam · 46 questions',
     'final.title':            'IEG Claude Academy — Final Exam',
     'final.desc':             'The final examination covering all modules. Pass threshold: 70%.',
     'final.status.passed':    'Passed',
