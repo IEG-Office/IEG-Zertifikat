@@ -724,6 +724,131 @@ var CURRICULUM_EN = [
       { q: 'What limitation applies to confidential financial models?', options: ['Claude refuses models with values over ten million', 'Financial formulas are not editable for liability reasons', 'Transmitted cell ranges end up on Anthropic servers — sensitive data must be anonymised first', 'Claude cannot process currency symbols'], correct: 2, explanation: 'The Add-in transmits selected ranges. Anonymise sensitive data first or use the IEG Enterprise Account.' },
       { q: 'Which use case shows the strongest advantage of the Add-in over copy-paste into chat?', options: ['Cleaning unstructured data directly in Excel without manual copying', 'Replacing Excel\'s formula bar with Claude\'s natural language search', 'Synchronising Excel data with Claude\'s memory', 'Converting worksheets into interactive dashboards in PowerPoint viewer'], correct: 0, explanation: 'The Add-in reads the file context directly — data can be cleaned in the sheet without copying back and forth.' }
     ]
+  },
+  {
+    id: 8,
+    number: '08',
+    meta: 'Practical · Module 8',
+    title: 'Claude Tag — AI as a Team Member in Slack',
+    desc: 'Claude Tag brings agentic AI capabilities directly into Slack: tag @Claude, delegate tasks, build context across channels — and Claude works asynchronously in the background.',
+    duration: '20 min.',
+    videos: [],
+    images: [],
+    longContent: '',
+    content: `
+      <h3>What is Claude Tag?</h3>
+      <p>Claude Tag is a new way for teams to work with Claude. Claude joins Slack as a full team member — with its own context, access to approved tools, and the ability to handle tasks asynchronously over hours or even days.</p>
+      <div class="callout">
+        <div class="callout-title">Real-world numbers</div>
+        <p>At Anthropic itself, <strong>65% of the product team's code</strong> is already created by their internal version of Claude Tag. The pattern is spreading well beyond engineering — to data analysis, support tickets and bug investigation.</p>
+      </div>
+
+      <h3>1. How @Claude Works</h3>
+      <p>Tagging Claude in a Slack channel works just like mentioning a colleague:</p>
+      <ol>
+        <li>Type <strong>@Claude</strong> followed by your task in any channel</li>
+        <li>Claude breaks the task into stages and works through them using available tools</li>
+        <li>Claude responds in the thread once the task is complete</li>
+      </ol>
+      <div class="callout">
+        <div class="callout-title">Example</div>
+        <p><strong>@Claude</strong> Please create a summary of all open action items from the last 5 meeting notes in the #deal-team channel and group them by owner.</p>
+      </div>
+
+      <h3>2. The Four Core Advantages</h3>
+      <h4>@Claude is multiplayer</h4>
+      <p>Within a given Slack channel, there is <strong>one Claude</strong> that interacts with everyone. Anyone can see what it is working on and pick up the conversation from where the last colleague left off — just like with a real team member.</p>
+
+      <h4>@Claude learns over time</h4>
+      <p>Claude builds context by following along with its channel. Users don't need to explain things from scratch over and over. Claude can even automatically learn from other Slack channels and data sources if granted permission.</p>
+
+      <h4>@Claude takes initiative</h4>
+      <p>With <strong>ambient behaviour</strong> enabled, Claude proactively keeps you updated: it flags relevant information from across connected channels and tools, and follows up on threads or tasks that have gone quiet without being resolved.</p>
+
+      <h4>@Claude works asynchronously</h4>
+      <p>Set a task and move on. Claude can schedule tasks for itself and pursue projects autonomously over hours or days. Multiple Claudes can be delegated in parallel — dramatically increasing throughput.</p>
+
+      <h3>3. Security and Access Control</h3>
+      <p>Claude Tag is designed from the ground up for teams and organisations:</p>
+      <ul>
+        <li><strong>Channel-specific identities:</strong> A Claude set up for sales has no access to engineering data — and vice versa. Context and memories stay strictly scoped to the configured channels.</li>
+        <li><strong>Tool control:</strong> Admins define which tools and data Claude can use in each channel.</li>
+        <li><strong>Token limits:</strong> Admins set monthly budgets for the whole organisation and per channel.</li>
+        <li><strong>Full audit log:</strong> Every action Claude takes is logged — including who made the request.</li>
+      </ul>
+      <div class="callout callout-warn">
+        <div class="callout-title">Important for IEG</div>
+        <p>Claude Tag is currently in beta for <strong>Claude Enterprise and Team</strong> customers. For use with confidential deal data, always use the IEG Enterprise Account and carefully configure which channels and tools are accessible.</p>
+      </div>
+
+      <h3>4. Getting Started in 4 Steps</h3>
+      <ol>
+        <li>Pair Claude Tag with your Slack workspace</li>
+        <li>Give Claude access to relevant tools (e.g. Google Drive, Notion, databases)</li>
+        <li>Set a monthly token spend limit for the organisation</li>
+        <li>Test Claude in a private channel to confirm everything works</li>
+      </ol>
+
+      <h3>5. Direct Messages to @Claude</h3>
+      <p>You can also send Claude direct messages — it will respond privately using the personal tools and connectors you have set up.</p>
+    `,
+    quiz: [
+      {
+        q: 'What distinguishes Claude Tag from a normal Claude chat?',
+        options: [
+          'Claude Tag is faster but less precise',
+          'Claude Tag is multiplayer — one Claude interacts with the whole channel and builds context over time',
+          'Claude Tag only works for coding tasks',
+          'Claude Tag stores no data between sessions'
+        ],
+        correct: 1,
+        explanation: 'Claude Tag is multiplayer: one Claude per channel that interacts with everyone, builds context over time, and picks up the conversation where the last colleague left off.'
+      },
+      {
+        q: 'What does "ambient behaviour" mean in Claude Tag?',
+        options: [
+          'Claude works with reduced compute power in the background',
+          'Claude ignores all messages until directly tagged',
+          'Claude proactively surfaces relevant updates and picks up unresolved tasks on its own',
+          'Claude sends automated daily summaries to all channel members'
+        ],
+        correct: 2,
+        explanation: 'With ambient behaviour enabled, Claude takes initiative: it flags relevant information and proactively follows up on unresolved threads and tasks — without explicit tagging.'
+      },
+      {
+        q: 'How is data separation between different teams ensured in Claude Tag?',
+        options: [
+          'All Claudes share the same global context — data separation is the user\'s responsibility',
+          'Each channel has its own Claude identity with its own context — no spillover to other channels',
+          'Data separation is only available in the Enterprise version',
+          'Claude automatically deletes its context after every session'
+        ],
+        correct: 1,
+        explanation: 'Channel-specific identities: a Claude for sales has no access to engineering data. Context and memories are strictly scoped to the configured channels.'
+      },
+      {
+        q: 'What controls do admins have in Claude Tag?',
+        options: [
+          'Only model selection (Sonnet or Opus)',
+          'Only the monthly token budget',
+          'Tool access per channel, token limits per channel and organisation, plus a full audit log of all actions',
+          'Admins have no control — Claude decides which tools to use'
+        ],
+        correct: 2,
+        explanation: 'Admins control: which tools are available per channel, monthly token budgets, and have access to a complete log of all Claude actions including who made each request.'
+      },
+      {
+        q: 'For which customer segments is Claude Tag currently available in beta?',
+        options: [
+          'All Claude users including the free tier',
+          'Only Claude Max subscribers',
+          'Claude Enterprise and Team customers',
+          'Exclusively Anthropic employees'
+        ],
+        correct: 2,
+        explanation: 'Claude Tag is currently in beta for Claude Enterprise and Team customers — with the goal of expanding availability more widely over time.'
+      }
+    ]
   }
 ];
 
@@ -767,5 +892,8 @@ var FINAL_EXAM_EN = [
   { q: 'How does Cowork store information beyond a single session?', options: ['It does not — all information is lost', 'In a cloud database by Anthropic', 'In Markdown files in the project folder', 'In working memory only'], correct: 2, explanation: 'Cowork has no session memory and uses Markdown files in the project folder for permanent storage.' },
   { q: 'What applies to a running Cowork task and model choice?', options: ['App must remain open; Sonnet for sorting, Opus for complex analyses', 'App may be closed; model is irrelevant', 'Task runs with Haiku only; closing app has no effect', 'Opus mandatory for every task'], correct: 0, explanation: 'Session persistence: app must remain open. Sonnet for sorting, Opus for complex analyses.' },
   { q: 'What distinguishes Opus from Sonnet for complex analyses?', options: ['Opus is slower but delivers identical quality', 'Sonnet has a larger context window', 'Opus integrates sources more deeply; Sonnet is more efficient for routine tasks', 'No qualitative difference'], correct: 2, explanation: 'Opus for in-depth research; Sonnet for daily routine work with good quality-speed balance.' },
-  { q: 'What distinguishes a Skill from a Project system prompt?', options: ['No difference', 'Projects are more flexible', 'Skills require Pro; system prompts are free in all versions', 'Skills are usable in any chat; system prompts only apply in the respective Project'], correct: 3, explanation: 'Skills: universally deployable in any chat. System prompts: only within the defined Project.' }
+  { q: 'What distinguishes a Skill from a Project system prompt?', options: ['No difference', 'Projects are more flexible', 'Skills require Pro; system prompts are free in all versions', 'Skills are usable in any chat; system prompts only apply in the respective Project'], correct: 3, explanation: 'Skills: universally deployable in any chat. System prompts: only within the defined Project.' },
+  { q: 'What is the key difference between Claude Tag and a normal Claude chat in Slack?', options: ['Claude Tag is faster but stores no data', 'Claude Tag is multiplayer — one shared Claude per channel that builds context over time and can be picked up by anyone', 'Claude Tag only works for coding tasks', 'Claude Tag requires a separate login'], correct: 1, explanation: 'Claude Tag is a shared team member: one Claude per channel, visible to everyone, building persistent context — fundamentally different from a private 1:1 chat.' },
+  { q: 'What does "ambient behaviour" mean in Claude Tag?', options: ['Claude runs with reduced compute in the background', 'Claude proactively flags relevant updates and follows up on unresolved threads without being explicitly tagged', 'Claude sends automated daily reports to all members', 'Claude only responds when directly mentioned'], correct: 1, explanation: 'Ambient behaviour: Claude takes initiative — it flags relevant information and picks up stalled threads on its own, without waiting to be tagged.' },
+  { q: 'How does Claude Tag ensure that a Claude set up for sales cannot access engineering data?', options: ['Users manually set access rights per message', 'There is no separation — all Claudes share the same memory', 'Admins create channel-specific Claude identities, each with its own scoped memory and tool access', 'Claude automatically detects sensitive content and ignores it'], correct: 2, explanation: 'Channel-specific identities: each Claude is scoped to its configured channels — memories and tool access never spill over to other channels or teams.' }
 ];
