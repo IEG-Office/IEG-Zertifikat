@@ -568,7 +568,7 @@ function renderCertificate() {
     var s = document.getElementById('certStatus');
     if (s) s.textContent = isFinalUnlocked()
       ? t('cert.status.exam')
-      : t('cert.status.progress') + state.completed.length + '/8 Module';
+      : t('cert.status.progress') + state.completed.length + '/' + CURRICULUM.length + ' Module';
     return;
   }
   lo.style.display = 'none'; un.style.display = 'block';
