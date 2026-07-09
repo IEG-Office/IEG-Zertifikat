@@ -17,7 +17,7 @@ const I18N = {
     /* Hero */
     'hero.eyebrow':     'Internes Trainingsprogramm · Onboarding für Analysts & Interns · 2026',
     'hero.title':       'Claude im Investment Banking',
-    'hero.lede':        'Ein achtteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag. Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und praktische Workflows für typische Aufgaben im Team — mit klarem Blick auf Sicherheit und Einsatzgrenzen.',
+    'hero.lede':        'Ein zehnteiliger Einführungskurs für den strukturierten Einsatz von Claude im Investment-Banking-Alltag. Der Kurs richtet sich an neue Mitarbeitende und Interns und vermittelt Grundlagen, Anwendungsfälle und praktische Workflows für typische Aufgaben im Team — mit klarem Blick auf Sicherheit und Einsatzgrenzen.',
     'hero.stat.modules':      'Module',
     'hero.stat.quizzes':      'Quizze',
     'hero.stat.time':         'Lernzeit',
@@ -28,12 +28,12 @@ const I18N = {
 
     /* Curriculum */
     'curriculum.eyebrow':     '/ Curriculum',
-    'curriculum.title':       'Acht Module für den strukturierten Einstieg.',
-    'curriculum.lede':        'Jedes Modul schließt mit einem Quiz ab. Nach erfolgreichem Abschluss wird das nächste Modul freigeschaltet. Nach allen acht Modulen folgt eine Abschlussprüfung mit internem Teilnahmezertifikat.',
+    'curriculum.title':       'Zehn Module für den strukturierten Einstieg.',
+    'curriculum.lede':        'Jedes Modul schließt mit einem Quiz ab. Nach erfolgreichem Abschluss wird das nächste Modul freigeschaltet. Nach allen zehn Modulen folgt eine Abschlussprüfung mit internem Teilnahmezertifikat.',
     'curriculum.preview':     'Vorschau-Modus: Alle Module ohne Quiz-Freischaltung anzeigen.',
     'curriculum.preview.btn': 'Vorschau aktivieren',
     'curriculum.preview.btn.off': 'Vorschau deaktivieren',
-    'curriculum.progress':    '0 von 8 Modulen abgeschlossen',
+    'curriculum.progress':    '0 von 10 Modulen abgeschlossen',
 
     /* Team */
     'team.eyebrow':   '/ Team',
@@ -57,7 +57,7 @@ const I18N = {
     /* Certificate */
     'cert.eyebrow':   '/ Zertifikat',
     'cert.title':     'Ihr IEG Claude Teilnahmezertifikat',
-    'cert.lede':      'Schließen Sie alle acht Module und die Abschlussprüfung ab, um Ihr persönliches, auf Ihren Namen ausgestelltes Zertifikat zu erhalten.',
+    'cert.lede':      'Schließen Sie alle zehn Module und die Abschlussprüfung ab, um Ihr persönliches, auf Ihren Namen ausgestelltes Zertifikat zu erhalten.',
     'cert.status':    'Status: noch nicht freigeschaltet',
 
     /* Name modal */
@@ -162,7 +162,7 @@ const I18N = {
     'cert.lede2':             'Herzlichen Glückwunsch — laden Sie Ihr persönliches Zertifikat als PDF herunter.',
     'cert.certifies':         'Hiermit wird bestätigt, dass',
     'cert.completed':         'den folgenden Kurs erfolgreich abgeschlossen hat:',
-    'cert.program.sub':       'Künstliche Intelligenz im Investment Banking · 7 Module · Final Examination',
+    'cert.program.sub':       'Künstliche Intelligenz im Investment Banking · 10 Module · Final Examination',
     'cert.date.label':        'Abschlussdatum',
     'cert.cred.label':        'Credential ID',
     'cert.issued.label':      'Ausgestellt von',
@@ -209,7 +209,7 @@ const I18N = {
     /* Hero */
     'hero.eyebrow':     'Internal Training Programme · Onboarding for Analysts & Interns · 2026',
     'hero.title':       'Claude in Investment Banking',
-    'hero.lede':        'An eight-part introductory course for the structured use of Claude in everyday investment banking. The course is aimed at new staff and interns and covers fundamentals, use cases and practical workflows for typical team tasks — with a clear focus on security and limitations.',
+    'hero.lede':        'A ten-part introductory course for the structured use of Claude in everyday investment banking. The course is aimed at new staff and interns and covers fundamentals, use cases and practical workflows for typical team tasks — with a clear focus on security and limitations.',
     'hero.stat.modules':      'Modules',
     'hero.stat.quizzes':      'Quizzes',
     'hero.stat.time':         'Learning time',
@@ -220,12 +220,12 @@ const I18N = {
 
     /* Curriculum */
     'curriculum.eyebrow':     '/ Curriculum',
-    'curriculum.title':       'Eight modules for a structured start.',
-    'curriculum.lede':        'Each module concludes with a quiz. After passing, the next module is unlocked. After all eight modules, a final exam leads to an internal certificate of completion.',
+    'curriculum.title':       'Ten modules for a structured start.',
+    'curriculum.lede':        'Each module concludes with a quiz. After passing, the next module is unlocked. After all ten modules, a final exam leads to an internal certificate of completion.',
     'curriculum.preview':     'Preview mode: show all modules without quiz gating.',
     'curriculum.preview.btn': 'Enable preview',
     'curriculum.preview.btn.off': 'Disable preview',
-    'curriculum.progress':    '0 of 8 modules completed',
+    'curriculum.progress':    '0 of 10 modules completed',
 
     /* Team */
     'team.eyebrow':   '/ Team',
@@ -249,7 +249,7 @@ const I18N = {
     /* Certificate */
     'cert.eyebrow':   '/ Certificate',
     'cert.title':     'Your IEG Claude Certificate of Completion',
-    'cert.lede':      'Complete all eight modules and the final exam to receive your personal certificate issued in your name.',
+    'cert.lede':      'Complete all ten modules and the final exam to receive your personal certificate issued in your name.',
     'cert.status':    'Status: not yet unlocked',
 
     /* Name modal */
@@ -354,7 +354,7 @@ const I18N = {
     'cert.lede2':             'Congratulations — download your personal certificate as a PDF.',
     'cert.certifies':         'This is to certify that',
     'cert.completed':         'has successfully completed the following course:',
-    'cert.program.sub':       'Artificial Intelligence in Investment Banking · 7 Modules · Final Examination',
+    'cert.program.sub':       'Artificial Intelligence in Investment Banking · 10 Modules · Final Examination',
     'cert.date.label':        'Completion date',
     'cert.cred.label':        'Credential ID',
     'cert.issued.label':      'Issued by',
