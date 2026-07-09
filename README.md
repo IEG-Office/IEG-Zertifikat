@@ -7,10 +7,8 @@ Sprach-Toggle.
 **Repo:** https://github.com/IEG-Office/IEG-Zertifikat
 **Live:** https://ieg-office.github.io/IEG-Zertifikat/
 
-Technisch ist die Seite eine statische Website ohne Build-Schritt:
-reines HTML, CSS und Vanilla-JavaScript. Extern eingebunden werden nur
-Google Fonts und die Supabase-JS-Library (via CDN). Supabase dient für
-Login und die optionale Synchronisation des Lernfortschritts.
+> Diese Dokumentation wurde gegen den tatsächlichen Code-Stand geprüft
+> und korrigiert. Stand: 2026-07-09.
 
 ---
 
@@ -31,18 +29,30 @@ python3 -m http.server 8000
 ### Auf GitHub Pages hosten
 
 Einfach in den `main`-Branch pushen, unter **Settings → Pages**
-„Deploy from branch: main" aktivieren — dann funktioniert alles
-automatisch unter der Pages-URL.
+„Deploy from branch: main" aktivieren — dann läuft alles automatisch
+unter der Pages-URL.
+
+---
+
+## 🧱 Technik im Überblick
+
+- Reine statische Website: **HTML + CSS + Vanilla-JavaScript**, kein
+  Build-Schritt, kein Framework.
+- Extern eingebunden werden nur **Google Fonts** und die
+  **Supabase-JS-Library** (über das CDN `jsdelivr`).
+- **Supabase** dient ausschließlich für **Login/Registrierung** und die
+  optionale **serverseitige Fortschritts-Synchronisation**. Der Lern-
+  und Quiz-Fortschritt funktioniert auch rein lokal über `localStorage`.
 
 ---
 
 ## 📚 Modul-Struktur
 
 **10 Module (00–09)**, jedes mit einer **eigenen HTML-Seite pro Sprache**
-im Ordner `modules/`. Die Fragenzahl je Modul-Quiz ist unterschiedlich:
+im Ordner `modules/`:
 
 | ID | Modul | Deutsche Datei | Englische Datei | Quiz-Fragen |
-|----|-------|-----------------|-------------------|:-----------:|
+|----|-------|-----------------|-------------------|:---:|
 | 00 | Das Claude-Ökosystem im Überblick | `modules/modul-00.html` | `modules/modul-00.en.html` | 10 |
 | 01 | Claude — Der komplette Grundkurs (2026) | `modules/modul-01.html` | `modules/modul-01.en.html` | 10 |
 | 02 | Prompting und strukturierte Anweisungen | `modules/modul-02.html` | `modules/modul-02.en.html` | 10 |
@@ -55,72 +65,107 @@ im Ordner `modules/`. Die Fragenzahl je Modul-Quiz ist unterschiedlich:
 | 09 | Umgang mit Nutzungslimits: Effizient mit Claude arbeiten | `modules/modul-09.html` | `modules/modul-09.en.html` | 6 |
 
 Zusätzlich gibt es eine **Abschlussprüfung** (Final Exam) mit
-**46 Fragen**. In der Übersicht wird sie als **„Modul 10"** dargestellt.
-Bestehensgrenze überall: **70 %** (`PASS_THRESHOLD`).
+**46 Fragen**, Zeitlimit **40 Minuten**, Bestehensgrenze **70 %**. In der
+Curriculum-Übersicht erscheint die Abschlussprüfung als Karte mit der
+Nummer **10** (sie ist aber kein reguläres Modul, sondern ein eigener
+Prüfungs-Ablauf).
 
 ---
 
-## 🧠 Wie die Inhalte organisiert sind — bitte genau lesen
+## 📂 Dateistruktur
 
-Es gibt **zwei getrennte Orte** für Modulinhalte. Welcher zuständig ist,
-hängt vom Inhaltstyp ab:
+```
+IEG-Zertifikat/
+├── index.html              # Startseite (Hero, Curriculum, Team, Zertifikat, Modals)
+├── login.html              # Login-/Registrier-Seite (echte Supabase-Auth)
+├── reset.html              # Passwort-Reset-Seite (Supabase Recovery)
+├── supabase-config.js      # Supabase-URL + anon-Key → window._SB_URL / window._SB_KEY
+├── content.js              # ★ Deutsche Inhalte: CURRICULUM, FINAL_EXAM, PASS_THRESHOLD (=70)
+├── content.en.js           # ★ Englische Inhalte: CURRICULUM_EN, FINAL_EXAM_EN (KEIN PASS_THRESHOLD!)
+├── app.js                  # Kernlogik der Startseite (Rendern, Locking, Final-Exam-Flow, Zertifikat, Sync)
+├── i18n.js                 # UI-Texte DE/EN + getLang(), t(), toggleLang(), applyLang()
+├── styles.css              # Stylesheet der Startseite (Fonts: Source Serif 4 + Inter)
+├── assets/
+│   ├── ieg-logo.png
+│   ├── modul-06-cowork-files.png
+│   └── modul-06-cowork-profile.png
+├── modules/
+│   ├── modul-00.html        # Modul 00 Deutsch
+│   ├── modul-00.en.html     # Modul 00 Englisch
+│   ├── ...                  # … bis Modul 09 (je DE/EN)
+│   ├── modul-09.html
+│   ├── modul-09.en.html
+│   ├── module.js            # ⚠️ Liegt HIER, nicht im Root! Quiz-Engine, dynamische Inhalte, Nächstes-Modul-Sperre, Sync
+│   └── module-styles.css    # Styles der Modulseiten (Fonts: Fraunces + Inter Tight)
+└── README.md                # Diese Datei
+```
 
-### 1. Fließtext des Moduls → **direkt in der HTML-Datei**
-Der eigentliche Lehrtext (Überschriften, Absätze, Tabellen, Callouts,
-Übungen, Musterlösungen) steht **fest im jeweiligen
-`modules/modul-XX(.en).html`**, im Bereich
-`<main class="module-content"> … </main>`. Zum Ändern des Textes
-bearbeiten Sie also die HTML-Datei, **nicht** `content.js`.
-
-### 2. Videos, Bilder, optionaler Zusatztext → **`content.js` / `content.en.js`**
-`modules/module.js` liest aus dem passenden Modul-Objekt **nur** die
-Felder `videos`, `images` und `longContent` und rendert sie in den
-Platzhalter `<div id="dynamicContent"></div>` (steht oben im
-`module-content`-Bereich jeder Modulseite). Außerdem stammen die
-**Quiz-Fragen** (`quiz`) und die **Übersichtskarten** auf der Startseite
-(`title`, `desc`, `meta`, `duration`, `number`) aus diesen Dateien.
-
-> ⚠️ **Hinweis zum Feld `content`:** Jedes Modul-Objekt enthält auch ein
-> Feld `content`. Dieses wird von der aktuellen Modul-Engine
-> **nicht ausgegeben** — der sichtbare Fließtext kommt aus der HTML-Datei
-> (siehe Punkt 1). Änderungen an `content` haben also keinen Effekt auf
-> die Modulseite.
-
-`content.js` (Deutsch) definiert `CURRICULUM`, `FINAL_EXAM` und
-`PASS_THRESHOLD`. `content.en.js` (Englisch) definiert `CURRICULUM_EN`
-und `FINAL_EXAM_EN` — und **kein** `PASS_THRESHOLD` (siehe Fallstricke).
+> ⚠️ `module.js` und `module-styles.css` liegen im Ordner `modules/`,
+> **nicht** im Projekt-Root.
 
 ---
 
-## 🌍 DE/EN Sprachumschaltung — wie sie funktioniert
+## ⚙️ Ladeordnung & Zusammenspiel
 
-- Der Toggle speichert die gewählte Sprache im `localStorage` unter dem
-  Key `ieg_lang` (Default: `de`). Logik in `i18n.js`
-  (`getLang()`, `toggleLang()`, `applyLang()`, globales `t()`).
-- `applyLang()` ersetzt alle Texte mit `data-i18n`-Attribut und feuert
-  das Event `ieg:langchange`, worauf `app.js` und `module.js` ihre
-  dynamischen Inhalte neu rendern.
-- `app.js` → Funktion `openModule()` leitet bei Klick auf ein Modul
-  sprachabhängig weiter: EN → `modul-XX.en.html`, DE → `modul-XX.html`.
-- `index.html` lädt zusätzlich `content.en.js`, damit auch die
-  Übersichtskarten die Sprache wechseln können.
+**`index.html`** lädt im `<head>` zuerst `i18n.js` (die UI-Texte müssen
+vor `app.js` bereitstehen). Am Seitenende folgen — in dieser Reihenfolge —
+`content.en.js`, dann `content.js`, dann `app.js`.
+
+- `content.en.js` wird **vor** `content.js` geladen. Beide leben im
+  selben globalen Scope. Deshalb:
+  - `content.en.js` benutzt `var` (nicht `const`), um Redeclaration-
+    Fehler zu vermeiden.
+  - `PASS_THRESHOLD` ist **nur** in `content.js` definiert (in
+    `content.en.js` würde es einen Redeclaration-Fehler auslösen).
+
+**Jede Modulseite** (`modules/modul-XX(.en).html`) lädt am Seitenende
+`i18n.js`, `content.en.js`, `../content.js` und `module.js` und setzt vorher
+die drei Konstanten `MODULE_ID`, `MODULE_TITLE` und `MODULE_QUIZ`.
+
+---
+
+## 🌍 DE/EN Sprachumschaltung
+
+- Die gewählte Sprache wird im `localStorage` unter dem Key `ieg_lang`
+  gespeichert (Default: `de`).
+- Der Toggle-Button ruft `toggleLang()`; anschließend ersetzt
+  `applyLang()` alle Elemente mit `data-i18n` (bzw. `data-i18n-html`) und
+  feuert das Event `ieg:langchange`.
+- `app.js` und `module.js` hören auf dieses Event und rendern ihre
+  dynamischen Inhalte neu. `openModule()` in `app.js` leitet je nach
+  Sprache auf `modul-XX.html` (DE) bzw. `modul-XX.en.html` (EN).
 - **Videos** können pro Sprache unterschiedlich sein — in `content.js`
   und `content.en.js` jeweils separat im `videos:`-Array pflegen.
 
-⚠️ **Bekannter Fallstrick:** Wird ein Modul nur auf Deutsch gepflegt und
-die `videos:`-Liste in `content.en.js` bleibt leer/kürzer, zeigt die
-englische Modulseite entsprechend weniger oder kein Video. Immer beide
-Sprachversionen prüfen! (Aktuell betrifft das z. B. **Modul 07**: DE hat
-2 Videos, EN nur 1.)
+⚠️ **Fallstrick:** Bleibt die `videos:`-Liste in `content.en.js` leer
+(`videos: []`), zeigt die englische Modulseite kein Video. Immer beide
+Sprachversionen prüfen.
 
 ---
 
-## ✏️ Inhalte pflegen
+## 🧩 Inhalte pflegen — wo was WIRKLICH liegt
+
+Jedes Modul-Objekt (in `CURRICULUM` / `CURRICULUM_EN`) hat die Felder:
+
+```
+id, number, meta, title, desc, duration, videos[], images[], longContent, content, quiz[]
+```
+
+**Wichtig — bitte genau lesen:**
+
+- Der **eigentliche Lehrtext eines Moduls steht fest im jeweiligen
+  `modules/modul-XX(.en).html`** (im Bereich `<main class="module-content">`).
+- `module.js` rendert in den Platzhalter `<div id="dynamicContent">` nur
+  **`videos`, `images` und `longContent`** aus `content.js` — **nicht**
+  das Feld `content`.
+- Das Feld **`content` wird aktuell nirgends ausgegeben** (Alt-Feld). Wer
+  den Fließtext eines Moduls ändern will, bearbeitet also die
+  **HTML-Datei**, nicht `content.js`.
 
 ### Video hinzufügen
 
-In `content.js` (DE) bzw. `content.en.js` (EN) das gewünschte Modul über
-die `id` suchen und die `videos:`-Liste anpassen:
+In `content.js` (DE) **und** `content.en.js` (EN) das gewünschte Modul
+(z. B. `id: 1`) suchen und die `videos:`-Liste anpassen:
 
 ```javascript
 videos: [
@@ -132,37 +177,35 @@ videos: [
 ],
 ```
 
-Bei YouTube-Embed-URLs erzeugt `module.js` automatisch ein anklickbares
-Vorschaubild (Thumbnail), das im neuen Tab zum Video führt.
+Hinweis: `module.js` wandelt YouTube-`embed`-URLs automatisch in ein
+anklickbares **Vorschaubild** (Thumbnail-Link auf `watch?v=…`) um. Nur
+wenn keine YouTube-ID erkannt wird, wird ein `<iframe>` eingebettet.
 
-**So bekommst du die Video-URL:**
-- **YouTube:** Video öffnen → „Teilen" → „Einbetten" → den `src`-Link
-  aus dem iframe kopieren (`https://www.youtube.com/embed/…`).
-- **Vimeo:** „Share" → „Embed" → `src`-Link kopieren
+**So bekommen Sie die Video-URL:**
+- **YouTube:** Video → „Teilen" → „Einbetten" → den `src`-Link aus dem
+  iframe kopieren (`https://www.youtube.com/embed/…`).
+- **Vimeo:** Video → „Share" → „Embed" → `src`-Link kopieren
   (`https://player.vimeo.com/video/…`).
-
-Dieselbe Änderung ggf. in der anderen Sprachdatei mit dem
-sprachlich passenden Video wiederholen.
 
 ### Bild hinzufügen
 
-1. Bild in den Ordner `assets/` legen (z. B. `assets/grafik-1.png`)
+1. Bild in `assets/` ablegen (z. B. `assets/grafik-1.png`).
 2. In `content.js` bzw. `content.en.js` bei `images:`:
 
 ```javascript
 images: [
   {
     src: '../assets/grafik-1.png',
-    alt: 'Beschreibung',
+    alt: 'Kurze Bildbeschreibung',
     caption: 'Abbildung 1.1 · Quelle: IEG Internal Analysis'
   },
 ],
 ```
 
-### Optionalen Zusatztext hinzufügen (`longContent`)
+### Zusatztext einblenden (`longContent`)
 
-`longContent` wird zusätzlich zum HTML-Fließtext in `#dynamicContent`
-gerendert (HTML als String):
+Wird — im Gegensatz zu `content` — von `module.js` in `#dynamicContent`
+ausgegeben:
 
 ```javascript
 longContent: `
@@ -175,202 +218,194 @@ longContent: `
 `,
 ```
 
-### Fließtext eines Moduls ändern
-
-Direkt in `modules/modul-XX(.en).html` im Bereich
-`<main class="module-content">` bearbeiten. Verfügbare Bausteine
-(siehe `modules/module-styles.css`): Überschriften `<h2>/<h3>`,
-Absätze, Listen, `<table>`, sowie:
-
-```html
-<div class="callout">
-  <div class="callout-title">Wichtig</div>
-  <p>Hervorgehobener Text.</p>
-</div>
-```
-
 ---
 
-## 🎓 Quiz-Fragen ändern
+## 🎓 Quiz- und Prüfungsfragen ändern
 
 In `content.js` (DE) bzw. `content.en.js` (EN) hat jedes Modul ein
-`quiz:`-Feld. Format:
+`quiz:`-Feld. Jede Frage hat dieselbe Struktur wie die Prüfungsfragen:
 
 ```javascript
 quiz: [
   {
     q: 'Ihre Frage hier?',
     options: ['Antwort A', 'Antwort B', 'Antwort C', 'Antwort D'],
-    correct: 1,  // 0=A, 1=B, 2=C, 3=D
-    explanation: 'Erklärung nach Auswahl'
+    correct: 1,  // Index der richtigen Antwort: 0=A, 1=B, 2=C, 3=D
+    explanation: 'Erklärung, die nach der Auswahl erscheint.'
   },
 ],
 ```
 
 Die **Abschlussprüfung** liegt in `FINAL_EXAM` (`content.js`, DE) bzw.
-`FINAL_EXAM_EN` (`content.en.js`, EN) — aktuell **46 Fragen** je Sprache,
-gleiches Frageformat. Bestehensgrenze: 70 % (`PASS_THRESHOLD`, **nur** in
-`content.js` definiert). Die Prüfung ist zeitlich begrenzt
-(**40 Minuten**, `FINAL_EXAM_DURATION_SEC` in `app.js`), unterstützt
-Markieren von Fragen und wird bei Zeitablauf automatisch abgegeben.
-
----
-
-## 🎨 Weiteres anpassen
-
-- **Logo:** `assets/ieg-logo.png` ersetzen
-- **UI-Texte / Buttons / Labels:** `i18n.js` (Objekt `I18N`, Blöcke
-  `de:` und `en:`)
-- **Modul-Übersichts-Beschreibungen:** `content.js` (DE) und
-  `content.en.js` (EN) → jeweils `title:`, `desc:`, `meta:`, `duration:`
-- **Design/Styles:** `styles.css` (Startseite) bzw.
-  `modules/module-styles.css` (Modulseiten). Hinweis: Startseite und
-  Modulseiten verwenden bewusst unterschiedliche Schrift-Sets.
-
----
-
-## 📂 Dateistruktur (Stand: 09.07.2026)
-
-```
-IEG-Zertifikat/
-├── index.html               # Startseite (Übersicht, Team, Zertifikat, Modals)
-├── login.html               # Login/Registrierung (Supabase Auth)
-├── reset.html               # Passwort-Reset (Supabase Auth)
-├── supabase-config.js       # Supabase-URL + anon-Key (window._SB_URL/_SB_KEY)
-├── content.js               # ★ Deutsch: CURRICULUM, FINAL_EXAM, PASS_THRESHOLD
-├── content.en.js            # ★ Englisch: CURRICULUM_EN, FINAL_EXAM_EN (KEIN PASS_THRESHOLD!)
-├── app.js                   # Startseiten-Logik: Rendern, Locking, Final-Exam-Flow, Zertifikat, Supabase-Sync
-├── i18n.js                  # UI-Übersetzungen + Sprachlogik (getLang/toggleLang/t)
-├── styles.css               # Stylesheet der Startseite
-├── assets/
-│   ├── ieg-logo.png
-│   ├── modul-06-cowork-files.png
-│   └── modul-06-cowork-profile.png
-├── modules/
-│   ├── modul-00.html … modul-09.html         # 10 Module (Deutsch)
-│   ├── modul-00.en.html … modul-09.en.html   # 10 Module (Englisch)
-│   ├── module.js             # ⚠️ HIER, nicht im Root! Quiz-Engine, #dynamicContent, Next-Lock
-│   └── module-styles.css     # Styles für alle Modulseiten
-└── README.md
-```
-
-> ⚠️ `module.js` und `module-styles.css` liegen im Ordner `modules/`,
-> **nicht** im Projekt-Root. Beim Ersetzen dieser Dateien entsprechend
-> im Unterordner suchen.
-
-**Ladeordnung der Skripte:**
-- `index.html`: `i18n.js` (im `<head>`) → am Seitenende
-  `content.en.js` → `content.js` → `app.js`.
-- Jede Modulseite: `i18n.js`, `content.en.js`, `../content.js`,
-  dann Inline-Setzen von `MODULE_ID`/`MODULE_TITLE`/`MODULE_QUIZ`,
-  dann `module.js`. Supabase-JS wird von `module.js` bei Bedarf
-  nachgeladen.
+`FINAL_EXAM_EN` (`content.en.js`, EN) — aktuell **46 Fragen** je Sprache.
+Die Bestehensgrenze `PASS_THRESHOLD` (= 70) ist **nur** in `content.js`
+definiert.
 
 ---
 
 ## 🔒 Locking-System
 
 - Modul 00 ist immer freigeschaltet.
-- Modul *n* wird frei, sobald das Quiz von Modul *n−1* mit **≥ 70 %**
-  bestanden wurde.
-- Die Abschlussprüfung wird frei, sobald **alle** Modul-Quizze bestanden
+- Modul *n* wird freigeschaltet, sobald das Quiz von Modul *n−1* mit
+  ≥ 70 % bestanden ist (Prüfung: `state.completed` enthält *n−1*).
+- Die **Abschlussprüfung** ist frei, wenn **alle** Module abgeschlossen
   sind.
-- Der Fortschritt liegt im `localStorage`
-  (`ieg-academy-progress-v1`); die Zwischenspeicherung laufender Quizze
-  in `ieg-academy-quiz-progress-v1`, der Prüfungsstand in
-  `ieg-academy-final-exam-v1`.
-- Ein **Vorschau-Modus** (Button in der Curriculum-Sektion) hebt die
-  Sperren temporär auf, ohne den Fortschritt zu verändern.
+- Ein **Vorschau-Modus** auf der Startseite hebt die Sperren temporär auf
+  (`togglePreviewMode()`), ohne den Fortschritt zu verändern.
+
+Der Fortschritt wird im `localStorage` gespeichert und (bei Login)
+zusätzlich mit Supabase synchronisiert.
+
+---
+
+## 💾 Fortschritt & Persistenz
+
+**localStorage-Keys:**
+
+| Key | Zweck |
+|---|---|
+| `ieg_logged_in` | Login-Flag (`'yes'`), von `login.html` gesetzt, von `index.html` geprüft |
+| `ieg_user_name` | Anzeigename des Nutzers |
+| `ieg_lang` | Gewählte Sprache (`de` / `en`) |
+| `ieg-academy-progress-v1` | Lernfortschritt (`completed`, `finalPassed`, `finalScore`, `completionDate`, `credentialId`) |
+| `ieg-academy-quiz-progress-v1` | Zwischenstand laufender Modul-Quizze |
+| `ieg-academy-final-exam-v1` | Laufende Abschlussprüfung (Antworten, Flags, Restzeit) für Wiederaufnahme |
+
+**Supabase-Sync:** Bei angemeldeten Nutzern schreibt die App den
+Fortschritt in die Tabelle **`user_progress`** mit den Spalten
+`user_id`, `completed_modules`, `final_passed`, `final_score`,
+`completion_date`. Beim Laden werden lokaler und entfernter Stand
+zusammengeführt (Vereinigung der abgeschlossenen Module, höherer Score
+gewinnt).
+
+---
+
+## 🧪 Abschlussprüfung (Ablauf)
+
+Der Prüfungs-Flow liegt in `app.js` und ist eigenständig:
+
+- **40-Minuten-Timer** mit Auto-Abgabe bei Zeitablauf.
+- Fragen lassen sich **markieren (Flag)** und in beliebiger Reihenfolge
+  bearbeiten; vor der Abgabe erscheint ein **Bestätigungsdialog** (offene/
+  markierte Fragen werden angezeigt).
+- **Wiederaufnahme:** Wird die Prüfung unterbrochen, kann sie über den in
+  `ieg-academy-final-exam-v1` gespeicherten Stand fortgesetzt werden.
+- Bei ≥ 70 % wird `finalPassed` gesetzt und das Zertifikat freigeschaltet.
+
+---
+
+## 📜 Zertifikat
+
+Nach bestandener Abschlussprüfung erzeugt `app.js` dynamisch ein
+personalisiertes Zertifikat (Name aus dem State, generierte
+Credential-ID, Datum). Über `printCertificate()` öffnet sich ein
+Druckfenster (A4 quer), aus dem sich das Zertifikat als PDF speichern
+lässt.
 
 ---
 
 ## 🔐 Authentifizierung (Supabase)
 
-- **`login.html`** — Anmeldung und Registrierung über **Supabase**
-  (`supabase.auth.signInWithPassword` / `signUp`). Bei Erfolg werden
-  `localStorage['ieg_logged_in'] = 'yes'` und `ieg_user_name` gesetzt
-  und es wird auf `index.html` weitergeleitet.
-- **`index.html`** prüft im `<head>` dieses `localStorage`-Flag: fehlt
-  es, erfolgt eine Weiterleitung auf `login.html`.
-- **`reset.html`** — Passwort-Reset über den per E-Mail versandten
-  Supabase-Link.
-- **`supabase-config.js`** — enthält URL und `anon`-/`public`-Key.
-  `logout()` in `app.js` beendet die Supabase-Session und entfernt die
-  `localStorage`-Flags.
+- **`login.html`** — Anmeldung/Registrierung über Supabase. Bei Erfolg
+  werden `ieg_logged_in='yes'` und `ieg_user_name` im `localStorage`
+  gesetzt und es folgt eine Weiterleitung auf `index.html`. Ist bereits
+  eine gültige Session vorhanden, leitet die Seite direkt weiter.
+- **`index.html`** — prüft im `<head>` das Flag `ieg_logged_in`; fehlt es,
+  erfolgt eine Weiterleitung auf `login.html`.
+- **`reset.html`** — stellt aus dem E-Mail-Link eine Recovery-Session her
+  (PKCE-`code`-Austausch oder Implicit-Flow) und erlaubt das Setzen eines
+  neuen Passworts (`supabase.auth.updateUser`).
+- **`supabase-config.js`** — enthält `SUPABASE_URL` und den
+  `anon`/`public`-Key (an `window._SB_URL` / `window._SB_KEY`).
 
-Der Lernfortschritt wird zusätzlich in die Supabase-Tabelle
-`user_progress` synchronisiert (Spalten `user_id`, `completed_modules`,
-`final_passed`, `final_score`, `completion_date`) und beim Laden mit dem
-lokalen Stand zusammengeführt.
-
-> **Hinweis (aktueller Stand):** Der Login-Guard (`localStorage`-Prüfung)
-> ist nur in `index.html` vorhanden; die einzelnen Modulseiten
-> (`modules/modul-XX.html`) enthalten keine eigene Login-Prüfung und sind
-> per Direktlink erreichbar. Dies ist der bewusst so belassene
-> Ist-Zustand.
-
-**⚠️ Sicherheitshinweis für `supabase-config.js`:** Der
-`anon`/`public`-Key ist dafür gedacht, im Frontend sichtbar zu sein
-(eingeschränkte Rechte gemäß den Row-Level-Security-Regeln). Es darf hier
-**niemals** ein `service_role`-Key eingetragen werden — dieser hat volle
-Datenbankrechte und gehört nicht in Browser-Code.
+**⚠️ Sicherheitshinweise:**
+- Der `anon`/`public`-Key darf im Frontend sichtbar sein (eingeschränkte
+  Rechte gemäß Row-Level-Security). Ein `service_role`-Key darf **niemals**
+  im Browser-Code stehen.
+- Die eigentliche **Row-Level-Security muss in Supabase** konfiguriert
+  sein — die clientseitigen Prüfungen (localStorage-Flag) sind kein
+  echter Zugriffsschutz (siehe „Bekannte offene Punkte").
 
 ---
 
-## ➕ Neues Modul hinzufügen (Modul 10 = neues Sachmodul)
+## ➕ Neues Modul hinzufügen
 
 1. Neues Objekt im `CURRICULUM`-Array in `content.js` anlegen
-   (`id: 10`, `number: '10'`, `title`, `desc`, `meta`, `duration`,
-   `videos`, `images`, `longContent`, `quiz`).
+   (`id`, `number`, `meta`, `title`, `desc`, `duration`, `videos`,
+   `images`, `longContent`, `content`, `quiz`).
 2. Dasselbe auf Englisch im `CURRICULUM_EN`-Array in `content.en.js`
-   (dort `var` verwenden, kein `PASS_THRESHOLD`).
-3. Fragen der Abschlussprüfung bei Bedarf in `FINAL_EXAM` **und**
-   `FINAL_EXAM_EN` ergänzen (beide Sprachen gleich lang halten).
-4. `modules/modul-10.html` (DE) durch **Kopieren einer bestehenden
-   Modulseite** erstellen und Inhalt/`MODULE_ID`/`MODULE_TITLE`/`MODULE_QUIZ`
-   sowie die Hero-Angaben (Nummer, Titel, Quiz-Fragen-Zahl) anpassen.
-5. `modules/modul-10.en.html` (EN) analog erstellen.
+   (dort `var` beibehalten, englisches Video-Pendant eintragen).
+3. Bei Bedarf Fragen in `FINAL_EXAM` **und** `FINAL_EXAM_EN` ergänzen
+   (die Prüfung ist ein fester Fragensatz, keine automatische Ableitung
+   aus den Modul-Quizzen).
+4. `modules/modul-XX.html` (DE) erstellen — am besten eine bestehende
+   Seite **kopieren** und nur `MODULE_ID`, `MODULE_TITLE`, `MODULE_QUIZ`
+   sowie den Fließtext im `<main class="module-content">` anpassen.
+5. `modules/modul-XX.en.html` (EN) analog erstellen.
 6. In `modules/module.js` die Zeile `const hasNext = nextModuleId <= 9;`
-   auf `<= 10` erhöhen (X = neue höchste Modul-ID). Sonst führt der
-   „Weiter"-Button des letzten Sachmoduls nicht zum neuen Modul.
-7. Startseiten-Zahlen in `index.html` (Hero-Stats „Module"/„Quizze") und
-   die Texte in `i18n.js` (`curriculum.title`, `curriculum.lede`,
-   `hero.lede`, `cert.lede`) an die neue Modulanzahl anpassen.
-8. Vor dem Hochladen prüfen: `node --check content.js` und
+   anpassen (die Zahl = höchste Modul-ID; bei 11 Modulen also `<= 10`).
+7. Vor dem Hochladen prüfen: `node --check content.js` und
    `node --check content.en.js`.
-
-> Da neue Modulseiten durch Kopieren entstehen, übernehmen sie
-> automatisch die korrekte Skript-Einbindung und Struktur.
+8. Die hartkodierten Zahlen auf der Startseite anpassen (siehe „Bekannte
+   offene Punkte", Punkt 3), falls sie stimmen sollen.
 
 ---
 
-## 🛠️ Bekannte Fallstricke
+## 🛠️ Bekannte Fallstricke (Pflege)
 
-1. **Fließtext am falschen Ort geändert** — der Modul-Fließtext steht in
-   der HTML-Datei, nicht im `content`-Feld von `content.js` (das nicht
-   gerendert wird). Videos/Bilder/`longContent` dagegen in `content.js`.
-2. **Videos in `content.en.js` vergessen/kürzer** — führt zu fehlenden
-   Videoboxen auf der englischen Seite (aktuell z. B. Modul 07).
-3. **`PASS_THRESHOLD` in `content.en.js`** — darf dort nicht stehen
-   (Redeclaration-Fehler, da `content.js` danach geladen wird).
-4. **`const` statt `var` in `content.en.js`** — beide Content-Dateien
-   teilen sich auf `index.html` denselben Scope; in `content.en.js`
-   daher `var` verwenden, um Redeclaration-Fehler zu vermeiden.
-5. **`hasNext` in `modules/module.js` nicht angepasst** — nach dem
-   Hinzufügen eines Moduls die Obergrenze erhöhen (`<= höchste ID`).
-   Datei liegt im Unterordner `modules/`, nicht im Root!
-6. **Modul-IDs müssen zum Dateinamen passen** — `id: 8` gehört zu
+1. **Videos in `content.en.js` vergessen** → leere/fehlende Videos auf der
+   englischen Seite.
+2. **`PASS_THRESHOLD` in `content.en.js`** → darf dort nicht stehen
+   (Redeclaration, da `content.js` danach geladen wird).
+3. **`const` statt `var` in `content.en.js`** → Redeclaration-Fehler.
+   In `content.en.js` immer `var` verwenden.
+4. **`hasNext` in `modules/module.js` nicht angepasst** → Navigation zum
+   nächsten Modul bricht ab. Aktuell korrekt: `nextModuleId <= 9`.
+5. **Modul-IDs müssen zum Dateinamen passen** — `id: 8` gehört zu
    `modul-08.html` / `modul-08.en.html`.
-7. **Modulzahl an mehreren Stellen** — bei Änderung der Modulanzahl
-   sowohl `index.html` (Hero-Stats) als auch `i18n.js`
-   (`curriculum.*`, `hero.lede`, `cert.lede`, beide Sprachen) aktualisieren.
-8. **Syntax vor Upload immer mit `node --check` prüfen.**
+6. **Modul-Fließtext liegt im HTML**, nicht im `content`-Feld von
+   `content.js` (siehe Abschnitt „Inhalte pflegen").
+7. **Syntax vor Upload immer mit `node --check` prüfen.**
 
 ---
 
-## Support
+## 🐞 Bekannte offene Punkte (Code)
+
+Diese technischen Punkte sind im aktuellen Code vorhanden und (noch) nicht
+behoben — hier ehrlich dokumentiert:
+
+1. **Anker `#certificate` vs. Sektions-ID `Zertifikat`:** Navigation,
+   Footer, `showCertificate()`, der Nav-Observer und die
+   Modulseiten-Links verweisen auf `#certificate`, die Sektion in
+   `index.html` hat aber `id="Zertifikat"`. Der Sprung zur
+   Zertifikatssektion greift dadurch nicht (das Zertifikat selbst wird
+   trotzdem gerendert).
+2. **Hartkodiertes „/8 Module":** In `renderCertificate()` (`app.js`)
+   steht `state.completed.length + '/8 Module'` — bei 10 Modulen falsch.
+3. **Veraltete statische Zahlen auf der Startseite:** Hero zeigt fix „8"
+   Module und „9" Quizze; die i18n-Texte sagen „Acht Module" bzw. „nach
+   allen acht Modulen". Diese Werte werden **nicht** dynamisch
+   überschrieben (nur die Fortschrittsanzeige rechnet mit der echten
+   Modulzahl 10).
+4. **Modulseiten ohne Login-Guard:** Keine der 20 `modul-XX.html` prüft
+   `ieg_logged_in`; nur `index.html` tut das. Per Direktlink sind die
+   Module ohne Anmeldung erreichbar. (Die Prüfung ist ohnehin rein
+   clientseitig und kein echter Zugriffsschutz — dafür braucht es
+   Row-Level-Security in Supabase.)
+5. **Toter Code:** Das Namens-Modal (`nameModal` / `submitName()`) und das
+   Modul-Modal (`moduleModal`) in `index.html` werden nie geöffnet bzw.
+   befüllt; das Feld `content` in `content.js` wird nirgends gerendert.
+6. **DE/EN-Abweichung:** Modul 07 hat auf Deutsch 2 Videos, auf Englisch
+   nur 1.
+7. **Duplizierte Supabase-Zugangsdaten:** URL und anon-Key stehen mehrfach
+   (in `supabase-config.js`, `modules/module.js` sowie inline in
+   `login.html`) — bei einer Schlüssel-Rotation an allen Stellen ändern.
+
+---
+
+## 📞 Support
 
 Bei Fragen zur Website oder zum Curriculum wenden Sie sich an Ihren
 internen IEG-Ansprechpartner.
 
-© 2026 IEG · Internes Schulungsmaterial · v5.0
+© 2026 IEG · Internes Schulungsmaterial
