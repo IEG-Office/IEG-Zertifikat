@@ -5,8 +5,8 @@
 
 const STORAGE_KEY = 'ieg-academy-progress-v1';
 
-const _SB_URL = 'https://hojkbskyhwocsknucvos.supabase.co';
-const _SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhvamtic2t5aHdvY3NrbnVjdm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI4NzYsImV4cCI6MjA5NzEwODg3Nn0.A2jd2EPn9bSBHiUh-CQDbx-zUnGart4iU688gXypT3c';
+const _SB_URL = 'https://gpyxgspdikztuyesgoaz.supabase.co';
+const _SB_KEY = 'sb_publishable_CAhKmPsjz79xKUhhxg0bww_D3v-7b5y';
 
 // ── i18n helper (graceful fallback if i18n.js not loaded yet) ──
 function mt(key, vars) {
