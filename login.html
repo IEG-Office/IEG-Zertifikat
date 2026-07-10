@@ -44,8 +44,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
   window.sb = supabase.createClient(
-    'https://hojkbskyhwocsknucvos.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhvamtic2t5aHdvY3NrbnVjdm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI4NzYsImV4cCI6MjA5NzEwODg3Nn0.A2jd2EPn9bSBHiUh-CQDbx-zUnGart4iU688gXypT3c'
+    'https://gpyxgspdikztuyesgoaz.supabase.co',
+    'sb_publishable_CAhKmPsjz79xKUhhxg0bww_D3v-7b5y'
   );
   // Bereits eingeloggt? → weiterleiten
 window.sb.auth.getSession().then(({ data }) => {
@@ -105,8 +105,8 @@ window.sb.auth.getSession().then(({ data }) => {
 
 <script>
 // ====== KONFIGURATION ======
-const URL = 'https://hojkbskyhwocsknucvos.supabase.co';
-const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhvamtic2t5aHdvY3NrbnVjdm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI4NzYsImV4cCI6MjA5NzEwODg3Nn0.A2jd2EPn9bSBHiUh-CQDbx-zUnGart4iU688gXypT3c';
+const URL = 'https://gpyxgspdikztuyesgoaz.supabase.co';
+const KEY = 'sb_publishable_CAhKmPsjz79xKUhhxg0bww_D3v-7b5y';
 // ===========================
 
 function sw(t) {
@@ -212,8 +212,7 @@ async function doReset() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': KEY,
-        'Authorization': `Bearer ${KEY}`
+        'apikey': KEY
       },
       body: JSON.stringify({
         email,
