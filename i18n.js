@@ -30,9 +30,6 @@ const I18N = {
     'curriculum.eyebrow':     '/ Curriculum',
     'curriculum.title':       'Zehn Module für den strukturierten Einstieg.',
     'curriculum.lede':        'Jedes Modul schließt mit einem Quiz ab. Nach erfolgreichem Abschluss wird das nächste Modul freigeschaltet. Nach allen zehn Modulen folgt eine Abschlussprüfung mit internem Teilnahmezertifikat.',
-    'curriculum.preview':     'Vorschau-Modus: Alle Module ohne Quiz-Freischaltung anzeigen.',
-    'curriculum.preview.btn': 'Vorschau aktivieren',
-    'curriculum.preview.btn.off': 'Vorschau deaktivieren',
     'curriculum.progress':    '0 von 10 Modulen abgeschlossen',
 
     /* Team */
@@ -172,8 +169,6 @@ const I18N = {
 
     /* Misc */
     'reset.confirm':          'Gesamten Lernfortschritt zurücksetzen?',
-    'preview.active':         '✓ Vorschau aktiv',
-    'preview.enable':         'Vorschau aktivieren',
     /* module.js — Quiz engine */
     'mod.quiz.eyebrow':          'Modul {n} \u00b7 Quiz',
     'mod.quiz.question':         'Frage {i} von {total}',
@@ -222,9 +217,6 @@ const I18N = {
     'curriculum.eyebrow':     '/ Curriculum',
     'curriculum.title':       'Ten modules for a structured start.',
     'curriculum.lede':        'Each module concludes with a quiz. After passing, the next module is unlocked. After all ten modules, a final exam leads to an internal certificate of completion.',
-    'curriculum.preview':     'Preview mode: show all modules without quiz gating.',
-    'curriculum.preview.btn': 'Enable preview',
-    'curriculum.preview.btn.off': 'Disable preview',
     'curriculum.progress':    '0 of 10 modules completed',
 
     /* Team */
@@ -364,8 +356,6 @@ const I18N = {
 
     /* Misc */
     'reset.confirm':          'Reset all learning progress?',
-    'preview.active':         '✓ Preview active',
-    'preview.enable':         'Enable preview',
     /* module.js — Quiz engine */
     'mod.quiz.eyebrow':          'Module {n} \u00b7 Quiz',
     'mod.quiz.question':         'Question {i} of {total}',
