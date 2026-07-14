@@ -5,8 +5,8 @@
 
 const STORAGE_KEY = 'ieg-academy-progress-v1';
 
-const _SB_URL = 'https://gpyxgspdikztuyesgoaz.supabase.co';
-const _SB_KEY = 'sb_publishable_CAhKmPsjz79xKUhhxg0bww_D3v-7b5y';
+const _SB_URL = 'https://hojkbskyhwocsknucvos.supabase.co';
+const _SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhvamtic2t5aHdvY3NrbnVjdm9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1MzI4NzYsImV4cCI6MjA5NzEwODg3Nn0.A2jd2EPn9bSBHiUh-CQDbx-zUnGart4iU688gXypT3c';
 
 // ── i18n helper (graceful fallback if i18n.js not loaded yet) ──
 function mt(key, vars) {
@@ -298,9 +298,12 @@ function finishQuiz() {
   const nextModuleId = MODULE_ID + 1;
   const hasNext = nextModuleId <= 9; // fixed off-by-one + extended for module 09
 
+  // Keep the current language when linking to the next module (.en.html for English)
+  const langSuffix = ((typeof window.getLang === 'function') && window.getLang() === 'en') ? '.en.html' : '.html';
+
   const actions = passed
     ? (hasNext
-        ? `<a href="modul-${String(nextModuleId).padStart(2, '0')}.html" class="btn btn-primary">${mt('mod.quiz.result.next', {n: String(nextModuleId).padStart(2,'0')})}</a>
+        ? `<a href="modul-${String(nextModuleId).padStart(2, '0')}${langSuffix}" class="btn btn-primary">${mt('mod.quiz.result.next', {n: String(nextModuleId).padStart(2,'0')})}</a>
            <a href="../index.html#curriculum" class="btn btn-ghost">${mt('mod.quiz.result.overview')}</a>`
         : `<a href="../index.html#certificate" class="btn btn-primary">${mt('mod.quiz.result.final')}</a>
            <a href="../index.html#curriculum" class="btn btn-ghost">${mt('mod.quiz.result.overview')}</a>`)
