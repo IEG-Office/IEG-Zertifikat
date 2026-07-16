@@ -93,21 +93,42 @@
     <div class="section-intro">
       <div class="section-eyebrow">Practical exercise</div>
       <h2>Apply what you've learned</h2>
-      <p>Review your current Claude usage for security risks and define your personal rules.</p>
+      <p>Assess inputs by risk and practice rephrasing problematic inputs safely.</p>
     </div>
     <div class="exercise-grid">
       <article class="exercise-card">
         <div class="exercise-kicker">Exercise 1</div>
-        <h3 class="exercise-title">Personal security audit</h3>
-        <p class="exercise-text">Take 5 minutes to review your Claude usage critically.</p>
+        <h3 class="exercise-title">Assess input risk</h3>
+        <p class="exercise-text">Not everything you could type into an AI chat should be typed into it. Sort the following examples into three risk categories.</p>
         <ul class="exercise-list">
-          <li>Have you ever pasted data into Claude that belongs to the "never paste" list?</li>
-          <li>Which connectors do you currently have active? Open the settings and check.</li>
-          <li>Are any work accounts connected to a personal Claude account?</li>
-          <li>Is the training option disabled? (Settings → Privacy)</li>
+          <li>Create a table with three columns: <strong>Uncritical</strong>, <strong>Only anonymised</strong>, <strong>Not in personal account</strong>.</li>
+          <li>Sort these inputs: (a) General industry research, (b) Meeting notes with client names, (c) Internal deal memo with valuation figures, (d) Publicly available press release, (e) Excel file with client revenues, (f) Generic email template without names.</li>
+          <li>Justify each input in one sentence, explaining why it belongs in that category.</li>
         </ul>
+        <div class="exercise-prompt">
+          <strong>Example prompt:</strong>
+          <p>I'll give you 6 different inputs that an M&amp;A analyst might type into an AI chat. Sort them into three categories: uncritical, use only anonymised, not in personal account. Justify each classification in one sentence. Format: table.</p>
+        </div>
         <div class="exercise-note">
-          <strong>Goal:</strong> Identify risks in your current usage and correct them immediately.
+          <strong>Goal:</strong> Develop practical data sensitivity — recognise what may be entered where.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show sample solution" data-label-open="Hide sample solution">
+          Show sample solution
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Sample solution</div>
+          <table>
+            <thead><tr><th>Input</th><th>Category</th><th>Justification</th></tr></thead>
+            <tbody>
+              <tr><td>(a) General industry research</td><td><strong>Uncritical</strong></td><td>Publicly available knowledge, no personal or confidential data</td></tr>
+              <tr><td>(b) Meeting notes with client names</td><td><strong>Only anonymised</strong></td><td>Personal data — replace names with placeholders such as [CFO, industrial company]</td></tr>
+              <tr><td>(c) Internal deal memo with valuation figures</td><td><strong>Not in personal account</strong></td><td>Non-public financial data, deal details — only via the IEG Claude Account</td></tr>
+              <tr><td>(d) Publicly available press release</td><td><strong>Uncritical</strong></td><td>Already published, no confidentiality concern</td></tr>
+              <tr><td>(e) Excel file with client revenues</td><td><strong>Not in personal account</strong></td><td>Non-public client financial data — always via a secured account</td></tr>
+              <tr><td>(f) Generic email template without names</td><td><strong>Uncritical</strong></td><td>No personal reference, no confidential content</td></tr>
+            </tbody>
+          </table>
         </div>
       </article>
       <article class="exercise-card">
