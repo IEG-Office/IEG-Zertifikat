@@ -105,7 +105,7 @@
     <div class="section-intro">
       <div class="section-eyebrow">Practical exercise</div>
       <h2>Apply what you've learned</h2>
-      <p>Create your first Claude Skill for a recurring task in your daily work.</p>
+      <p>Identify your first Skill candidate and learn when a Skill makes more sense than a single prompt.</p>
     </div>
     <div class="exercise-grid">
       <article class="exercise-card">
@@ -123,21 +123,35 @@
       </article>
       <article class="exercise-card">
         <div class="exercise-kicker">Exercise 2</div>
-        <h3 class="exercise-title">Create the Skill in Claude</h3>
-        <p class="exercise-text">Use Claude's Skill Creator mode to build your first Skill.</p>
+        <h3 class="exercise-title">Skill or standard prompt?</h3>
+        <p class="exercise-text">Not every task justifies its own Skill. Learn to choose the right level of abstraction.</p>
         <ul class="exercise-list">
-          <li>Open a new chat in Claude.</li>
-          <li>Type: "I want to create a new Skill. Help me set it up."</li>
-          <li>Answer Claude's follow-up questions about goal, audience and format.</li>
-          <li>Test the finished Skill with a real task.</li>
-          <li>Refine once based on the result.</li>
+          <li>Assess these three tasks: (a) A one-off summary of an article, (b) Weekly creation of meeting minutes in the exact same format, (c) Occasional translation of an email into English.</li>
+          <li>Decide for each: is a <strong>one-off prompt</strong> sufficient, or is a <strong>saved Skill</strong> more sensible?</li>
+          <li>Justify your decision using these criteria: frequency, consistency requirement, complexity of the instruction.</li>
         </ul>
         <div class="exercise-prompt">
-          <strong>Example starting prompt:</strong>
-          <p>I want to create a Skill for writing professional client emails at IEG. The emails should be concise, formal and structured. Help me define the Skill parameters.</p>
+          <strong>Example prompt:</strong>
+          <p>I'll give you 3 tasks. For each, decide whether a one-off prompt is enough or a saved Skill would be more sensible. Justify your reasoning using frequency, consistency requirement and complexity. Format: table with columns Task, Recommendation, Justification.</p>
         </div>
         <div class="exercise-note">
-          <strong>Goal:</strong> A working Skill that you can use from tomorrow — the investment pays off immediately.
+          <strong>Goal:</strong> Choose the right level of abstraction — not everything needs a Skill, but recurring processes benefit enormously.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Show sample solution" data-label-open="Hide sample solution">
+          Show sample solution
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Sample solution</div>
+          <table>
+            <thead><tr><th>Task</th><th>Recommendation</th><th>Justification</th></tr></thead>
+            <tbody>
+              <tr><td>(a) One-off summary of an article</td><td><strong>Standard prompt</strong></td><td>Low frequency, no consistency requirement — a single prompt is entirely sufficient</td></tr>
+              <tr><td>(b) Weekly meeting minutes in the same format</td><td><strong>Skill</strong></td><td>High frequency + fixed format = classic Skill candidate; define once, use permanently</td></tr>
+              <tr><td>(c) Occasional translation of an email</td><td><strong>Standard prompt</strong></td><td>Low frequency, variable context — a Skill would barely save time</td></tr>
+            </tbody>
+          </table>
+          <p style="margin-top:12px"><strong>Rule of thumb:</strong> A Skill pays off from roughly 3–5 repetitions per month, provided the desired format stays the same each time.</p>
         </div>
       </article>
     </div>
