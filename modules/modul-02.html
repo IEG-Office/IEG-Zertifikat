@@ -126,6 +126,23 @@
         <div class="exercise-note">
           <strong>Ziel:</strong> Promptqualität durch systematische Struktur verbessern — vom vagen Input zum präzisen Output.
         </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)">
+          Musterlösung anzeigen
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Musterlösung</div>
+          <table>
+            <thead><tr><th>Element</th><th>Schwach</th><th>Stark</th></tr></thead>
+            <tbody>
+              <tr><td>Rolle</td><td>—</td><td>M&amp;A-Analyst</td></tr>
+              <tr><td>Aufgabe</td><td>Vage ("schreib was")</td><td>Konkret ("erstelle ein Profil mit Abschnitten")</td></tr>
+              <tr><td>Output-Format</td><td>—</td><td>Struktur + Wortlimit definiert</td></tr>
+              <tr><td>Stoppkriterien</td><td>—</td><td>"Falls nicht verfügbar, explizit kennzeichnen"</td></tr>
+              <tr><td>Überprüfbarkeit</td><td>Gering</td><td>Hoch</td></tr>
+            </tbody>
+          </table>
+        </div>
       </article>
       <article class="exercise-card">
         <div class="exercise-kicker">Übung 2</div>
@@ -144,6 +161,19 @@
         </div>
         <div class="exercise-note">
           <strong>Ziel:</strong> Komplexe Aufgaben durch Prompt Chaining kontrollierbar machen — jedes Teilergebnis ist prüfbar.
+        </div>
+        <button class="exercise-solution-toggle" onclick="toggleSolution(this)" data-label-closed="Lösungsansatz anzeigen" data-label-open="Lösungsansatz ausblenden">
+          Lösungsansatz anzeigen
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="exercise-solution">
+          <div class="exercise-solution-eyebrow">Lösungsansatz</div>
+          <ul>
+            <li><strong>Schritt 1–2:</strong> Jedes Unternehmensprofil sollte enthalten: Geschäftsmodell (2–3 Sätze), geschätzte Umsatzgröße, 2–3 Wettbewerber, wichtigste Stärken.</li>
+            <li><strong>Schritt 3:</strong> Die Tabelle macht Unterschiede sofort sichtbar — nach strategischer Passung sortieren, um den besten Kandidaten zu identifizieren.</li>
+            <li><strong>Schritt 4:</strong> Die Management Summary sollte den Top-Kandidaten mit einem klaren Grund benennen.</li>
+            <li><strong>Kernerkenntnis:</strong> Die Prüfung jedes Schritts verhindert, dass sich Fehler in nachfolgende Prompts fortpflanzen.</li>
+          </ul>
         </div>
       </article>
     </div>
