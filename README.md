@@ -117,8 +117,10 @@ pflegen (`content.js` + `content.en.js`, ggf. `i18n.js` de + en).
 - **`index.html`** prüft im `<head>` lediglich das Flag
   `localStorage['ieg_logged_in'] === 'yes'` und leitet andernfalls auf
   `login.html` um.
-- **`supabase-config.js`** enthält `SUPABASE_URL` und den
-  `anon`/`public`-Key (an `window._SB_URL` / `window._SB_KEY`).
+- **`supabase-config.js`** enthält `SUPABASE_URL` und den öffentlichen
+  Client-Key (an `window._SB_URL` / `window._SB_KEY`). Genutzt wird der
+  neue **Publishable Key** (`sb_publishable_…`); der ältere
+  `anon`/`public`-JWT-Key funktioniert alternativ ebenso.
 
 > ⚠️ **Aktuelle Einschränkung (bewusst so belassen):** Die
 > **Modul-Seiten (`modules/modul-XX.html`) enthalten keinen
@@ -128,13 +130,94 @@ pflegen (`content.js` + `content.en.js`, ggf. `i18n.js` de + en).
 > echter Schutz**. Verbindlicher Zugriffsschutz muss über
 > **Supabase Row-Level-Security** auf der Datenbank erfolgen.
 
-**⚠️ Sicherheitshinweis für `supabase-config.js`:** Der
-`anon`/`public`-Key darf im Frontend sichtbar sein (eingeschränkte
-Rechte gemäß RLS). **Niemals** einen `service_role`-Key eintragen — der
-hat volle DB-Rechte und darf nie im Browser-Code stehen. Die Zugangsdaten
-liegen derzeit mehrfach vor (`supabase-config.js`, `modules/module.js`
-und inline in `login.html`); bei einer Key-Rotation an **allen** Stellen
-ändern.
+**⚠️ Sicherheitshinweis für `supabase-config.js`:** Der öffentliche
+Client-Key (Publishable Key `sb_publishable_…` bzw. `anon`/`public`)
+darf im Frontend sichtbar sein — der eigentliche Schutz kommt aus der
+**Row-Level-Security** auf der Datenbank. **Niemals** einen
+`service_role`- oder `secret`-Key (`sb_secret_…`) eintragen — der hat
+volle DB-Rechte und darf nie im Browser-Code stehen. Die Zugangsdaten
+liegen an **vier Stellen** vor: `supabase-config.js` (1×),
+`modules/module.js` (1×) und inline in `login.html` (**2×**: im
+`createClient`-Aufruf sowie in `const URL`/`const KEY` für den
+Passwort-Reset). Bei einer Key-Rotation an **allen vier** Stellen ändern.
+
+> Hinweis: Der Passwort-Reset in `login.html` sendet den Key nur noch im
+> `apikey`-Header (kein `Authorization: Bearer` mehr) — nötig für die
+> Kompatibilität mit den neuen Publishable Keys.
+
+---
+
+## 🧩 Supabase-Einrichtung (bei neuem/eigenem Account)
+
+Möchte man das Projekt mit einem **eigenen** Supabase-Account verbinden,
+sind zwei Dinge nötig: die Zugangsdaten im Code (siehe oben, vier
+Stellen) **und** die folgende Einrichtung im Supabase-Dashboard.
+
+### 1. Zugangsdaten holen
+Im Dashboard über **Connect** (oben) oder **Project Settings → API Keys**:
+`Project URL` und den **Publishable Key** (`sb_publishable_…`) kopieren
+und an den vier Code-Stellen eintragen. **Nicht** den `secret`-Key.
+
+### 2. Tabelle + RLS (Pflicht für die Fortschritts-Speicherung)
+Im **SQL Editor** ausführen:
+
+```sql
+create table public.user_progress (
+  user_id uuid primary key references auth.users (id) on delete cascade,
+  completed_modules jsonb default '[]'::jsonb,
+  final_passed boolean default false,
+  final_score numeric default 0,
+  completion_date text
+);
+alter table public.user_progress enable row level security;
+create policy "own progress" on public.user_progress
+  for all
+  using  ( (select auth.uid()) = user_id )
+  with check ( (select auth.uid()) = user_id );
+```
+
+### 3. Auth-Einstellungen
+- **Authentication → Sign In / Providers → Email:** Option
+  „Confirm email" nach Wunsch (aus = Nutzer ist nach Registrierung
+  sofort eingeloggt, so wie es der Code erwartet).
+- **Authentication → URL Configuration:** `Site URL` und `Redirect URLs`
+  auf die Live-Adresse setzen — inkl. **`…/reset.html`** (oder
+  Wildcard `…/**`), sonst führt der Passwort-Reset-Link ins Leere.
+  Fürs lokale Testen zusätzlich `http://localhost:8000`.
+- Empfohlen: **Authentication → Leaked Password Protection** aktivieren.
+
+### 4. Auswertungsansicht für Admins (optional, empfohlen)
+Zeigt Fortschritt mit Name/E-Mail statt roher User-IDs. Im **SQL Editor**:
+
+```sql
+create or replace view public.teilnehmer_fortschritt
+with (security_invoker = true) as
+select
+  u.email,
+  u.raw_user_meta_data->>'full_name'                    as name,
+  coalesce(jsonb_array_length(up.completed_modules), 0) as module_abgeschlossen,
+  up.final_passed                                       as bestanden,
+  up.final_score                                        as punktzahl,
+  up.completion_date                                    as abschlussdatum
+from public.user_progress up
+join auth.users u on u.id = up.user_id
+order by u.email;
+```
+Danach im **Table Editor** die Ansicht `teilnehmer_fortschritt` öffnen.
+
+### 5. Spalte für geräteübergreifende Fehler-Wiederansicht (optional)
+Nur nötig, wenn der letzte Prüfungsversuch auch auf **anderen Geräten**
+abrufbar sein soll (ohne diese Spalte läuft alles fehlerfrei, dann nur
+lokal je Browser):
+
+```sql
+alter table public.user_progress
+  add column if not exists last_exam jsonb;
+```
+
+> Der Code ist so gebaut, dass `last_exam` **getrennt** vom Kern-Fortschritt
+> gespeichert/geladen wird: Fehlt die Spalte, schlägt nur dieser eine
+> Aufruf still fehl — der reguläre Fortschritt bleibt unberührt.
 
 ---
 
@@ -142,7 +225,7 @@ und inline in `login.html`); bei einer Key-Rotation an **allen** Stellen
 
 - Fortschritt liegt lokal in `localStorage['ieg-academy-progress-v1']`
   (`completed[]`, `finalPassed`, `finalScore`, `completionDate`,
-  `userName`, `credentialId`).
+  `userName`, `credentialId`, `lastExam`).
 - **Locking:** Modul 0 ist immer frei; Modul *n* ist frei, sobald das
   Quiz von Modul *n−1* mit ≥ 70 % bestanden wurde. Die
   **Abschlussprüfung** ist frei, sobald **alle** Modul-IDs abgeschlossen
@@ -150,7 +233,12 @@ und inline in `login.html`); bei einer Key-Rotation an **allen** Stellen
 - **Supabase-Sync:** Ist der Nutzer eingeloggt, wird der Fortschritt in
   die Tabelle `user_progress` geschrieben (Spalten `user_id`,
   `completed_modules`, `final_passed`, `final_score`, `completion_date`)
-  und beim Laden mit dem lokalen Stand zusammengeführt.
+  und beim Laden mit dem lokalen Stand zusammengeführt (Vereinigung der
+  Module, höchste Punktzahl, `finalPassed` per ODER).
+- **Letzter Prüfungsversuch** (`lastExam`) wird lokal gespeichert und —
+  falls die optionale Spalte `last_exam` existiert — zusätzlich in
+  Supabase (über einen **separaten**, fehlertoleranten Aufruf, siehe
+  Einrichtung Schritt 5).
 
 ---
 
@@ -160,6 +248,18 @@ und inline in `login.html`); bei einer Key-Rotation an **allen** Stellen
   40-Minuten-Timer, Fragen-Markierung (Flag), Bestätigungsdialog,
   automatische Abgabe bei Zeitablauf und Wiederaufnahme aus
   `localStorage['ieg-academy-final-exam-v1']`.
+- **Zufällige Reihenfolge:** Bei jedem Start werden Fragen **und**
+  Antwortoptionen gemischt (`buildExamQuestions()` /
+  `shuffleArray()`); der Index der richtigen Antwort wird korrekt
+  neu zugeordnet. Die gemischte Fassung wird im Prüfungsstand
+  gespeichert, damit die Wiederaufnahme nach einem Reload konsistent
+  bleibt.
+- **Fehler-/Antwortüberprüfung:** Nach der Abgabe zeigt ein Button
+  „Antworten überprüfen" jede Frage mit eigener/richtiger Antwort
+  (grün/rot) und Erklärung, umschaltbar zwischen „Alle Fragen" und
+  „Nur Fehler" (`renderExamReview()`). Der letzte Versuch bleibt
+  gespeichert und ist später erneut über den Button **auf der
+  Prüfungs-Kachel** abrufbar (`openStoredExamReview()`).
 - Bei ≥ 70 % wird `finalPassed` gesetzt; danach wird das persönliche
   **Zertifikat** (Name, generierte Credential-ID, Datum) in `app.js`
   erzeugt und über ein Druckfenster als PDF ausgegeben
@@ -266,6 +366,18 @@ Wichtig: `content.en.js` benutzt `var` und definiert **kein**
 geladen werden (sonst „Redeclaration"-Fehler).
 Modulseiten laden zusätzlich `../content.js` und `module.js`.
 
+### Cache-Versionierung (`?v=`)
+
+Die Einbindungen in `index.html` tragen eine Versionsnummer, z. B.
+`app.js?v=6`, `styles.css?v=6`, `i18n.js?v=6`, `content(.en).js?v=6`.
+Diese Nummer ist für die Datei bedeutungslos, steuert aber den
+Browser-Cache: **Ändert man eine dieser Dateien, muss die Nummer erhöht
+werden** (z. B. auf `?v=7`), damit wiederkehrende Besucher garantiert
+die neue Version laden statt einer alten, zwischengespeicherten. Wird
+das vergessen, ist nichts kaputt — manche Nutzer sehen die Änderung dann
+nur verzögert oder erst nach einem harten Neuladen
+(`Strg`/`Cmd`+`Shift`+`R`). Aktueller Stand: **`v=6`**.
+
 ---
 
 ## 🛠️ Bekannte Fallstricke
@@ -285,6 +397,10 @@ Modulseiten laden zusätzlich `../content.js` und `module.js`.
    Inhalte technisch aufgebaut sind").
 7. **Syntax vor Upload prüfen:** `node --check content.js` /
    `content.en.js`.
+8. **`?v=`-Version nicht erhöht** — nach Änderung an
+   `app.js`/`styles.css`/`i18n.js`/`content*.js` die Versionsnummer in
+   `index.html` hochzählen, sonst laden Browser die alte Fassung aus dem
+   Cache (siehe Abschnitt „Cache-Versionierung").
 
 ---
 
@@ -304,4 +420,4 @@ Modulseiten laden zusätzlich `../content.js` und `module.js`.
 Bei Fragen zur Website oder zum Curriculum wenden Sie sich an Ihren
 internen IEG-Ansprechpartner.
 
-© 2026 IEG · Internes Schulungsmaterial · v4.1
+© 2026 IEG · Internes Schulungsmaterial · v4.2
