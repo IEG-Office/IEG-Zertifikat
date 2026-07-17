@@ -399,6 +399,7 @@ function finishExam(auto) {
     state.finalScore = pct; saveState(); saveProgressToSupabase();
   }
   clearExamState();
+  currentQuiz.lastResult = { c: c, total: total, pct: pct, pass: pass, auto: !!auto };
   renderExamResult(c, total, pct, pass, !!auto);
 }
 
@@ -529,11 +530,65 @@ function renderExamResult(c, total, pct, pass, auto) {
     (auto ? '<div class="exam-result-auto">' + t('exam.result.auto') + '</div>' : '') +
     '<div class="quiz-result-msg">' + (pass ? t('exam.result.cert') : t('exam.result.min') + PASS_THRESHOLD + t('exam.result.min2')) + '</div>' +
     '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">' +
+      '<button class="btn btn-secondary" onclick="renderExamReview(\'all\')">' + t('exam.result.review') + '</button>' +
       (pass
         ? '<button class="btn btn-primary" onclick="closeQuiz();showCertificate();">' + t('exam.result.tocert') + '</button>'
         : '<button class="btn btn-primary" onclick="retryExam()">' + t('exam.result.retry') + '</button>' +
           '<button class="btn btn-secondary" onclick="closeQuiz()">' + t('exam.result.close') + '</button>') +
     '</div></div>'
+  );
+}
+
+function backToExamResult() {
+  var r = currentQuiz && currentQuiz.lastResult;
+  if (!r) { closeQuiz(); return; }
+  renderExamResult(r.c, r.total, r.pct, r.pass, r.auto);
+}
+
+function renderExamReview(filter) {
+  if (!currentQuiz || !currentQuiz.questions) return;
+  filter = filter || 'all';
+  var qs = currentQuiz.questions, ans = currentQuiz.answers || [];
+  var correctCount = 0, wrongCount = 0;
+  qs.forEach(function(q, i) { if (ans[i] === q.correct) correctCount++; else wrongCount++; });
+
+  var items = qs.map(function(q, i) {
+    var ua = (ans[i] === undefined) ? null : ans[i];
+    var isCorrect = ua === q.correct;
+    if (filter === 'wrong' && isCorrect) return '';
+    var badgeCls = ua === null ? 'unanswered' : (isCorrect ? 'correct' : 'wrong');
+    var badgeTxt = ua === null ? t('exam.review.unanswered') : (isCorrect ? t('exam.review.correctBadge') : t('exam.review.wrongBadge'));
+    var opts = q.options.map(function(o, j) {
+      var cls = 'quiz-option';
+      if (j === q.correct) cls += ' correct';
+      else if (j === ua) cls += ' wrong';
+      return '<div class="' + cls + '"><span class="quiz-option-marker">' + String.fromCharCode(65+j) + '</span><span>' + o + '</span></div>';
+    }).join('');
+    return '<div class="exam-review-item">' +
+      '<div class="exam-review-qhead"><span class="exam-review-num">' + t('exam.question') + ' ' + (i+1) + '</span>' +
+        '<span class="exam-review-badge ' + badgeCls + '">' + badgeTxt + '</span></div>' +
+      '<div class="quiz-question">' + q.q + '</div>' +
+      '<div class="quiz-options">' + opts + '</div>' +
+      (q.explanation ? '<div class="quiz-explanation"><strong>' + t('exam.review.why') + '</strong> ' + q.explanation + '</div>' : '') +
+      '</div>';
+  }).join('');
+
+  if (filter === 'wrong' && wrongCount === 0) {
+    items = '<div class="exam-review-empty">' + t('exam.review.none') + '</div>';
+  }
+
+  renderExamHtml(
+    '<div class="exam-review">' +
+    '<div class="exam-review-head">' +
+      '<div class="exam-review-summary"><strong>' + correctCount + ' / ' + qs.length + '</strong> ' + t('exam.review.summary') + ' · <strong>' + wrongCount + '</strong> ' + t('exam.review.mistakes') + '</div>' +
+      '<div class="exam-review-filter">' +
+        '<button class="' + (filter === 'all' ? 'active' : '') + '" onclick="renderExamReview(\'all\')">' + t('exam.review.all') + '</button>' +
+        '<button class="' + (filter === 'wrong' ? 'active' : '') + '" onclick="renderExamReview(\'wrong\')">' + t('exam.review.onlyWrong') + '</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="exam-review-list">' + items + '</div>' +
+    '<div class="exam-review-actions"><button class="btn btn-primary" onclick="backToExamResult()">' + t('exam.review.back') + '</button></div>' +
+    '</div>'
   );
 }
 
