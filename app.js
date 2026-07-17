@@ -31,9 +31,10 @@ function logout() {
 
 function resetProgress() {
   if (!confirm(t('reset.confirm'))) return;
-  state = { completed: [], finalPassed: false, finalScore: 0, userName: '', completionDate: '' };
+  state = { completed: [], finalPassed: false, finalScore: 0, userName: '', completionDate: '', lastExam: null };
   saveState();
   saveProgressToSupabase();
+  saveLastExamToSupabase();
   renderEverything();
   document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' });
 }
@@ -108,6 +109,11 @@ function renderModules() {
 
   var fcard = document.createElement('div');
   fcard.className = 'module-card final-exam ' + fc;
+  var reviewBtn = state.lastExam
+    ? '<button class="final-review-btn" onclick="event.stopPropagation();openStoredExamReview()">' +
+        '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>' +
+        t('exam.result.review') + '</button>'
+    : '';
   fcard.innerHTML =
     '<div class="module-header"><div class="module-number">10</div><div class="module-status-icon ' + fc + '">' + fi + '</div></div>' +
     '<div class="module-meta">' + t('final.meta') + '</div>' +
@@ -119,7 +125,7 @@ function renderModules() {
     (fu
       ? '<span class="module-action">' + (fp ? t('final.action.repeat') : t('final.action.start')) + ' <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>'
       : '<span class="module-action" style="color:rgba(255,255,255,0.4);">' + t('mod.action.locked') + '</span>') +
-    '</div>';
+    '</div>' + reviewBtn;
   if (fu) fcard.onclick = startFinalExam;
   grid.appendChild(fcard);
 }
@@ -255,6 +261,34 @@ function closeQuiz() {
 
 var EXAM_STORAGE_KEY = 'ieg-academy-final-exam-v1';
 function getFinalExam() { return (typeof getLang === 'function' && getLang() === 'en' && typeof FINAL_EXAM_EN !== 'undefined') ? FINAL_EXAM_EN : FINAL_EXAM; }
+
+// Fisher-Yates-Shuffle (in place)
+function shuffleArray(a) {
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+// Baut eine gemischte Prüfungs-Kopie: Fragenreihenfolge UND Antwortoptionen zufällig,
+// wobei der Index der richtigen Antwort korrekt neu zugeordnet wird.
+function buildExamQuestions() {
+  var src = getFinalExam();
+  var qs = src.map(function(q) {
+    var order = q.options.map(function(_, i) { return i; });
+    shuffleArray(order);
+    return {
+      q: q.q,
+      options: order.map(function(i) { return q.options[i]; }),
+      correct: order.indexOf(q.correct),
+      explanation: q.explanation
+    };
+  });
+  shuffleArray(qs);
+  return qs;
+}
+
 var FINAL_EXAM_DURATION_SEC = 40 * 60;
 var examTimerId = null;
 
@@ -266,6 +300,7 @@ function saveExamState() {
       currentIndex: currentQuiz.currentIndex, answers: currentQuiz.answers,
       flagged: currentQuiz.flagged, endsAt: currentQuiz.endsAt,
       durationSec: currentQuiz.durationSec, startedAt: currentQuiz.startedAt,
+      questions: currentQuiz.questions,
       timeLeft: Math.max(0, Math.round((currentQuiz.endsAt - Date.now()) / 1000)),
       savedAt: Date.now()
     }));
@@ -329,10 +364,11 @@ function submitName() {
 
 function beginExam() {
   clearExamTimer();
-  var n = getFinalExam().length;
+  var questions = buildExamQuestions();
+  var n = questions.length;
   currentQuiz = {
     isFinal: true, started: true, submitted: false,
-    questions: getFinalExam(), currentIndex: 0,
+    questions: questions, currentIndex: 0,
     answers: new Array(n).fill(null), flagged: new Array(n).fill(false),
     durationSec: FINAL_EXAM_DURATION_SEC, startedAt: Date.now(),
     endsAt: Date.now() + FINAL_EXAM_DURATION_SEC * 1000, restored: false
@@ -342,9 +378,10 @@ function beginExam() {
 
 function resumeExam(saved, showBanner) {
   clearExamTimer();
-  var n = getFinalExam().length;
+  var questions = (saved.questions && saved.questions.length) ? saved.questions : buildExamQuestions();
+  var n = questions.length;
   currentQuiz = {
-    isFinal: true, started: true, submitted: false, questions: getFinalExam(),
+    isFinal: true, started: true, submitted: false, questions: questions,
     currentIndex: Math.min(Math.max(saved.currentIndex || 0, 0), n - 1),
     answers: normalizeExamArray(saved.answers, n, null),
     flagged: normalizeExamArray(saved.flagged, n, false),
@@ -399,7 +436,13 @@ function finishExam(auto) {
     state.finalScore = pct; saveState(); saveProgressToSupabase();
   }
   clearExamState();
+  state.lastExam = {
+    questions: currentQuiz.questions, answers: currentQuiz.answers,
+    c: c, total: total, pct: pct, pass: pass, date: new Date().toISOString()
+  };
+  saveState();
   currentQuiz.lastResult = { c: c, total: total, pct: pct, pass: pass, auto: !!auto };
+  saveProgressToSupabase().then(saveLastExamToSupabase);
   renderExamResult(c, total, pct, pass, !!auto);
 }
 
@@ -537,6 +580,18 @@ function renderExamResult(c, total, pct, pass, auto) {
           '<button class="btn btn-secondary" onclick="closeQuiz()">' + t('exam.result.close') + '</button>') +
     '</div></div>'
   );
+}
+
+function openStoredExamReview() {
+  var le = state.lastExam;
+  if (!le || !le.questions) return;
+  currentQuiz = {
+    isFinal: true, started: true, submitted: true, reviewOnly: true,
+    questions: le.questions, answers: le.answers || [],
+    lastResult: { c: le.c, total: le.total, pct: le.pct, pass: le.pass, auto: false }
+  };
+  openExamModal();
+  renderExamReview('all');
 }
 
 function backToExamResult() {
@@ -732,6 +787,29 @@ async function saveProgressToSupabase() {
   if (res.error) console.warn('Supabase save error:', res.error.message);
 }
 
+// Getrennt gespeichert: falls die Spalte 'last_exam' (noch) nicht existiert,
+// schlaegt nur DIESER Aufruf fehl — der Fortschritt bleibt davon unberuehrt.
+async function saveLastExamToSupabase() {
+  if (!window.sb || !currentUserId || !state.lastExam) return;
+  try {
+    var res = await window.sb.from('user_progress')
+      .update({ last_exam: state.lastExam }).eq('user_id', currentUserId);
+    if (res.error) console.warn('Supabase last_exam save skipped:', res.error.message);
+  } catch (e) { console.warn('Supabase last_exam save skipped:', e && e.message); }
+}
+
+async function loadLastExamFromSupabase() {
+  if (!window.sb || !currentUserId) return;
+  try {
+    var res = await window.sb.from('user_progress')
+      .select('last_exam').eq('user_id', currentUserId).maybeSingle();
+    if (res.error) { console.warn('Supabase last_exam load skipped:', res.error.message); return; }
+    if (res.data && res.data.last_exam && res.data.last_exam.questions) {
+      state.lastExam = res.data.last_exam; saveState();
+    }
+  } catch (e) { console.warn('Supabase last_exam load skipped:', e && e.message); }
+}
+
 // ===== START =====
 async function initApp() {
   renderEverything();
@@ -744,6 +822,7 @@ async function initApp() {
     currentUserId = user.id;
     if (user.user_metadata && user.user_metadata.full_name) currentUser.name = user.user_metadata.full_name;
     await loadProgressFromSupabase();
+    await loadLastExamFromSupabase();
     renderEverything();
   }
 }
