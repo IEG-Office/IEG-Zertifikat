@@ -1605,3 +1605,41 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .nav-user-name { display: none; }
   .nav-right { gap: 8px; }
 }
+
+/* ===== FINAL EXAM — ANTWORTÜBERPRÜFUNG / FEHLERANSICHT ===== */
+.exam-review { text-align: left; padding: 8px 0 4px; }
+.exam-review-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.exam-review-summary { font-size: 14px; color: var(--text-faint); }
+.exam-review-summary strong { color: var(--navy); }
+.exam-review-filter {
+  display: inline-flex; gap: 4px; background: var(--bone-soft);
+  border-radius: 10px; padding: 4px;
+}
+.exam-review-filter button {
+  border: none; background: transparent; padding: 6px 14px; border-radius: 7px;
+  font: inherit; font-size: 13px; cursor: pointer; color: var(--text);
+}
+.exam-review-filter button.active {
+  background: var(--white); box-shadow: 0 1px 3px rgba(0,0,0,.08); font-weight: 600;
+}
+.exam-review-list {
+  display: flex; flex-direction: column; gap: 22px;
+  max-height: 52vh; overflow-y: auto; padding-right: 6px;
+}
+.exam-review-item { border-top: 1px solid var(--bone-soft); padding-top: 18px; }
+.exam-review-item:first-child { border-top: none; padding-top: 0; }
+.exam-review-qhead { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.exam-review-num { font-size: 13px; color: var(--text-faint); font-weight: 600; }
+.exam-review-badge {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  padding: 3px 9px; border-radius: 999px;
+}
+.exam-review-badge.correct { background: #ECF6F1; color: var(--sage); }
+.exam-review-badge.wrong { background: #FEF1ED; color: var(--rust); }
+.exam-review-badge.unanswered { background: var(--bone-soft); color: var(--text-faint); }
+.exam-review .quiz-option { cursor: default; }
+.exam-review-empty { text-align: center; color: var(--text-faint); padding: 32px 0; }
+.exam-review-actions { margin-top: 22px; text-align: center; }
