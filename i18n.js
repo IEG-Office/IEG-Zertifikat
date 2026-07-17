@@ -35,7 +35,7 @@ const I18N = {
     /* Team */
     'team.eyebrow':   '/ Team',
     'team.title':     'Die Menschen hinter IEG',
-    'team.lede':      'Eine kurze Einführung in das IEG Team und ausgewählte Ansprechpartner. Besonders hilfreich für neue Praktikantinnen, Praktikanten und Analystinnen bzw. Analysten im Onboarding.',
+    'team.lede':      'Eine kurze Einführung in das IEG Team und seine Mitglieder. Besonders hilfreich für neue Praktikantinnen, Praktikanten und Analystinnen bzw. Analysten im Onboarding.',
     'team.locations': 'Standorte',
 
     /* Team bios */
@@ -50,6 +50,18 @@ const I18N = {
     'team.schwemme.bio':    'Bringt Menschen und Prozesse zusammen. Erste Anlaufstelle für neue Teammitglieder in Sachen Onboarding und Office.',
     'team.krassowsky.bio':  'Strukturiert, kommunikativ, zuverlässig — Lena koordiniert das Tagesgeschäft und ist die richtige Adresse für organisatorische Fragen.',
     'team.dubber.bio':      'Schwerpunkt auf HealthTech und FinTech. Schätzt das Navigieren komplexer finanzieller Transaktionen und kollaboratives Arbeiten.',
+    'team.fakhfakh.bio':    'Managing Director und Mitgründer von IEG Tunesien. Über 20 Jahre Bankerfahrung mit Schwerpunkt auf KMU-Finanzierung, Fundraising, Restrukturierung und M&A.',
+    'team.attia.bio':       'Mitgründer und Managing Director von IEG Tunesien. Fachwissen in Corporate Finance; seit 2012 in Restrukturierung, M&A und Fundraising über zahlreiche Branchen hinweg.',
+    'team.schmidtbadoux.bio':'Über zwei Jahrzehnte Erfahrung in Corporate Finance, vorwiegend mit Schweizer Unternehmen im internationalen Umfeld. Leidenschaft für M&A im Technologiesektor.',
+    'team.abdelkhalek.bio': 'Director mit Fokus auf M&A. Begeistert von KI-Anwendungen — insbesondere in HealthTech, AgriTech und FinTech mit Blick auf finanzielle Inklusion in Afrika.',
+    'team.benfayala.bio':   'Vice President mit Leidenschaft für FinTech, B2C-SaaS und CleanTech. Engagiert im sozialen Unternehmertum zur Förderung benachteiligter Gemeinschaften.',
+    'team.alhajji.bio':     'Vice President mit umfassender Erfahrung im Investment Banking. Schwerpunkte: Kapitalbeschaffung, M&A und Restrukturierung in wachstumsstarken Märkten.',
+    'team.helland.bio':     'Associate Partner mit Hintergrund in der Unternehmensberatung. Seit 15 Jahren Berater von Wachstumsunternehmen, zuletzt mit Fokus auf CleanTech und ClimateTech.',
+    'team.karam.bio':       'Senior Analyst mit Erfahrung als VC-Analyst und Projektleiter in einem Tech-Startup. Begleitet Gründerinnen und Gründer von der Idee bis zum Exit.',
+    'team.khecharem.bio':   'Senior Associate mit Interesse an Retail Intelligence und innovativem E-Commerce sowie an FinTech — insbesondere Krypto und Asset Management.',
+    'team.maercklin.bio':   'Head of Accounting mit großer Leidenschaft für analytisches Denken und Zahlen. Sorgt mit Sorgfalt und Genauigkeit für präzise Finanzplanung.',
+    'team.alhusseini.bio':  'Analyst mit Master of Finance (University of Maryland) und NYU-Abu-Dhabi-Alumnus. Unterstützt wachstumsstarke Unternehmen bei Akquisitionen, Kapitalbeschaffung und strategischer Beratung.',
+    'team.gruell.bio':      'Financial Analyst mit Begeisterung für M&A und strategisches Denken. Besonderes Interesse an HealthTech und FinTech.',
 
     /* Certificate */
     'cert.eyebrow':   '/ Zertifikat',
@@ -233,7 +245,7 @@ const I18N = {
     /* Team */
     'team.eyebrow':   '/ Team',
     'team.title':     'The people behind IEG',
-    'team.lede':      'A brief introduction to the IEG team and key contacts. Particularly helpful for new interns and analysts during onboarding.',
+    'team.lede':      'A brief introduction to the IEG team and its members. Particularly helpful for new interns and analysts during onboarding.',
     'team.locations': 'Locations',
 
     /* Team bios */
@@ -248,6 +260,18 @@ const I18N = {
     'team.schwemme.bio':    'Brings people and processes together. First point of contact for new team members on onboarding and office matters.',
     'team.krassowsky.bio':  'Structured, communicative, reliable — Lena coordinates day-to-day operations and is the right person for organisational questions.',
     'team.dubber.bio':      'Focused on HealthTech and FinTech. Values navigating complex financial transactions and collaborative working.',
+    'team.fakhfakh.bio':    'Managing Director and co-founder of IEG Tunisia. Over 20 years in banking, focused on SME financing, fundraising, restructuring and M&A.',
+    'team.attia.bio':       'Co-founder and Managing Director of IEG Tunisia. Expertise in corporate finance; leading restructuring, M&A and fundraising projects across many sectors since 2012.',
+    'team.schmidtbadoux.bio':'Over two decades of corporate finance experience, primarily with Swiss corporations on an international scale. Passionate about M&A in the technology sector.',
+    'team.abdelkhalek.bio': 'Director focused on M&A. Passionate about AI applications — especially in HealthTech, AgriTech and FinTech, with an eye on financial inclusion in Africa.',
+    'team.benfayala.bio':   'Vice President passionate about FinTech, B2C SaaS and CleanTech. Committed to social entrepreneurship supporting disadvantaged communities.',
+    'team.alhajji.bio':     'Vice President with extensive investment banking experience. Focused on capital raising, M&A and corporate restructuring in high-growth markets.',
+    'team.helland.bio':     'Associate Partner with a management consulting background. Fifteen years advising growth companies, most recently focused on clean-tech and climate-tech.',
+    'team.karam.bio':       'Senior Analyst with experience as a VC analyst and tech-startup project lead. Supports founders throughout the journey from inception to exit.',
+    'team.khecharem.bio':   'Senior Associate interested in retail intelligence and innovative e-commerce, as well as FinTech — particularly crypto and asset management.',
+    'team.maercklin.bio':   'Head of Accounting with a passion for analytical thinking and numbers. Ensures precise financial planning with thoroughness and diligence.',
+    'team.alhusseini.bio':  'Analyst with a Master of Finance (University of Maryland) and NYU Abu Dhabi alumnus. Supports high-growth companies with acquisitions, capital raising and strategic advisory.',
+    'team.gruell.bio':      'Financial Analyst enthusiastic about M&A and strategic thinking. Particularly interested in HealthTech and FinTech.',
 
     /* Certificate */
     'cert.eyebrow':   '/ Certificate',
