@@ -608,7 +608,8 @@ var CURRICULUM_EN = [
       <p>Claude Cowork is an <strong>AI agent that acts independently on your computer</strong>. The model is the <strong>brain</strong>, Cowork is the <strong>hands</strong> — it opens, moves, renames and controls files and programmes.</p>
       <h3>2. Setup and Security</h3>
       <ul>
-        <li><strong>Desktop app:</strong> Requires the Claude desktop app (Mac/Windows) and a <strong>Pro subscription</strong>.</li>
+        <li><strong>Desktop app:</strong> Full functionality runs via the Claude desktop app (Mac/Windows) — included on <strong>every paid plan</strong> (Pro, Max, Team, Enterprise), not only with a Pro subscription.</li>
+        <li><strong>Remote control (beta):</strong> Cowork is gradually rolling out to web and mobile too, letting you start and follow running desktop sessions from your phone.</li>
         <li><strong>Security sandboxing:</strong> Cowork only works in folders you explicitly authorise.</li>
         <li><strong>Working environment:</strong> Create a dedicated folder for each project.</li>
       </ul>
@@ -637,7 +638,7 @@ var CURRICULUM_EN = [
     `,
     quiz: [
       { q: 'How can the relationship between the Claude model and Cowork be described?', options: ['Cowork replaces the language model with its own engine', 'The model is the brain, Cowork is the hands that control files and programmes', 'Cowork is a pure chatbot with no file system access', 'Cowork and the model run in two completely separate accounts'], correct: 1, explanation: 'The model is the brain, Cowork the hands — it opens, moves and renames files and controls programmes.' },
-      { q: 'How is Cowork accessed and what is the prerequisite?', options: ['Via any browser without any requirement', 'Only via the mobile app; a free account is sufficient', 'Exclusively via the web interface', 'Exclusively via the desktop app (Mac/Windows) with a Pro subscription'], correct: 3, explanation: 'Cowork only works via the Claude desktop app for Mac and Windows and requires a Pro subscription.' },
+      { q: 'How is Cowork accessed and what is the prerequisite?', options: ['Via any browser without any requirement', 'Only via the mobile app; a free account is sufficient', 'Only with a Team or Enterprise contract', 'Full functionality via the desktop app (Mac/Windows), included on every paid plan — web and mobile are in beta rollout for remote control'], correct: 3, explanation: 'Cowork runs via the Claude desktop app for Mac and Windows and is included on every paid plan (Pro, Max, Team, Enterprise) — not only Pro. Web and mobile are in beta rollout for remotely controlling running sessions.' },
       { q: 'What does security sandboxing do in Claude Cowork?', options: ['Cowork only works in explicitly authorised folders', 'It encrypts all hard drives automatically', 'It limits task runtime to ten minutes', 'It blocks internet access during tasks'], correct: 0, explanation: 'Sandboxing: Cowork may only work in explicitly authorised folders — all other data remains protected.' },
       { q: 'Why does Cowork use Markdown files in the project folder?', options: ['Markdown is the only language Cowork can read', 'To make outputs look better than PDF', 'Because it lacks session memory and stores information this way permanently', 'To hand over tasks to a human colleague'], correct: 2, explanation: 'Cowork has no built-in session memory and therefore stores information in Markdown files.' },
       { q: 'What happens to a running task when the desktop app is closed?', options: ['The task continues in the cloud', 'The task is handed over to the smartphone app', 'The task pauses and restarts from the beginning', 'The agent stops — the app must remain open'], correct: 3, explanation: 'Session persistence: the app must remain open — closing it stops the agent.' },
@@ -652,8 +653,8 @@ var CURRICULUM_EN = [
     id: 7,
     number: '07',
     meta: 'Practical · Module 7',
-    title: 'Claude in Microsoft Office (Excel & PowerPoint)',
-    desc: 'The Claude Add-in in Excel and PowerPoint: generate formulas by voice, write VBA macros, fix circular references and create presentations from data tables.',
+    title: 'Claude in Microsoft Office (Excel, PowerPoint & Word)',
+    desc: 'The Claude Add-in in Excel, PowerPoint and Word: generate formulas by voice, write VBA macros, fix circular references, create presentations from data tables and review contracts with tracked changes.',
     duration: '30 min.',
     videos: [
       { url: 'https://www.youtube.com/embed/9OsKjq_rVXc', title: 'How to Use Claude for Excel (Step-by-Step Tutorial)', caption: 'Video 7.1 · How to Use Claude for Excel — Step-by-Step Tutorial' },
@@ -666,7 +667,7 @@ var CURRICULUM_EN = [
         <thead><tr><th>Mode</th><th>Access</th><th>Key advantage</th></tr></thead>
         <tbody>
           <tr><td><strong>Standalone chat</strong></td><td>Browser or desktop app</td><td>Flexible all-purpose solution</td></tr>
-          <tr><td><strong>Office Add-in</strong></td><td>Directly in Excel / PowerPoint</td><td>Claude sees the open file and can directly edit cells and slides</td></tr>
+          <tr><td><strong>Office Add-in</strong></td><td>Directly in Excel / PowerPoint / Word</td><td>Claude sees the open file and can directly edit cells, slides or text passages</td></tr>
         </tbody>
       </table>
       <div class="callout">
@@ -676,7 +677,7 @@ var CURRICULUM_EN = [
       <h3>2. Setup</h3>
       <ul>
         <li>Find "Claude" in the Microsoft AppSource Store and install with one click.</li>
-        <li>Requires an active <strong>Claude Pro or Team subscription</strong>.</li>
+        <li>Requires an active <strong>Claude Pro or Team subscription</strong> (the Word Add-in currently requires Team/Enterprise, see below).</li>
         <li>No IT installation required — standard Office Add-in.</li>
       </ul>
       <h3>3. Claude in Excel</h3>
@@ -699,18 +700,33 @@ var CURRICULUM_EN = [
         <li>Shorten, rephrase or bring text into corporate design language.</li>
         <li>Suggest and create chart types from data tables.</li>
       </ul>
-      <h3>5. Data Security</h3>
-      <p>The Add-in transmits <strong>only the selected cell range</strong> — not the entire workbook.</p>
+      <h3>5. New: Claude in Word (Beta)</h3>
+      <p>Since April 2026, <strong>Claude for Word</strong> has completed the "classic Office trio" alongside Excel and PowerPoint. Its focus:</p>
+      <ul>
+        <li><strong>Document review:</strong> Check spelling, style and consistency even in long contracts or reports.</li>
+        <li><strong>Redlining:</strong> Comment on contract clauses and mark them as suggested changes.</li>
+        <li><strong>Tracked changes:</strong> Claude works directly with Word's own change-tracking — every edit stays traceable.</li>
+      </ul>
+      <div class="callout callout-warn">
+        <div class="callout-title">Requirement</div>
+        <p>Claude for Word is in beta and currently only available with a <strong>Team or Enterprise contract</strong> — not yet on Pro.</p>
+      </div>
+      <h3>6. Shared Context Across the Add-ins</h3>
+      <p>Since March 2026, Excel and PowerPoint share a <strong>common context</strong>: Claude can take figures from an open Excel sheet and use them directly for a PowerPoint slide — no copy-paste, no re-explaining. Word's integration into this shared context is expected to follow.</p>
+      <p>The same update also introduced <strong>Skills directly inside Excel and PowerPoint</strong> — reusable workflows that teams can save and share as one-click actions (e.g. "create monthly report").</p>
+      <h3>7. Data Security</h3>
+      <p>The Add-in transmits <strong>only the selected cell range or text passage</strong> — not the entire workbook or document.</p>
       <div class="callout callout-warn">
         <div class="callout-title">Data protection at IEG</div>
         <p>No real client data or deal terms in the Add-in. Use the <strong>IEG Claude Enterprise Account</strong> for sensitive models.</p>
       </div>
-      <h3>6. Integration Limits</h3>
+      <h3>8. Integration Limits</h3>
       <ul>
         <li>No direct macro execution — manual start via VBA editor.</li>
         <li>No database access (SAP, Bloomberg, SQL).</li>
         <li>Visible context only — not all background worksheets.</li>
         <li>No real-time synchronisation.</li>
+        <li>Word Add-in still in beta — feature set is expanding continuously.</li>
       </ul>
     `,
     quiz: [
@@ -723,7 +739,8 @@ var CURRICULUM_EN = [
       { q: 'How does Claude react to a circular reference error in Excel?', options: ['Claude deletes the affected rows and rebuilds', 'Claude saves under a new name and marks with a comment', 'Claude converts the formula to a static value', 'Claude identifies the error-causing formula, explains the cause and corrects the cell directly'], correct: 3, explanation: 'Claude identifies the problem formula, explains the cause and corrects it directly — without asking in "Accept all edits" mode.' },
       { q: 'Why is the Add-in superior for complex data transformations?', options: ['It stores inputs locally only', 'Claude sees the table structure and can reference columns, rows and cell addresses specifically', 'It exclusively activates the Opus model', 'It replaces Excel\'s formula library'], correct: 1, explanation: 'In the Add-in, Claude knows the actual table structure — enabling precise transformations not possible in chat.' },
       { q: 'What limitation applies to confidential financial models?', options: ['Claude refuses models with values over ten million', 'Financial formulas are not editable for liability reasons', 'Transmitted cell ranges end up on Anthropic servers — sensitive data must be anonymised first', 'Claude cannot process currency symbols'], correct: 2, explanation: 'The Add-in transmits selected ranges. Anonymise sensitive data first or use the IEG Enterprise Account.' },
-      { q: 'Which use case shows the strongest advantage of the Add-in over copy-paste into chat?', options: ['Cleaning unstructured data directly in Excel without manual copying', 'Replacing Excel\'s formula bar with Claude\'s natural language search', 'Synchronising Excel data with Claude\'s memory', 'Converting worksheets into interactive dashboards in PowerPoint viewer'], correct: 0, explanation: 'The Add-in reads the file context directly — data can be cleaned in the sheet without copying back and forth.' }
+      { q: 'Which use case shows the strongest advantage of the Add-in over copy-paste into chat?', options: ['Cleaning unstructured data directly in Excel without manual copying', 'Replacing Excel\'s formula bar with Claude\'s natural language search', 'Synchronising Excel data with Claude\'s memory', 'Converting worksheets into interactive dashboards in PowerPoint viewer'], correct: 0, explanation: 'The Add-in reads the file context directly — data can be cleaned in the sheet without copying back and forth.' },
+      { q: 'What became possible between Claude for Excel and Claude for PowerPoint since the March 2026 update?', options: ['Both Add-ins share a common context, so Excel figures can be used directly in PowerPoint slides without copy-paste', 'Excel files are automatically converted into PowerPoint files', 'PowerPoint automatically imports all Excel formulas as plain text', 'There is no new connection between the two Add-ins'], correct: 0, explanation: 'Since March 2026, Excel and PowerPoint share a common context (Shared Context) — Claude can take figures from an open sheet and use them directly for a slide, without manual copying or re-explaining.' }
     ]
   },
   {
