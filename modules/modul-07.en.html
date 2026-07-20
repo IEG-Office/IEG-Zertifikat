@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 07 · Claude in Microsoft Office (Excel &amp; PowerPoint) — IEG Claude Academy</title>
+<title>Module 07 · Claude in Microsoft Office (Excel, PowerPoint &amp; Word) — IEG Claude Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -31,8 +31,8 @@
   <div class="module-hero-inner">
     <div class="module-breadcrumb"><span>PRACTICAL</span><span>·</span><span>MODULE 7</span></div>
     <div class="module-hero-number">07</div>
-    <h1 class="module-hero-title">Claude in Microsoft Office (Excel &amp; PowerPoint)</h1>
-    <p class="module-hero-lede">The Claude Add-in in Excel and PowerPoint: generate formulas by voice, write VBA macros, fix circular references and create presentations from data tables.</p>
+    <h1 class="module-hero-title">Claude in Microsoft Office (Excel, PowerPoint &amp; Word)</h1>
+    <p class="module-hero-lede">The Claude Add-in in Excel, PowerPoint and Word: generate formulas by voice, write VBA macros, fix circular references, create presentations from data tables and review contracts with tracked changes.</p>
     <div class="module-hero-meta">
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -40,7 +40,7 @@
       </span>
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        10 quiz questions
+        11 quiz questions
       </span>
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
@@ -58,7 +58,7 @@
     <thead><tr><th>Mode</th><th>Access</th><th>Key advantage</th></tr></thead>
     <tbody>
       <tr><td><strong>Standalone chat</strong></td><td>Browser or desktop app</td><td>Flexible all-purpose solution — paste data manually</td></tr>
-      <tr><td><strong>Office Add-in</strong></td><td>Directly in Excel / PowerPoint</td><td>Claude sees the open file and can directly read and edit cells and slides</td></tr>
+      <tr><td><strong>Office Add-in</strong></td><td>Directly in Excel / PowerPoint / Word</td><td>Claude sees the open file and can directly read and edit cells, slides or text passages</td></tr>
     </tbody>
   </table>
   <div class="callout">
@@ -69,7 +69,7 @@
   <h3>2. Setup</h3>
   <ul>
     <li>Search for "Claude" in the <strong>Microsoft AppSource Store</strong> and install with one click.</li>
-    <li>Requires an active <strong>Claude Pro or Team subscription</strong>.</li>
+    <li>Requires an active <strong>Claude Pro or Team subscription</strong>. The new Word Add-in (see below) currently requires a <strong>Team or Enterprise contract</strong>.</li>
     <li>No IT installation required — standard Office Add-in, works immediately.</li>
   </ul>
 
@@ -95,19 +95,36 @@
     <li>Suggest and create appropriate chart types from data tables.</li>
   </ul>
 
-  <h3>5. Data Security</h3>
-  <p>The Add-in transmits <strong>only the selected cell range</strong> to Anthropic's servers — not the entire workbook. Background worksheets and non-selected ranges are not transmitted.</p>
+  <h3>5. New: Claude in Word (Beta)</h3>
+  <p>Since April 2026, <strong>Claude for Word</strong> has completed the "classic Office trio" alongside Excel and PowerPoint:</p>
+  <ul>
+    <li><strong>Document review:</strong> Check spelling, style and consistency even in long contracts or reports.</li>
+    <li><strong>Redlining:</strong> Suggest and comment on contract clauses, marking them as suggested changes.</li>
+    <li><strong>Tracked changes:</strong> Claude works directly with Word's own change-tracking — every edit stays traceable.</li>
+  </ul>
+  <div class="callout callout-warn">
+    <div class="callout-title">Requirement</div>
+    <p>Claude for Word is in beta and currently only available with a <strong>Team or Enterprise contract</strong> — not yet on Pro.</p>
+  </div>
+
+  <h3>6. Shared Context Across the Add-ins</h3>
+  <p>Since March 2026, Excel and PowerPoint share a <strong>common context</strong>: Claude can take figures from an open Excel sheet and use them directly for a PowerPoint slide — no copy-paste, no re-explaining. Word's integration into this shared context is expected to follow.</p>
+  <p>The same update also introduced <strong>Skills directly inside Excel and PowerPoint</strong> — reusable workflows that teams can save and share as one-click actions (e.g. "create monthly report").</p>
+
+  <h3>7. Data Security</h3>
+  <p>The Add-in transmits <strong>only the selected cell range or text passage</strong> to Anthropic's servers — not the entire workbook or document. Background worksheets and non-selected ranges are not transmitted.</p>
   <div class="callout callout-warn">
     <div class="callout-title">Data protection at IEG</div>
     <p>No real client data or deal terms in the Add-in. Anonymise sensitive models first, or use the <strong>IEG Claude Enterprise Account</strong> for financial models with real figures.</p>
   </div>
 
-  <h3>6. Integration Limits</h3>
+  <h3>8. Integration Limits</h3>
   <ul>
     <li>No direct macro execution — manual start via VBA editor required.</li>
     <li>No database access (SAP, Bloomberg, SQL) — data must be exported first.</li>
     <li>Only visible context — not all background worksheets are available.</li>
     <li>No real-time synchronisation with live data sources.</li>
+    <li>Word Add-in still in beta — feature set is expanding continuously, currently Team/Enterprise only.</li>
   </ul>
 
   <section class="exercise-section">
@@ -157,7 +174,7 @@
   <div class="quiz-section">
     <div class="quiz-eyebrow">Ready for the quiz?</div>
     <h2>Test your understanding</h2>
-    <p class="quiz-lede">10 questions · Pass threshold 70%.</p>
+    <p class="quiz-lede">11 questions · Pass threshold 70%.</p>
     <button class="btn btn-primary" onclick="startQuiz()">Start quiz <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
   </div>
 </main>
@@ -192,7 +209,7 @@
 <script src="../content.js"></script>
 <script>
   const MODULE_ID = 7;
-  const MODULE_TITLE = "Claude in Microsoft Office (Excel & PowerPoint)";
+  const MODULE_TITLE = "Claude in Microsoft Office (Excel, PowerPoint & Word)";
   const MODULE_QUIZ = CURRICULUM.find(m => m.id === 7).quiz;
 </script>
 <script src="module.js"></script>
