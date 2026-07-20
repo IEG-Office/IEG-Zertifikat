@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modul 07 · Claude in Microsoft Office (Excel &amp; PowerPoint) — IEG Claude Academy</title>
+<title>Modul 07 · Claude in Microsoft Office (Excel, PowerPoint &amp; Word) — IEG Claude Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -36,8 +36,8 @@
       <span>MODULE 7</span>
     </div>
     <div class="module-hero-number">07</div>
-    <h1 class="module-hero-title">Claude in Microsoft Office (Excel &amp; PowerPoint)</h1>
-    <p class="module-hero-lede">Das Claude Add-in direkt in Excel und PowerPoint: Formeln per Sprache generieren, VBA-Makros schreiben, Zirkelbezüge korrigieren und vollständige Präsentationen aus Datentabellen erzeugen — inklusive Setup, Sicherheit und Grenzen der Integration.</p>
+    <h1 class="module-hero-title">Claude in Microsoft Office (Excel, PowerPoint &amp; Word)</h1>
+    <p class="module-hero-lede">Das Claude Add-in direkt in Excel, PowerPoint und Word: Formeln per Sprache generieren, VBA-Makros schreiben, Zirkelbezüge korrigieren, vollständige Präsentationen erzeugen und Verträge mit Tracked Changes prüfen — inklusive Setup, Sicherheit und Grenzen der Integration.</p>
     <div class="module-hero-meta">
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -45,7 +45,7 @@
       </span>
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-        10 Quiz-Fragen
+        11 Quiz-Fragen
       </span>
       <span class="module-hero-meta-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
@@ -73,8 +73,8 @@
       </tr>
       <tr>
         <td><strong>Office Add-in</strong></td>
-        <td>Direkt in Excel / PowerPoint</td>
-        <td>Claude sieht die geöffnete Datei und kann Zellen, Formeln und Folien <em>direkt bearbeiten</em></td>
+        <td>Direkt in Excel / PowerPoint / Word</td>
+        <td>Claude sieht die geöffnete Datei und kann Zellen, Formeln, Folien oder Textabschnitte <em>direkt bearbeiten</em></td>
       </tr>
     </tbody>
   </table>
@@ -86,7 +86,7 @@
   <h3>2. Einrichtung des Claude Add-ins</h3>
   <ul>
     <li><strong>Installation:</strong> Das Add-in wird im <strong>Microsoft AppSource Store</strong> gesucht (Suchbegriff: „Claude") und mit einem Klick installiert.</li>
-    <li><strong>Voraussetzung:</strong> Ein aktives <strong>Claude Pro- oder Team-Abonnement</strong> ist erforderlich — die kostenlose Version unterstützt das Add-in nicht.</li>
+    <li><strong>Voraussetzung:</strong> Ein aktives <strong>Claude Pro- oder Team-Abonnement</strong> ist erforderlich — die kostenlose Version unterstützt das Add-in nicht. Das neue Word-Add-in (siehe unten) setzt aktuell einen <strong>Team- oder Enterprise-Vertrag</strong> voraus.</li>
     <li><strong>Authentifizierung:</strong> Beim ersten Start wird die Anthropic-Anmeldung einmalig verknüpft. Das Add-in erscheint danach als Seitenleiste direkt in Excel und PowerPoint.</li>
     <li><strong>Kein IT-Aufwand:</strong> Da es sich um ein Standard-Office-Add-in handelt, ist keine lokale Installation durch die IT-Abteilung nötig.</li>
   </ul>
@@ -121,20 +121,37 @@
     <li><strong>Daten zu Charts:</strong> Aus einer eingefügten Datentabelle schlägt Claude geeignete Diagrammtypen vor und erstellt die Visualisierung als Folieninhalt.</li>
   </ul>
 
-  <h3>5. Workflows und Datensicherheit</h3>
-  <p>Das Add-in überträgt <strong>nur den markierten oder aktiven Zellbereich</strong> an Claudes Server — nicht die gesamte Arbeitsmappe. Das reduziert die übermittelten Daten, erfordert jedoch bewusstes Handeln bei vertraulichen Finanzmodellen.</p>
+  <h3>5. Neu: Claude in Word (Beta)</h3>
+  <p>Seit April 2026 ergänzt <strong>Claude für Word</strong> das Add-in-Angebot zum vollständigen „klassischen Office-Trio" aus Excel, PowerPoint und Word:</p>
+  <ul>
+    <li><strong>Dokumentenprüfung:</strong> Rechtschreibung, Stil und Konsistenz auch bei umfangreichen Verträgen oder Berichten prüfen.</li>
+    <li><strong>Redlining:</strong> Vertragsklauseln vorschlagen, kommentieren und als Änderungsvorschlag markieren.</li>
+    <li><strong>Tracked Changes:</strong> Claude arbeitet direkt mit Words eigener Änderungsverfolgung — jede Anpassung bleibt nachvollziehbar.</li>
+  </ul>
+  <div class="callout callout-warn">
+    <div class="callout-title">Voraussetzung</div>
+    <p>Claude für Word befindet sich in der Beta-Phase und ist aktuell nur mit <strong>Team- oder Enterprise-Vertrag</strong> verfügbar — noch nicht auf Pro.</p>
+  </div>
+
+  <h3>6. Ein Kontext über die Add-ins hinweg</h3>
+  <p>Seit März 2026 teilen sich Excel und PowerPoint einen <strong>gemeinsamen Kontext (Shared Context)</strong>: Claude kann Zahlen aus einem geöffneten Excel-Sheet direkt für eine PowerPoint-Folie weiterverwenden — ohne Copy-Paste, ohne erneutes Erklären. Die Anbindung von Word an diesen gemeinsamen Kontext folgt.</p>
+  <p>Seit demselben Update lassen sich zudem <strong>Skills direkt in Excel und PowerPoint nutzen</strong> — wiederverwendbare Workflows, die Teams als Ein-Klick-Aktion speichern und teilen können (z.&thinsp;B. „Monatsbericht erstellen").</p>
+
+  <h3>7. Workflows und Datensicherheit</h3>
+  <p>Das Add-in überträgt <strong>nur den markierten oder aktiven Zellbereich bzw. Textabschnitt</strong> an Claudes Server — nicht die gesamte Arbeitsmappe oder das gesamte Dokument. Das reduziert die übermittelten Daten, erfordert jedoch bewusstes Handeln bei vertraulichen Finanzmodellen.</p>
   <div class="callout callout-warn">
     <div class="callout-title">Datenschutz-Pflicht bei IEG</div>
     <p>Auch im Add-in gilt: Keine echten Mandantendaten, Deal-Konditionen oder nicht-öffentlichen Finanzzahlen eingeben. Für sensible Modelle immer den <strong>IEG Claude Enterprise Account</strong> verwenden, der Datenverarbeitungsverträge und keine Trainingsnutzung der Daten gewährleistet.</p>
   </div>
   <p>Als Best Practice empfiehlt sich, <strong>kritische Werte vorab zu anonymisieren</strong> oder durch Platzhalter zu ersetzen, bevor ein Modell an Claude übergeben wird.</p>
 
-  <h3>6. Grenzen der Integration</h3>
+  <h3>8. Grenzen der Integration</h3>
   <ul>
     <li><strong>Keine direkte Makro-Ausführung:</strong> Claude kann VBA-Code schreiben, aber nicht ausführen — das bleibt eine manuelle Aktion.</li>
     <li><strong>Kein Datenbankzugriff:</strong> Das Add-in hat keine Verbindung zu externen Systemen wie SAP, Bloomberg oder SQL-Datenbanken.</li>
     <li><strong>Nur sichtbarer Kontext:</strong> Claude verarbeitet nur markierte oder aktive Inhalte — nicht implizit alle Tabellenblätter im Hintergrund.</li>
     <li><strong>Keine Echtzeit-Synchronisation:</strong> Änderungen werden einmalig angewendet; automatische Aktualisierungen bei sich ändernden Quelldaten erfordern erneute Prompts.</li>
+    <li><strong>Word-Add-in noch in Beta:</strong> Funktionsumfang wächst laufend, aktuell nur für Team/Enterprise.</li>
   </ul>
 
   <section class="exercise-section">
@@ -187,7 +204,7 @@
     <div class="quiz-eyebrow">Bereit für das Quiz?</div>
     <h2>Testen Sie Ihr Verständnis</h2>
     <p class="quiz-lede">
-      10 Fragen · Pass-Threshold 70 %. Bei Bestehen wird die Abschlussprüfung freigeschaltet.
+      11 Fragen · Pass-Threshold 70 %. Bei Bestehen wird die Abschlussprüfung freigeschaltet.
     </p>
     <button class="btn btn-primary" onclick="startQuiz()">
       Quiz starten
@@ -224,7 +241,7 @@
 
 <script>
   const MODULE_ID = 7;
-  const MODULE_TITLE = "Claude in Microsoft Office (Excel & PowerPoint)";
+  const MODULE_TITLE = "Claude in Microsoft Office (Excel, PowerPoint & Word)";
 </script>
 <script src="../i18n.js?v=1"></script>
 <script src="../content.en.js?v=1"></script>
