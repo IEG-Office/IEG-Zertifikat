@@ -23,14 +23,15 @@ var CURRICULUM_EN = [
       <table>
         <thead><tr><th>Model</th><th>Strength</th><th>Typical use</th></tr></thead>
         <tbody>
-          <tr><td><strong>Haiku</strong></td><td>The fastest and most cost-efficient model</td><td>Simple tasks, quick formatting, short summaries</td></tr>
-          <tr><td><strong>Sonnet</strong></td><td>The "all-rounder"</td><td>Balanced combination of speed and intelligence — everyday work</td></tr>
-          <tr><td><strong>Opus</strong></td><td>The flagship model</td><td>Maximum capability for extremely complex analyses and decisions</td></tr>
+          <tr><td><strong>Haiku</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">currently: Haiku 4.5</span></td><td>The fastest and most cost-efficient model</td><td>Simple tasks, quick formatting, short summaries</td></tr>
+          <tr><td><strong>Sonnet</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">currently: Sonnet 5</span></td><td>The "all-rounder"</td><td>Balanced combination of speed and intelligence — everyday work</td></tr>
+          <tr><td><strong>Opus</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">currently: Opus 4.8</span></td><td>The flagship model</td><td>Maximum capability for extremely complex analyses and decisions</td></tr>
+          <tr><td><strong>Fable</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">Mythos class, since June 2026</span></td><td>The most capable publicly available model — positioned above Opus</td><td>Exceptional cases requiring the highest depth and precision (higher cost)</td></tr>
         </tbody>
       </table>
       <div class="callout">
         <div class="callout-title">Looking ahead: What's next?</div>
-        <p>Anthropic is continuously developing new models. The current state of progress shows where things are headed — speed, depth and integration will continue to grow.</p>
+        <p>Anthropic is continuously developing new models. Since June 2026, a new tier above Opus has existed — the "Mythos" class: <strong>Claude Fable 5</strong> is its publicly available model, while the more capable <strong>Claude Mythos 5</strong> is so far only available to select organisations as part of "Project Glasswing". For everyday work, Haiku, Sonnet and Opus remain the relevant tools — Fable is worthwhile only for rare exceptional cases with the highest requirements.</p>
       </div>
 
       <h3>2. Organisation through "Projects" — The Briefing Folder</h3>
