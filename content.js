@@ -23,14 +23,15 @@ const CURRICULUM = [
       <table>
         <thead><tr><th>Modell</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead>
         <tbody>
-          <tr><td><strong>Haiku</strong></td><td>Das schnellste und kostengünstigste Modell</td><td>Einfache Aufgaben, schnelle Formatierungen, kurze Zusammenfassungen</td></tr>
-          <tr><td><strong>Sonnet</strong></td><td>Der „Allrounder"</td><td>Ausgewogenes Verhältnis aus Geschwindigkeit und Intelligenz — tägliche Arbeit</td></tr>
-          <tr><td><strong>Opus</strong></td><td>Das Flaggschiff-Modell</td><td>Maximale Leistungsfähigkeit für extrem komplexe Analysen und Entscheidungen</td></tr>
+          <tr><td><strong>Haiku</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">aktuell: Haiku 4.5</span></td><td>Das schnellste und kostengünstigste Modell</td><td>Einfache Aufgaben, schnelle Formatierungen, kurze Zusammenfassungen</td></tr>
+          <tr><td><strong>Sonnet</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">aktuell: Sonnet 5</span></td><td>Der „Allrounder"</td><td>Ausgewogenes Verhältnis aus Geschwindigkeit und Intelligenz — tägliche Arbeit</td></tr>
+          <tr><td><strong>Opus</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">aktuell: Opus 4.8</span></td><td>Das Flaggschiff-Modell</td><td>Maximale Leistungsfähigkeit für extrem komplexe Analysen und Entscheidungen</td></tr>
+          <tr><td><strong>Fable</strong><br><span style="font-weight:400;font-size:0.9em;color:var(--text-faint);">Mythos-Klasse, seit Juni 2026</span></td><td>Das leistungsstärkste öffentlich verfügbare Modell — oberhalb von Opus angesiedelt</td><td>Ausnahmefälle mit höchsten Anforderungen an Tiefe und Präzision (höhere Kosten)</td></tr>
         </tbody>
       </table>
       <div class="callout">
         <div class="callout-title">Ausblick: Was kommt als Nächstes?</div>
-        <p>Anthropic arbeitet kontinuierlich an neuen Modellen. Der aktuelle Entwicklungsstand zeigt, wohin die Reise geht — Geschwindigkeit, Tiefe und Integration werden weiter zunehmen.</p>
+        <p>Anthropic arbeitet kontinuierlich an neuen Modellen. Seit Juni 2026 gibt es mit der „Mythos"-Klasse eine neue Stufe oberhalb von Opus: <strong>Claude Fable 5</strong> ist deren öffentlich verfügbares Modell, während das leistungsstärkere <strong>Claude Mythos 5</strong> bislang nur ausgewählten Organisationen im Rahmen von „Project Glasswing" zur Verfügung steht. Für den Arbeitsalltag bleiben Haiku, Sonnet und Opus die relevanten Werkzeuge — Fable lohnt sich nur für seltene Ausnahmefälle mit höchsten Anforderungen.</p>
       </div>
 
       <h3>2. Organisation durch „Projects" — Der Briefing-Ordner</h3>
