@@ -153,6 +153,12 @@ function openGlossary() {
   window.location.href = 'glossar' + suffix;
 }
 
+function openMyNotes() {
+  var lang = (typeof getLang === 'function') ? getLang() : 'de';
+  var suffix = (lang === 'en') ? '.en.html' : '.html';
+  window.location.href = 'notizen' + suffix;
+}
+
 // ===== SITE-WIDE SEARCH =====
 function stripHtml(html) {
   var div = document.createElement('div');
