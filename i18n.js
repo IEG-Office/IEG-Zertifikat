@@ -12,6 +12,7 @@ const I18N = {
     'nav.team':         'Team',
     'nav.certificate':  'Zertifikat',
     'nav.glossary':     'Glossar',
+    'search.placeholder': 'Kurs durchsuchen … (Module, Inhalte, Quizfragen)',
     'nav.progress':     'Fortschritt',
     'nav.logout':       'Abmelden',
 
@@ -25,6 +26,9 @@ const I18N = {
     'hero.stat.time.unit':    'Std.',
     'hero.stat.certificate':  'Teilnahmezertifikat',
     'hero.cta.start':         'Curriculum starten',
+    'hero.cta.resume':        'Weiter da, wo ich aufgehört habe',
+    'hero.cta.exam':          'Zur Abschlussprüfung',
+    'hero.cta.certificate':   'Zum Zertifikat',
     'hero.cta.team':          'Über das IEG Team',
 
     /* Curriculum */
@@ -195,8 +199,12 @@ const I18N = {
     'reset.confirm':          'Gesamten Lernfortschritt zurücksetzen?',
     /* module.js — Quiz engine */
     'mod.quiz.eyebrow':          'Modul {n} \u00b7 Quiz',
+    'mod.notes.title':           'Meine Notizen',
+    'mod.notes.placeholder':     'Eigene Merksätze zu diesem Modul \u2014 wird nur lokal in deinem Browser gespeichert.',
+    'mod.notes.saved':           'Gespeichert \u2713',
     'mod.quiz.question':         'Frage {i} von {total}',
     'mod.quiz.subtitle':         '{total} Fragen \u00b7 Pass-Threshold {pass}%',
+    'mod.quiz.keyhint':          'Tastatur: 1\u20134 wählen \u00b7 Enter bestätigt \u00b7 \u2190 \u2192 blättern',
     'mod.quiz.choose':           'W\u00e4hlen Sie eine Antwort',
     'mod.quiz.back':             '\u2190 Zur\u00fcck',
     'mod.quiz.next':             'N\u00e4chste Frage \u2192',
@@ -223,6 +231,7 @@ const I18N = {
     'nav.team':         'Team',
     'nav.certificate':  'Certificate',
     'nav.glossary':     'Glossary',
+    'search.placeholder': 'Search the course … (modules, content, quiz questions)',
     'nav.progress':     'Progress',
     'nav.logout':       'Log out',
 
@@ -236,6 +245,9 @@ const I18N = {
     'hero.stat.time.unit':    'hrs.',
     'hero.stat.certificate':  'Certificate of completion',
     'hero.cta.start':         'Start curriculum',
+    'hero.cta.resume':        'Resume where you left off',
+    'hero.cta.exam':          'Go to final exam',
+    'hero.cta.certificate':   'View certificate',
     'hero.cta.team':          'About the IEG team',
 
     /* Curriculum */
@@ -406,6 +418,9 @@ const I18N = {
     'reset.confirm':          'Reset all learning progress?',
     /* module.js — Quiz engine */
     'mod.quiz.eyebrow':          'Module {n} \u00b7 Quiz',
+    'mod.notes.title':           'My Notes',
+    'mod.notes.placeholder':     'Your own notes on this module \u2014 saved only locally in your browser.',
+    'mod.notes.saved':           'Saved \u2713',
     'mod.quiz.question':         'Question {i} of {total}',
     'mod.quiz.subtitle':         '{total} questions \u00b7 Pass threshold {pass}%',
     'mod.quiz.choose':           'Choose an answer',
@@ -489,5 +504,52 @@ const I18N = {
     document.addEventListener('DOMContentLoaded', applyLang);
   } else {
     applyLang();
+  }
+
+  /* ===== DARK MODE (runs on every page that loads i18n.js) ===== */
+  const THEME_KEY = 'ieg-academy-theme';
+
+  function getTheme() {
+    try { return localStorage.getItem(THEME_KEY) || 'light'; } catch (e) { return 'light'; }
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) {
+      btn.innerHTML = theme === 'dark' ? SUN_ICON : MOON_ICON;
+      btn.title = theme === 'dark'
+        ? (getLang() === 'en' ? 'Switch to light mode' : 'Zu hellem Modus wechseln')
+        : (getLang() === 'en' ? 'Switch to dark mode' : 'Zu dunklem Modus wechseln');
+    }
+  }
+
+  window.toggleTheme = function () {
+    const next = getTheme() === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    applyTheme(next);
+  };
+
+  const SUN_ICON  = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  const MOON_ICON = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+
+  function injectThemeToggle() {
+    if (document.getElementById('themeToggleBtn')) return;
+    const btn = document.createElement('button');
+    btn.id = 'themeToggleBtn';
+    btn.className = 'theme-toggle-fab';
+    btn.setAttribute('onclick', 'toggleTheme()');
+    btn.setAttribute('aria-label', 'Toggle dark mode');
+    document.body.appendChild(btn);
+    applyTheme(getTheme());
+  }
+
+  /* Apply theme immediately (before paint) to avoid flash-of-wrong-theme */
+  document.documentElement.setAttribute('data-theme', getTheme());
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectThemeToggle);
+  } else {
+    injectThemeToggle();
   }
 })();
