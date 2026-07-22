@@ -137,6 +137,109 @@ window.addEventListener('load', renderDynamicContent);
 // Re-render when language changes
 document.addEventListener('ieg:langchange', renderDynamicContent);
 
+// ---------- PERSONAL NOTES ----------
+const NOTES_KEY = 'ieg-academy-notes-v1';
+
+function loadAllNotes() {
+  try {
+    const saved = localStorage.getItem(NOTES_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) {}
+  return {};
+}
+
+function getModuleNote() {
+  const all = loadAllNotes();
+  return all[MODULE_ID] || '';
+}
+
+function saveModuleNote(text) {
+  try {
+    const all = loadAllNotes();
+    if (text && text.trim()) all[MODULE_ID] = text; else delete all[MODULE_ID];
+    localStorage.setItem(NOTES_KEY, JSON.stringify(all));
+  } catch (e) {}
+}
+
+let _notesSaveTimer = null;
+function onNoteInput(textarea) {
+  clearTimeout(_notesSaveTimer);
+  const indicator = document.getElementById('notesSaveIndicator');
+  if (indicator) indicator.textContent = '';
+  _notesSaveTimer = setTimeout(function () {
+    saveModuleNote(textarea.value);
+    if (indicator) {
+      indicator.textContent = mt('mod.notes.saved');
+      clearTimeout(indicator._fadeTimer);
+      indicator._fadeTimer = setTimeout(function () { indicator.textContent = ''; }, 2000);
+    }
+  }, 500);
+}
+
+function escapeForTextarea(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderNotesSection() {
+  const main = document.querySelector('main.module-content');
+  if (!main || document.getElementById('moduleNotesSection')) return;
+  const existing = getModuleNote();
+  const html = `
+    <section id="moduleNotesSection" class="notes-section">
+      <div class="notes-header">
+        <div class="notes-title">${mt('mod.notes.title')}</div>
+        <span class="notes-save-indicator" id="notesSaveIndicator"></span>
+      </div>
+      <textarea id="moduleNotesTextarea" class="notes-textarea"
+        placeholder="${mt('mod.notes.placeholder')}"
+        oninput="onNoteInput(this)">${escapeForTextarea(existing)}</textarea>
+    </section>`;
+  main.insertAdjacentHTML('afterend', html);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(renderNotesSection, 60);
+});
+
+// ---------- SECTION PROGRESS BAR ----------
+function initSectionProgressBar() {
+  const main = document.querySelector('main.module-content');
+  if (!main || document.getElementById('sectionProgressBar')) return;
+
+  const bar = document.createElement('div');
+  bar.id = 'sectionProgressBar';
+  bar.className = 'section-progress-bar';
+  bar.innerHTML = '<div class="section-progress-fill" id="sectionProgressFill"></div>';
+  document.body.appendChild(bar);
+
+  function update() {
+    const total = main.scrollHeight - window.innerHeight;
+    var pct;
+    if (total <= 0) {
+      pct = window.scrollY > 0 ? 100 : 0;
+    } else {
+      var docTop = main.offsetTop;
+      var docHeight = main.offsetHeight;
+      var winHeight = window.innerHeight;
+      var scrollTop = window.scrollY;
+      var progressStart = docTop - winHeight * 0.2;
+      var progressRange = docHeight + winHeight * 0.2;
+      pct = ((scrollTop - progressStart) / progressRange) * 100;
+    }
+    pct = Math.max(0, Math.min(100, pct));
+    const fill = document.getElementById('sectionProgressFill');
+    if (fill) fill.style.width = pct + '%';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(initSectionProgressBar, 60);
+});
+
 // ---------- QUIZ ENGINE ----------
 let currentQuiz = null;
 const QUIZ_PROGRESS_KEY = 'ieg-academy-quiz-progress-v1';
@@ -242,6 +345,7 @@ function renderQuizQuestion() {
       <div class="quiz-modal-eyebrow">${mt('mod.quiz.eyebrow', {n: nStr})}</div>
       <div class="quiz-title">${mt('mod.quiz.question', {i: idx + 1, total})}</div>
       <div class="quiz-subtitle">${mt('mod.quiz.subtitle', {total, pass: PASS_THRESHOLD})}</div>
+      <div class="quiz-keyhint">${mt('mod.quiz.keyhint')}</div>
     </div>
     <div class="quiz-progress">${dotsHtml}</div>
     <div class="quiz-question">${q.q}</div>
@@ -318,6 +422,10 @@ function finishQuiz() {
       <div class="quiz-result-msg">${msg}</div>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">${actions}</div>
     </div>`;
+
+  // Clear the active quiz state so keyboard shortcuts (1-4, Enter, arrows) no longer
+  // act on a finished quiz and accidentally redraw the question view over the result screen.
+  currentQuiz = null;
 }
 
 function restartQuiz() { clearQuizProgress(); startQuiz(); }
@@ -329,7 +437,42 @@ function closeQuiz() {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && document.getElementById('quizModal').classList.contains('active')) closeQuiz();
+  const modalActive = document.getElementById('quizModal').classList.contains('active');
+  if (!modalActive) return;
+
+  if (e.key === 'Escape') { closeQuiz(); return; }
+  if (!currentQuiz) return;
+
+  // Number keys 1-4 select an answer option (only if not yet answered)
+  if (['1', '2', '3', '4'].includes(e.key)) {
+    const idx = currentQuiz.currentIndex;
+    const already = currentQuiz.answers[idx] !== null;
+    const optionCount = currentQuiz.questions[idx].options.length;
+    const optionIndex = parseInt(e.key, 10) - 1;
+    if (!already && optionIndex < optionCount) {
+      e.preventDefault();
+      answerQuestion(optionIndex);
+    }
+    return;
+  }
+
+  // Enter advances to next question, or finishes the quiz on the last question
+  if (e.key === 'Enter') {
+    const idx = currentQuiz.currentIndex;
+    const total = currentQuiz.questions.length;
+    const answered = currentQuiz.answers[idx] !== null;
+    if (!answered) return;
+    e.preventDefault();
+    const isLast = idx === total - 1;
+    const allAnswered = currentQuiz.answers.every(a => a !== null);
+    if (isLast && allAnswered) finishQuiz();
+    else if (idx < total - 1) nextQuestion();
+    return;
+  }
+
+  // Arrow keys navigate between already-visited questions
+  if (e.key === 'ArrowRight') { e.preventDefault(); nextQuestion(); return; }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); prevQuestion(); return; }
 });
 
 // ---------- NEXT MODULE LOCK ----------
