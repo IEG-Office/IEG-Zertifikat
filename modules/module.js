@@ -184,6 +184,8 @@ function renderNotesSection() {
   const main = document.querySelector('main.module-content');
   if (!main || document.getElementById('moduleNotesSection')) return;
   const existing = getModuleNote();
+  const lang = (typeof window.getLang === 'function') ? window.getLang() : 'de';
+  const overviewHref = '../notizen' + (lang === 'en' ? '.en.html' : '.html');
   const html = `
     <section id="moduleNotesSection" class="notes-section">
       <div class="notes-header">
@@ -193,6 +195,7 @@ function renderNotesSection() {
       <textarea id="moduleNotesTextarea" class="notes-textarea"
         placeholder="${mt('mod.notes.placeholder')}"
         oninput="onNoteInput(this)">${escapeForTextarea(existing)}</textarea>
+      <a href="${overviewHref}" class="notes-overview-cta">${mt('mod.notes.viewall')}</a>
     </section>`;
   main.insertAdjacentHTML('afterend', html);
 }
@@ -518,3 +521,152 @@ function toggleSolution(btn) {
   var labelClosed = btn.getAttribute('data-label-closed') || 'Musterlösung anzeigen';
   btn.firstChild.textContent = isOpen ? label + ' ' : labelClosed + ' ';
 }
+
+// ---------- TEXT HIGHLIGHTING ----------
+const HIGHLIGHTS_KEY = 'ieg-academy-highlights-v1';
+
+function loadAllHighlights() {
+  try {
+    const saved = localStorage.getItem(HIGHLIGHTS_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (e) {}
+  return {};
+}
+
+function saveAllHighlights(all) {
+  try { localStorage.setItem(HIGHLIGHTS_KEY, JSON.stringify(all)); } catch (e) {}
+}
+
+function getModuleHighlights() {
+  const all = loadAllHighlights();
+  return Array.isArray(all[MODULE_ID]) ? all[MODULE_ID] : [];
+}
+
+function addModuleHighlight(text) {
+  const all = loadAllHighlights();
+  if (!Array.isArray(all[MODULE_ID])) all[MODULE_ID] = [];
+  if (all[MODULE_ID].indexOf(text) === -1) all[MODULE_ID].push(text);
+  saveAllHighlights(all);
+}
+
+function removeModuleHighlight(text) {
+  const all = loadAllHighlights();
+  if (!Array.isArray(all[MODULE_ID])) return;
+  all[MODULE_ID] = all[MODULE_ID].filter(function (t) { return t !== text; });
+  saveAllHighlights(all);
+}
+
+let _highlightPopup = null;
+function getHighlightPopup() {
+  if (_highlightPopup) return _highlightPopup;
+  const btn = document.createElement('button');
+  btn.id = 'highlightPopupBtn';
+  btn.className = 'highlight-popup-btn';
+  btn.type = 'button';
+  document.body.appendChild(btn);
+  _highlightPopup = btn;
+  return btn;
+}
+
+function hideHighlightPopup() {
+  if (_highlightPopup) _highlightPopup.style.display = 'none';
+}
+
+function initHighlighting() {
+  const container = document.querySelector('main.module-content');
+  if (!container) return;
+
+  document.addEventListener('mouseup', function (e) {
+    // Ignore selections inside the notes textarea or the highlight popup itself
+    if (e.target.closest && (e.target.closest('#moduleNotesTextarea') || e.target.closest('#highlightPopupBtn'))) return;
+
+    const sel = window.getSelection();
+    const text = sel && sel.toString().trim();
+    if (!text || sel.isCollapsed || sel.rangeCount === 0) { hideHighlightPopup(); return; }
+
+    const range = sel.getRangeAt(0);
+    if (!container.contains(range.commonAncestorContainer)) { hideHighlightPopup(); return; }
+
+    const rect = range.getBoundingClientRect();
+    const popup = getHighlightPopup();
+    popup.textContent = mt('mod.highlight.mark');
+    popup.style.display = 'block';
+    popup.style.top = (window.scrollY + rect.top - 42) + 'px';
+    popup.style.left = (window.scrollX + rect.left + rect.width / 2) + 'px';
+
+    popup.onclick = function () {
+      try {
+        const mark = document.createElement('mark');
+        mark.className = 'user-highlight';
+        mark.title = mt('mod.highlight.remove');
+        range.surroundContents(mark);
+        addModuleHighlight(text);
+        attachHighlightRemoval(mark);
+      } catch (err) {
+        // Selection spans multiple elements (surroundContents fails) — save text only, skip DOM wrap
+        addModuleHighlight(text);
+      }
+      sel.removeAllRanges();
+      hideHighlightPopup();
+    };
+  });
+
+  document.addEventListener('mousedown', function (e) {
+    if (e.target.id !== 'highlightPopupBtn') hideHighlightPopup();
+  });
+
+  reapplySavedHighlights(container);
+}
+
+function attachHighlightRemoval(mark) {
+  mark.addEventListener('click', function () {
+    const text = mark.textContent;
+    const parent = mark.parentNode;
+    while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
+    parent.removeChild(mark);
+    parent.normalize();
+    removeModuleHighlight(text);
+  });
+}
+
+function highlightTextInDOM(container, searchText) {
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      return node.parentElement && node.parentElement.tagName === 'MARK'
+        ? NodeFilter.FILTER_REJECT
+        : NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  let node;
+  while ((node = walker.nextNode())) {
+    const idx = node.nodeValue.indexOf(searchText);
+    if (idx === -1) continue;
+    const range = document.createRange();
+    range.setStart(node, idx);
+    range.setEnd(node, idx + searchText.length);
+    const mark = document.createElement('mark');
+    mark.className = 'user-highlight';
+    mark.title = mt('mod.highlight.remove');
+    try {
+      range.surroundContents(mark);
+      attachHighlightRemoval(mark);
+    } catch (e) {}
+    return true;
+  }
+  return false;
+}
+
+function reapplySavedHighlights(container) {
+  const saved = getModuleHighlights();
+  saved.forEach(function (text) { highlightTextInDOM(container, text); });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  setTimeout(initHighlighting, 80);
+});
+document.addEventListener('ieg:langchange', function () {
+  setTimeout(function () {
+    const container = document.querySelector('main.module-content');
+    if (container) reapplySavedHighlights(container);
+  }, 80);
+});
