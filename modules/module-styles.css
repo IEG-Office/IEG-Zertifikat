@@ -117,6 +117,36 @@
 }
 .notes-textarea:focus { outline: none; border-color: var(--ieg-blue-deep); }
 .notes-textarea::placeholder { color: var(--text-faint); }
+.notes-overview-cta { display: inline-block; margin-top: 12px; font-size: 13px; color: var(--ieg-blue-deep); text-decoration: none; }
+.notes-overview-cta:hover { text-decoration: underline; }
+
+/* ---------- TEXT HIGHLIGHTING ---------- */
+.highlight-popup-btn {
+  position: absolute;
+  display: none;
+  transform: translateX(-50%);
+  z-index: 700;
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: var(--sans);
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-lift);
+  white-space: nowrap;
+}
+.highlight-popup-btn:hover { background: var(--ieg-blue-deep); }
+mark.user-highlight {
+  background: #FFE58A;
+  color: var(--navy);
+  border-radius: 2px;
+  padding: 0 1px;
+  cursor: pointer;
+}
+:root[data-theme="dark"] mark.user-highlight { background: #7A6420; color: var(--text); }
 
 /* ---------- SECTION PROGRESS BAR ---------- */
 .section-progress-bar {
