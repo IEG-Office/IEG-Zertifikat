@@ -67,11 +67,13 @@
   </ul>
 
   <h3>2. Core Working Functions</h3>
-  <p>The most important tools can be activated via the <strong>plus icon</strong> below the text input. These three form the backbone of daily work:</p>
+  <p>The most important tools can be activated via the <strong>plus icon</strong> below the text input. These four form the backbone of daily work:</p>
   <h4>Web search</h4>
   <p>Claude can search hundreds of sources in seconds to compile current data (e.g. DAX revenues or daily industry news) into tables. Unlike pure model knowledge, results are <strong>backed by source links</strong> — always verify these for critical figures. Formulate requests precisely with a time period and desired output format, e.g. "Summarise Q3 revenues of the three largest German car manufacturers as a table with source references."</p>
+  <h4>Research</h4>
+  <p>For especially extensive research tasks, Claude offers its own mode called <strong>"Research"</strong> (often referred to as "Deep Research"): Claude independently plans multiple research steps and summarises the findings in a structured final report — rather than performing just a single web search. Useful for broad questions that require multiple angles or sources (e.g. a competitive analysis covering several providers).</p>
   <h4>File analysis</h4>
-  <p>PDFs, Excel or Word documents can be uploaded directly. <strong>Pro tip:</strong> use the stopwatch icon (<em>extended thinking mode</em>) so Claude takes more time to read the file thoroughly and provide more precise answers. Ask specific questions <em>about</em> the document rather than a blanket summary — e.g. "What three risks does the report mention on pages 10–15?" With multiple files, Claude can also <strong>compare</strong> them (e.g. contrast two quarterly reports).</p>
+  <p>PDFs, Excel or Word documents can be uploaded directly. <strong>Pro tip:</strong> set the <em>effort setting</em> (dropdown next to the model selector) to "High" or "Max" so Claude takes more time to read the file thoroughly and provide more precise answers. Ask specific questions <em>about</em> the document rather than a blanket summary — e.g. "What three risks does the report mention on pages 10–15?" With multiple files, Claude can also <strong>compare</strong> them (e.g. contrast two quarterly reports).</p>
   <h4>Technical support</h4>
   <p>Claude helps with PC and software problems. The most efficient workflow: first describe the problem in general terms, then upload a <strong>screenshot of the user interface</strong> (e.g. the activity monitor or an error message) — Claude reads the screen contents and diagnoses the cause directly. Then ask for a <strong>step-by-step guide</strong> and have technical terms explained in plain language if needed.</p>
 
@@ -117,7 +119,7 @@
         </ul>
         <div class="exercise-prompt">
           <strong>Example prompt:</strong>
-          <p>I will give you 5 tasks from everyday work. Recommend the appropriate Claude function (web search, file upload + extended thinking mode, screenshot upload, standard chat) for each and justify the choice in one sentence. Format: table with three columns.</p>
+          <p>I will give you 5 tasks from everyday work. Recommend the appropriate Claude function (web search, file upload + high effort setting, screenshot upload, standard chat) for each and justify the choice in one sentence. Format: table with three columns.</p>
         </div>
         <div class="exercise-note">
           <strong>Goal:</strong> Think function and precise instruction together — the right tool alone is not enough, the instruction must be clear.
@@ -132,7 +134,7 @@
             <thead><tr><th>Task</th><th>Function</th><th>Rationale</th></tr></thead>
             <tbody>
               <tr><td>(a) Industry multiples with source references</td><td><strong>Web search</strong></td><td>Delivers current data with cited source links for verification</td></tr>
-              <tr><td>(b) Analyse an 80-page market study</td><td><strong>File upload + extended thinking mode</strong></td><td>Thorough reading of large documents, targeted questions instead of blanket summaries</td></tr>
+              <tr><td>(b) Analyse an 80-page market study</td><td><strong>File upload + high effort setting</strong></td><td>Thorough reading of large documents, targeted questions instead of blanket summaries</td></tr>
               <tr><td>(c) Diagnose a slow PC</td><td><strong>Screenshot upload</strong></td><td>Claude reads the activity monitor and recognises UI elements directly</td></tr>
               <tr><td>(d) Compare two quarterly reports</td><td><strong>File upload (multiple files)</strong></td><td>Claude compares both documents and highlights differences</td></tr>
               <tr><td>(e) Short internal email</td><td><strong>Standard chat</strong></td><td>Simple text task — no external source or file needed</td></tr>
