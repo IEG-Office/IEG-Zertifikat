@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Notes · IEG Claude Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modules/module-styles.css">
+<style>
+  .notes-overview-card { margin-top: 24px; padding: 24px 28px; background: var(--bone-soft); border: 1px solid var(--navy-line); border-radius: var(--radius-lg); }
+  .notes-overview-card:first-child { margin-top: 0; }
+  .notes-overview-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .notes-overview-title { font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--navy); }
+  .notes-overview-title a { color: inherit; text-decoration: none; }
+  .notes-overview-title a:hover { text-decoration: underline; }
+  .notes-overview-link { font-size: 13px; color: var(--ieg-blue-deep); text-decoration: none; white-space: nowrap; }
+  .notes-overview-link:hover { text-decoration: underline; }
+  .notes-overview-note { font-size: 15px; line-height: 1.6; color: var(--text); white-space: pre-wrap; padding: 12px 14px; background: var(--white); border-radius: var(--radius); border: 1px solid var(--navy-line); margin-bottom: 12px; }
+  .notes-overview-highlights-label { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-faint); font-weight: 600; margin-bottom: 8px; }
+  .notes-overview-highlight-item { font-size: 14px; line-height: 1.6; color: var(--text); background: #FFF9E5; border-left: 3px solid #FFE58A; padding: 8px 12px; margin-bottom: 8px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  :root[data-theme="dark"] .notes-overview-highlight-item { background: #2A2410; border-left-color: #7A6420; }
+  .notes-empty-state { text-align: center; padding: 64px 24px; color: var(--text-faint); }
+  .notes-empty-state svg { opacity: 0.4; margin-bottom: 16px; }
+  .notes-empty-state p { font-size: 16px; margin-bottom: 20px; }
+  .notes-clear-all { margin-top: 32px; text-align: center; }
+  .notes-clear-all button { background: none; border: 1px solid var(--rust); color: var(--rust); padding: 10px 18px; border-radius: var(--radius); font-size: 13px; cursor: pointer; font-family: var(--sans); }
+  .notes-clear-all button:hover { background: var(--rust); color: var(--white); }
+</style>
+</head><body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/ieg-logo.png" alt="IEG" class="nav-logo-img"><span class="logo-divider"></span><div class="logo-text"><span class="logo-primary">Claude Academy</span><span class="logo-secondary">My Notes</span></div></a>
+  <a href="index.html" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to home</a>
+</div></nav>
+<section class="module-hero"><div class="module-hero-inner">
+  <div class="module-breadcrumb"><span>PERSONAL</span><span>·</span><span>MY NOTES</span></div>
+  <h1 class="module-hero-title">My Notes</h1>
+  <p class="module-hero-lede">All your own notes and highlighted passages from all ten modules in one place — saved only locally in this browser.</p>
+</div></section>
+
+<main class="module-content">
+  <div id="notesOverviewContainer"></div>
+</main>
+
+<div class="module-navigation">
+  <a href="index.html" class="nav-card nav-card-prev" style="grid-column: 1 / -1;">
+    <div class="nav-card-label">← Back</div>
+    <div class="nav-card-title">To the homepage and curriculum</div>
+  </a>
+</div>
+
+<script src="i18n.js"></script>
+<script src="content.en.js?v=7"></script>
+<script src="content.js?v=7"></script>
+<script>
+  const NOTES_KEY = 'ieg-academy-notes-v1';
+  const HIGHLIGHTS_KEY = 'ieg-academy-highlights-v1';
+
+  function loadJSON(key) {
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return {};
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderNotesOverview() {
+    const lang = (typeof getLang === 'function') ? getLang() : 'de';
+    const curriculum = (lang === 'en' && typeof CURRICULUM_EN !== 'undefined') ? CURRICULUM_EN : CURRICULUM;
+    const suffix = (lang === 'en') ? '.en.html' : '.html';
+    const notes = loadJSON(NOTES_KEY);
+    const highlights = loadJSON(HIGHLIGHTS_KEY);
+
+    const moduleIds = new Set();
+    Object.keys(notes).forEach(function (id) { if (notes[id] && notes[id].trim()) moduleIds.add(id); });
+    Object.keys(highlights).forEach(function (id) { if (Array.isArray(highlights[id]) && highlights[id].length) moduleIds.add(id); });
+
+    const container = document.getElementById('notesOverviewContainer');
+
+    if (moduleIds.size === 0) {
+      container.innerHTML =
+        '<div class="notes-empty-state">' +
+          '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>' +
+          '<p>No notes or highlights yet. Open a module and jot down notes, or highlight passages directly in the lesson text.</p>' +
+          '<a href="index.html#curriculum" class="btn btn-primary">Go to curriculum</a>' +
+        '</div>';
+      return;
+    }
+
+    const sortedIds = Array.from(moduleIds).map(Number).sort(function (a, b) { return a - b; });
+
+    container.innerHTML = sortedIds.map(function (id) {
+      const mod = curriculum.find(function (m) { return m.id === id; });
+      const title = mod ? mod.title : ('Module ' + id);
+      const href = 'modules/modul-' + String(id).padStart(2, '0') + suffix;
+      const note = notes[id];
+      const modHighlights = Array.isArray(highlights[id]) ? highlights[id] : [];
+
+      let html = '<div class="notes-overview-card">' +
+        '<div class="notes-overview-header">' +
+          '<div class="notes-overview-title"><a href="' + href + '">Module ' + id + ' · ' + escapeHtml(title) + '</a></div>' +
+          '<a class="notes-overview-link" href="' + href + '">Open module →</a>' +
+        '</div>';
+
+      if (note && note.trim()) {
+        html += '<div class="notes-overview-note">' + escapeHtml(note) + '</div>';
+      }
+
+      if (modHighlights.length) {
+        html += '<div class="notes-overview-highlights-label">' + modHighlights.length + ' highlighted passage' + (modHighlights.length > 1 ? 's' : '') + '</div>';
+        html += modHighlights.map(function (h) {
+          return '<div class="notes-overview-highlight-item">' + escapeHtml(h) + '</div>';
+        }).join('');
+      }
+
+      html += '</div>';
+      return html;
+    }).join('') +
+    '<div class="notes-clear-all"><button onclick="clearAllNotesAndHighlights()">Delete all notes &amp; highlights</button></div>';
+  }
+
+  function clearAllNotesAndHighlights() {
+    if (!confirm('Really delete all notes and highlights from every module? This cannot be undone.')) return;
+    try {
+      localStorage.removeItem(NOTES_KEY);
+      localStorage.removeItem(HIGHLIGHTS_KEY);
+    } catch (e) {}
+    renderNotesOverview();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () { setTimeout(renderNotesOverview, 30); });
+  document.addEventListener('ieg:langchange', renderNotesOverview);
+</script>
+</body></html>
