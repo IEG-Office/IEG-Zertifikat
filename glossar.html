@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossar · IEG Claude Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="modules/module-styles.css">
+<style>
+  .glossary-term { margin-top: 20px; }
+  .glossary-term:first-child { margin-top: 0; }
+  .glossary-term h4 { margin-bottom: 4px; }
+  .glossary-tag { font-size: 13px; color: var(--text-faint); font-weight: 400; }
+  .glossary-mod-link { color: var(--ieg-blue-deep); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; }
+  .glossary-mod-link:hover { border-bottom-color: var(--ieg-blue-deep); }
+  .glossary-section-label { display:inline-block; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color: var(--ieg-blue-deep); font-weight:600; margin-bottom: 4px; }
+  .glossary-search-wrap { position: relative; margin-bottom: 8px; }
+  .glossary-search { width: 100%; box-sizing: border-box; padding: 14px 16px 14px 44px; font-size: 16px; font-family: inherit; border: 1px solid var(--navy-line, #1F3461); border-radius: 10px; background: rgba(255,255,255,0.04); color: inherit; }
+  .glossary-search::placeholder { color: var(--text-faint); }
+  .glossary-search-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); opacity: 0.6; pointer-events: none; }
+  .glossary-count { font-size: 13px; color: var(--text-faint); margin-top: 8px; }
+  .glossary-no-results { display: none; color: var(--text-faint); font-size: 15px; padding: 24px 0; }
+  mark.glossary-highlight { background: #FFE58A; color: inherit; border-radius: 3px; padding: 0 2px; }
+</style>
+</head><body>
+<nav class="navbar"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="assets/ieg-logo.png" alt="IEG" class="nav-logo-img"><span class="logo-divider"></span><div class="logo-text"><span class="logo-primary">Claude Academy</span><span class="logo-secondary">Glossar</span></div></a>
+  <a href="index.html" class="nav-back"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Zurück zur Startseite</a>
+</div></nav>
+<section class="module-hero"><div class="module-hero-inner">
+  <div class="module-breadcrumb"><span>NACHSCHLAGEN</span><span>·</span><span>GLOSSAR</span></div>
+  <h1 class="module-hero-title">Glossar</h1>
+  <p class="module-hero-lede">Alle zentralen Begriffe und Konzepte aus den zehn Modulen an einem Ort — mit Verweis auf das jeweilige Modul zum Nachlesen.</p>
+</div></section>
+
+<main class="module-content">
+
+  <div class="glossary-search-wrap">
+    <svg class="glossary-search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" id="glossarySearch" class="glossary-search" placeholder="Begriff suchen … (z. B. Cowork, Skill, Token)" oninput="filterGlossary(this.value)" autocomplete="off">
+  </div>
+  <p class="glossary-count" id="glossaryCount">24 Begriffe</p>
+  <p class="glossary-no-results" id="glossaryNoResults">Kein Begriff gefunden. Versuche einen anderen Suchbegriff.</p>
+
+  <div class="glossary-section" data-section="core">
+  <h2>🔑 Kernkonzepte</h2>
+  <p>Die acht Begriffe, die für die tägliche Arbeit mit Claude am wichtigsten sind.</p>
+
+  <div class="glossary-term">
+    <h4>Haiku / Sonnet / Opus / Fable <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>)</span></h4>
+    <p>Die vier Modellstufen: Haiku (schnellstes, günstigstes Modell), Sonnet (Allrounder für den Alltag), Opus (Flaggschiff für maximale Analysetiefe), Fable (Mythos-Klasse, seit Juni 2026 oberhalb von Opus — nur für Ausnahmefälle).</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Projects <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>)</span></h4>
+    <p>Arbeitsbereich, der Dateien, Anweisungen und Chatverlauf zu einem Thema bündelt — einmal anlegen, nie wieder neu briefen; gilt für alle Chats innerhalb des Projekts.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Konnektor <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>, <a class="glossary-mod-link" href="modules/modul-03.html">Modul 3</a>)</span></h4>
+    <p>Schnittstelle zu einem externen Dienst (Gmail, Google Drive, Calendar, Slack, Teams, Outlook). Der Zugriff ist enorm — eine verbundene Gmail-Adresse bedeutet, dass die KI das gesamte Postfach lesen kann.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>„Lethal Trifecta" <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-03.html">Modul 3</a>)</span></h4>
+    <p>Sicherheitskonzept: Gefährlich wird es, wenn eine KI gleichzeitig (1) Zugriff auf private Daten hat, (2) externe, nicht vertrauenswürdige Inhalte liest und (3) Informationen nach außen senden kann.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Rollierendes 5-Stunden-Fenster <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-09.html">Modul 9</a>)</span></h4>
+    <p>Nutzungslimits laufen über ein gleitendes 5-Stunden-Fenster — wird Arbeit über mehrere Sitzungen am Tag verteilt, kann ältere Nutzung „abrollen", bevor eine neue Sitzung startet.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Kontextfenster / Chat-Disziplin <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-01.html">Modul 1</a>)</span></h4>
+    <p>Claude liest bei jeder Antwort den gesamten bisherigen Chatverlauf erneut ein. Je länger und themenvermischter ein Chat wird, desto ungenauer und langsamer werden die Antworten — ein frischer Chat pro Thema hält den Kontext sauber.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Skill <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-04.html">Modul 4</a>, <a class="glossary-mod-link" href="modules/modul-05.html">Modul 5</a>)</span></h4>
+    <p>Wiederverwendbarer, gespeicherter Workflow, den Claude bei Bedarf abrufen kann, statt jedes Mal neu instruiert zu werden — der Unterschied zwischen einmaliger Anweisung und dauerhaftem Werkzeug.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Claude Cowork <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>, <a class="glossary-mod-link" href="modules/modul-06.html">Modul 6</a>)</span></h4>
+    <p>Autonomer Desktop-Agent mit Zugriff auf freigegebene lokale Ordner — liest, erstellt und bearbeitet Dateien selbstständig. Läuft über die Desktop-App (Mac/Windows), verfügbar auf jedem bezahlten Plan; Web/Mobile aktuell im Beta-Rollout für die Fernsteuerung.</p>
+  </div>
+
+  </div>
+
+  <div class="glossary-section" data-section="other">
+  <h2>📎 Weitere Begriffe</h2>
+  <p>Alphabetisch sortiert.</p>
+
+  <div class="glossary-term">
+    <h4>Adaptives Denken <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>)</span></h4>
+    <p>Sonnet 5, Opus 4.8 und Fable 5 entscheiden automatisch, wie viel Zeit sie sich für eine Antwort nehmen — bei einfachen Fragen sofort, bei komplexen Analysen länger im Hintergrund. Nur Haiku 4.5 macht bewusst nicht mit.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Chain of Thought <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-02.html">Modul 2</a>)</span></h4>
+    <p>Prompting-Technik: Claude wird angewiesen, „Schritt für Schritt zu denken", bevor die Antwort kommt.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Claude Tag (@Claude in Slack) <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-08.html">Modul 8</a>)</span></h4>
+    <p>Durch @Claude-Erwähnung in Slack-Channels und Threads werden Aufgaben delegiert; Claude arbeitet danach asynchron im Hintergrund weiter.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Few-Shot-Prompting <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-02.html">Modul 2</a>)</span></h4>
+    <p>Ein bis drei konkrete Beispiele zeigen das gewünschte Ergebnis oft klarer als eine lange Beschreibung.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Inkognito-Modus <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-01.html">Modul 1</a>)</span></h4>
+    <p>Chats werden nicht dauerhaft in der Seitenleiste gespeichert (Geist-Symbol) — ideal für private oder einmalige Anfragen.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Memory (Gedächtnis) <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-01.html">Modul 1</a>)</span></h4>
+    <p>Durch den Befehl „Bitte erstelle eine Erinnerung" merkt sich Claude Fakten über dich, die er in künftigen Chats automatisch berücksichtigt.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>NotebookLM <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-04.html">Modul 4</a>)</span></h4>
+    <p>Google-Tool zur Wissensgewinnung aus großen Dokumentenmengen (inkl. „Deep Research"), häufig genutzt vor der Erstellung eines eigenen Skills.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Personal Instructions <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-06.html">Modul 6</a>)</span></h4>
+    <p>Dauerhaft hinterlegte Anweisungen (Profil → „Instructions for Claude"), die Claudes Standardverhalten über alle Chats hinweg anpassen.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Plugin <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-00.html">Modul 0</a>)</span></h4>
+    <p>Bündelt mehrere Skills zu einem Paket.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Prompt Caching <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-02.html">Modul 2</a>)</span></h4>
+    <p>Spart Zeit, da Claude statische Dokumente nicht neu einlesen muss.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Shared Context <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-07.html">Modul 7</a>)</span></h4>
+    <p>Seit März 2026: Excel- und PowerPoint-Add-in teilen sich einen gemeinsamen Kontext — Daten aus einem offenen Excel-Sheet lassen sich ohne Copy-Paste in einer PowerPoint-Folie nutzen.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>System Prompt <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-02.html">Modul 2</a>)</span></h4>
+    <p>Übergeordnete Anweisung, die Claudes Verhalten für eine gesamte Unterhaltung oder ein Project festlegt.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Token <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-09.html">Modul 9</a>)</span></h4>
+    <p>Einheit, an der Nutzungslimits gemessen werden; der Verbrauch wächst mit der Länge eines Chats, da jede neue Nachricht den gesamten bisherigen Verlauf erneut einliest.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>VBA-Makro <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-07.html">Modul 7</a>)</span></h4>
+    <p>Claude kann VBA-Code für Excel schreiben, aber nicht selbst ausführen — der Start bleibt eine manuelle Aktion.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>Websuche <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-01.html">Modul 1</a>)</span></h4>
+    <p>Claudes Fähigkeit, aktuelle Informationen aus dem Internet abzurufen, statt sich nur auf Trainingswissen zu verlassen.</p>
+  </div>
+
+  <div class="glossary-term">
+    <h4>XML-Tags <span class="glossary-tag">(<a class="glossary-mod-link" href="modules/modul-02.html">Modul 2</a>)</span></h4>
+    <p>Strukturierungshilfe in Prompts (z.&thinsp;B. <code>&lt;anweisungen&gt;</code>, <code>&lt;kontext&gt;</code>), um verschiedene Prompt-Bestandteile klar zu trennen.</p>
+  </div>
+
+  </div>
+
+</main>
+
+<div class="module-navigation">
+  <a href="index.html" class="nav-card nav-card-prev" style="grid-column: 1 / -1;">
+    <div class="nav-card-label">← Zurück</div>
+    <div class="nav-card-title">Zur Startseite und zum Curriculum</div>
+  </a>
+</div>
+
+<script src="i18n.js"></script>
+<script>
+  var GLOSSARY_TOTAL = document.querySelectorAll('.glossary-term').length;
+
+  function stripHighlights(el) {
+    el.querySelectorAll('mark.glossary-highlight').forEach(function (m) {
+      var parent = m.parentNode;
+      parent.replaceChild(document.createTextNode(m.textContent), m);
+      parent.normalize();
+    });
+  }
+
+  function highlightMatch(el, query) {
+    stripHighlights(el);
+    if (!query) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var nodes = [];
+    var node;
+    while ((node = walker.nextNode())) nodes.push(node);
+    var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+    nodes.forEach(function (textNode) {
+      if (!re.test(textNode.nodeValue)) return;
+      re.lastIndex = 0;
+      var frag = document.createDocumentFragment();
+      var lastIndex = 0;
+      var m;
+      while ((m = re.exec(textNode.nodeValue))) {
+        frag.appendChild(document.createTextNode(textNode.nodeValue.slice(lastIndex, m.index)));
+        var mark = document.createElement('mark');
+        mark.className = 'glossary-highlight';
+        mark.textContent = m[0];
+        frag.appendChild(mark);
+        lastIndex = m.index + m[0].length;
+      }
+      frag.appendChild(document.createTextNode(textNode.nodeValue.slice(lastIndex)));
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+  }
+
+  function filterGlossary(rawQuery) {
+    var query = rawQuery.trim().toLowerCase();
+    var terms = document.querySelectorAll('.glossary-term');
+    var visibleCount = 0;
+
+    terms.forEach(function (term) {
+      var text = term.textContent.toLowerCase();
+      var match = !query || text.indexOf(query) !== -1;
+      term.style.display = match ? '' : 'none';
+      if (match) {
+        visibleCount++;
+        highlightMatch(term, query);
+      } else {
+        stripHighlights(term);
+      }
+    });
+
+    document.querySelectorAll('.glossary-section').forEach(function (section) {
+      var anyVisible = Array.prototype.some.call(
+        section.querySelectorAll('.glossary-term'),
+        function (t) { return t.style.display !== 'none'; }
+      );
+      section.style.display = anyVisible ? '' : 'none';
+    });
+
+    var countEl = document.getElementById('glossaryCount');
+    var noResultsEl = document.getElementById('glossaryNoResults');
+    if (query) {
+      countEl.textContent = visibleCount + ' von ' + GLOSSARY_TOTAL + ' Begriffen';
+    } else {
+      countEl.textContent = GLOSSARY_TOTAL + ' Begriffe';
+    }
+    noResultsEl.style.display = (visibleCount === 0) ? 'block' : 'none';
+    countEl.style.display = (visibleCount === 0) ? 'none' : 'block';
+  }
+</script>
+</body></html>
