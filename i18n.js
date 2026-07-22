@@ -11,6 +11,7 @@ const I18N = {
     'nav.curriculum':   'Curriculum',
     'nav.team':         'Team',
     'nav.certificate':  'Zertifikat',
+    'nav.glossary':     'Glossar',
     'nav.progress':     'Fortschritt',
     'nav.logout':       'Abmelden',
 
@@ -221,6 +222,7 @@ const I18N = {
     'nav.curriculum':   'Curriculum',
     'nav.team':         'Team',
     'nav.certificate':  'Certificate',
+    'nav.glossary':     'Glossary',
     'nav.progress':     'Progress',
     'nav.logout':       'Log out',
 
