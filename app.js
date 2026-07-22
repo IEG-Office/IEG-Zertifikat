@@ -153,6 +153,113 @@ function openGlossary() {
   window.location.href = 'glossar' + suffix;
 }
 
+// ===== SITE-WIDE SEARCH =====
+function stripHtml(html) {
+  var div = document.createElement('div');
+  div.innerHTML = html || '';
+  return (div.textContent || div.innerText || '').replace(/\s+/g, ' ').trim();
+}
+
+function buildSearchIndex() {
+  var lang = (typeof getLang === 'function') ? getLang() : 'de';
+  var curriculum = (lang === 'en' && typeof CURRICULUM_EN !== 'undefined') ? CURRICULUM_EN : CURRICULUM;
+  var index = [];
+  curriculum.forEach(function (mod) {
+    var parts = [];
+    if (mod.title) parts.push(mod.title);
+    if (mod.desc) parts.push(mod.desc);
+    if (mod.content) parts.push(stripHtml(mod.content));
+    if (mod.quiz && mod.quiz.length) {
+      mod.quiz.forEach(function (item) { if (item.q) parts.push(item.q); });
+    }
+    index.push({
+      id: mod.id,
+      title: mod.title,
+      searchText: parts.join(' \u2022 ')
+    });
+  });
+  return index;
+}
+
+function escapeHtmlForSearch(s) {
+  return String(s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+
+function buildSnippet(text, query) {
+  var lower = text.toLowerCase();
+  var qLower = query.toLowerCase();
+  var idx = lower.indexOf(qLower);
+  if (idx === -1) return escapeHtmlForSearch(text.slice(0, 140)) + '…';
+  var start = Math.max(0, idx - 60);
+  var end = Math.min(text.length, idx + query.length + 80);
+  var prefix = start > 0 ? '…' : '';
+  var suffix = end < text.length ? '…' : '';
+  var before = escapeHtmlForSearch(text.slice(start, idx));
+  var match = escapeHtmlForSearch(text.slice(idx, idx + query.length));
+  var after = escapeHtmlForSearch(text.slice(idx + query.length, end));
+  return prefix + before + '<mark>' + match + '</mark>' + after + suffix;
+}
+
+function filterSiteSearch(rawQuery) {
+  var query = rawQuery.trim();
+  var resultsEl = document.getElementById('siteSearchResults');
+  var gridEl = document.getElementById('modulesGrid');
+  var progressEl = document.getElementById('progressTrackWrap');
+  var clearBtn = document.getElementById('siteSearchClear');
+  clearBtn.style.display = query ? 'block' : 'none';
+
+  if (!query) {
+    resultsEl.style.display = 'none';
+    resultsEl.innerHTML = '';
+    gridEl.style.display = '';
+    if (progressEl) progressEl.style.display = '';
+    return;
+  }
+
+  gridEl.style.display = 'none';
+  if (progressEl) progressEl.style.display = 'none';
+  resultsEl.style.display = 'flex';
+
+  var lang = (typeof getLang === 'function') ? getLang() : 'de';
+  var suffix = (lang === 'en') ? '.en.html' : '.html';
+  var index = buildSearchIndex();
+  var qLower = query.toLowerCase();
+  var matches = index.filter(function (entry) {
+    return entry.searchText.toLowerCase().indexOf(qLower) !== -1;
+  });
+
+  if (!matches.length) {
+    var noResultsText = (lang === 'en') ? 'No matching module found. Try a different search term.' : 'Kein passendes Modul gefunden. Versuche einen anderen Suchbegriff.';
+    resultsEl.innerHTML = '<div class="site-search-no-results">' + noResultsText + '</div>';
+    return;
+  }
+
+  var moduleLabel = (lang === 'en') ? 'Module ' : 'Modul ';
+  resultsEl.innerHTML = matches.map(function (m) {
+    var href = 'modules/modul-' + String(m.id).padStart(2, '0') + suffix;
+    var snippet = buildSnippet(m.searchText, query);
+    return '<a class="site-search-result" href="' + href + '">' +
+      '<div class="site-search-result-module">' + moduleLabel + m.id + '</div>' +
+      '<div class="site-search-result-title">' + escapeHtmlForSearch(m.title) + '</div>' +
+      '<div class="site-search-result-snippet">' + snippet + '</div>' +
+      '</a>';
+  }).join('');
+}
+
+function clearSiteSearch() {
+  var input = document.getElementById('siteSearch');
+  input.value = '';
+  filterSiteSearch('');
+  input.focus();
+}
+
+document.addEventListener('ieg:langchange', function () {
+  var input = document.getElementById('siteSearch');
+  if (input && input.value.trim()) filterSiteSearch(input.value);
+});
+
 // ===== QUIZ =====
 var currentQuiz = null;
 
@@ -713,9 +820,54 @@ function renderCertificate() {
     '</div>';
 }
 
+let _html2pdfLoadPromise = null;
+function loadHtml2Pdf() {
+  if (window.html2pdf) return Promise.resolve();
+  if (_html2pdfLoadPromise) return _html2pdfLoadPromise;
+  _html2pdfLoadPromise = new Promise(function (resolve, reject) {
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  return _html2pdfLoadPromise;
+}
+
 function printCertificate() {
   var cert = document.getElementById('certDoc');
   if (!cert) return;
+  var btn = document.querySelector('.cert-actions .btn-primary');
+  var originalLabel = btn ? btn.innerHTML : null;
+  if (btn) { btn.disabled = true; btn.style.opacity = '0.6'; }
+
+  loadHtml2Pdf().then(function () {
+    var wasDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    if (wasDark) document.documentElement.setAttribute('data-theme', 'light');
+    var filename = 'IEG-Claude-Academy-Zertifikat-' + (state.credentialId || 'certificate') + '.pdf';
+    var opt = {
+      margin: 0,
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, backgroundColor: '#ffffff', useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+    };
+    window.html2pdf().set(opt).from(cert).save().then(function () {
+      if (wasDark) document.documentElement.setAttribute('data-theme', 'dark');
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; if (originalLabel) btn.innerHTML = originalLabel; }
+    }).catch(function () {
+      if (wasDark) document.documentElement.setAttribute('data-theme', 'dark');
+      printCertificateFallback(cert);
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; if (originalLabel) btn.innerHTML = originalLabel; }
+    });
+  }).catch(function () {
+    // No internet access to CDN or blocked — fall back to browser print dialog
+    printCertificateFallback(cert);
+    if (btn) { btn.disabled = false; btn.style.opacity = ''; if (originalLabel) btn.innerHTML = originalLabel; }
+  });
+}
+
+function printCertificateFallback(cert) {
   var html = cert.outerHTML;
   var win = window.open('', '_blank', 'width=1200,height=800');
   win.document.write('<!DOCTYPE html><html lang="' + (typeof getLang === 'function' ? getLang() : 'de') + '"><head><meta charset="UTF-8">');
@@ -756,7 +908,34 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('ieg:langchange', function() { renderEverything(); });
 
 // ===== RENDER =====
-function renderEverything() { updateUserDisplay(); renderModules(); renderProgress(); renderCertificate(); }
+function renderEverything() { updateUserDisplay(); renderModules(); renderProgress(); renderCertificate(); setupHeroResumeButton(); }
+
+function setupHeroResumeButton() {
+  var btn = document.getElementById('heroPrimaryBtn');
+  var label = document.getElementById('heroPrimaryBtnLabel');
+  if (!btn || !label) return;
+  var total = CURRICULUM.length;
+  var done = state.completed.length;
+
+  if (done === 0) {
+    label.textContent = t('hero.cta.start');
+    btn.onclick = function () { document.getElementById('curriculum').scrollIntoView({ behavior: 'smooth' }); };
+    return;
+  }
+
+  if (done >= total) {
+    label.textContent = t(state.finalPassed ? 'hero.cta.certificate' : 'hero.cta.exam');
+    btn.onclick = function () { document.getElementById('certificate').scrollIntoView({ behavior: 'smooth' }); };
+    return;
+  }
+
+  var nextId = null;
+  for (var i = 0; i < total; i++) {
+    if (state.completed.indexOf(CURRICULUM[i].id) === -1) { nextId = CURRICULUM[i].id; break; }
+  }
+  label.textContent = t('hero.cta.resume');
+  btn.onclick = function () { if (nextId !== null) openModule(nextId); };
+}
 
 // ===== SUPABASE PROGRESS SYNC =====
 async function loadProgressFromSupabase() {
